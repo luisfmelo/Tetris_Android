@@ -7,6 +7,9 @@ import com.luis.teresa.tetris.Tetris;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = Tetris.TITLE;
+		//config.width = Tetris.WIDTH;
+		//config.height = Tetris.HEIGHT;
 		new LwjglApplication(new Tetris(), config);
 	}
 }
