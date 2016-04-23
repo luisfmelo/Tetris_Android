@@ -3,18 +3,18 @@ package com.luis.teresa.tetris;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.GameScreen;
+import com.luis.teresa.tetris.screens.IntroScreen;
 
 public class Tetris extends Game {
 
 	public static final String TITLE = "Tetris";
-	public static final int WIDTH = 300;
-	public static final int HEIGHT = 480;
+	//public static final int WIDTH = 1080/4;
+	//public static final int HEIGHT = 1920/4;
 	
 	@Override
 	public void create() {
-		//setScreen(new IntroScreen());
-		setScreen(new GameScreen());
+		setScreen(new IntroScreen());
+		//setScreen(new GameScreen());
 		//LoadAssets.load();
 	}
 	

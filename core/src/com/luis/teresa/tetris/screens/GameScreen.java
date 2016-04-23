@@ -3,7 +3,6 @@ package com.luis.teresa.tetris.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.luis.teresa.tetris.helpers.InputHandler;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 import com.luis.teresa.tetris.logic.TetrisRenderer;
 

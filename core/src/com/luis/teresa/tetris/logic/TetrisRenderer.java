@@ -43,8 +43,8 @@ public class TetrisRenderer {
 		 */
 		char[][] c = myGame.getBoard();
 		
-		for (int i = 0; i < 22; i++) {
-			for (int j = 0; j < 12; j++) {
+		for (int i = 0; i < myGame.getRows(); i++) {
+			for (int j = 0; j < myGame.getCols(); j++) {
 				if ( c[i][j] == 'X' )
 					fillCell(i,j,0);
 				else
@@ -99,18 +99,18 @@ public class TetrisRenderer {
 		shapeRenderer.end();		
 
 	}
-
+/*
 	private void renderSquare() {
 		/*
 		 * 1. We draw a black background. This prevents flickering.
-		 */
+		 *
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		/*
 		 * 2. We draw the Filled rectangle
-		 */
+		 *
 
 		// Tells shapeRenderer to begin drawing filled shapes
 		shapeRenderer.begin(ShapeType.Filled);
@@ -128,7 +128,7 @@ public class TetrisRenderer {
 
 		/*
 		 * 3. We draw the rectangle's outline
-		 */
+		 *
 
 		// Tells shapeRenderer to draw an outline of the following shapes
 		shapeRenderer.begin(ShapeType.Line);
@@ -141,5 +141,5 @@ public class TetrisRenderer {
 				myGame.getRect().width, myGame.getRect().height);
 
 		shapeRenderer.end();		
-	}
+	}*/
 }

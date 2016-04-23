@@ -1,37 +1,62 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
+import com.luis.teresa.tetris.helpers.Const;
+import com.luis.teresa.tetris.objects.Board;
+import com.luis.teresa.tetris.objects.Shape;
 
 public class TetrisLogic {
-	private char[][] board = new char[22][12];
 	
-	private Rectangle rect = new Rectangle(0, 0, 17, 12);
+	//private Rectangle rect = new Rectangle(0, 0, 17, 12);
+	private Board board;
+	private float time;
+	private boolean shapeInGame;
+	private Shape presentShape;
+	private Shape futureShape;
+	
+	public TetrisLogic() {
+		board = new Board();
+		board.initializeBoard();
+		shapeInGame = false;
+		presentShape = new Shape();
+	}
 
+	public char[][] getBoard() {
+		return board.getBoard();
+	}
+	
 	public void update(float delta) {
+		time += System.nanoTime();
+		if ( time > Const.CYCLE_TIME )
+			newCycle();
+		
+	}
+
+	private void newCycle() {
+		
+	}
+
+	public int getRows() {
+		return board.getRows();
+	}
+
+	public int getCols() {
+		return board.getCols();
+	}
+	
+	
+	/*public void update(float delta) {
 		System.out.println("GameWorld - update");
 		rect.y++;
 		if (rect.y > Gdx.graphics.getHeight()/2) {
 			rect.y = 0;
 		}
-	}
+	}*/
 	
-	public Rectangle getRect() {
+	/*public Rectangle getRect() {
 		return rect;
-	}
+	}*/
 	
-	public char[][] getBoard() {
-		return board;
-	}
 	
-	private void initializeBoard(){
-		for (int i = 0; i < 22; i++) {
-			for (int j = 0; j < 12; j++) {
-				if ( i == 0 || i == 21 || j == 0 || j == 11 )
-					board[i][j] = 'X';
-				else
-					board[i][j] = ' ';
-			}
-		}
-	}
+	
+	
 }
