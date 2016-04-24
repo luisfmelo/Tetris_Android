@@ -28,6 +28,7 @@ public class Tetris extends Game {
 	public void render() {
 		super.render();
 	}
+	
 
 	@Override
 	public void resize(int width, int height) {

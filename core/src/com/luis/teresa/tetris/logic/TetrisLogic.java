@@ -1,10 +1,12 @@
 package com.luis.teresa.tetris.logic;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.objects.Board;
 import com.luis.teresa.tetris.objects.Shape;
 
-public class TetrisLogic {
+public class TetrisLogic{
 	
 	//private Rectangle rect = new Rectangle(0, 0, 17, 12);
 	private Board board;
@@ -14,10 +16,12 @@ public class TetrisLogic {
 	private Shape futureShape;
 	
 	public TetrisLogic() {
+		time = 0;
 		board = new Board();
 		board.initializeBoard();
 		shapeInGame = false;
 		presentShape = new Shape();
+		Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
 	}
 
 	public char[][] getBoard() {
@@ -25,14 +29,25 @@ public class TetrisLogic {
 	}
 	
 	public void update(float delta) {
-		time += System.nanoTime();
+		time += delta;
 		if ( time > Const.CYCLE_TIME )
+		{
+			futureShape = new Shape();
 			newCycle();
+			time = 0;
+			board.clearRow();
+			presentShape = futureShape;
+		}
 		
 	}
 
 	private void newCycle() {
-		
+		if ( !shapeInGame )
+		{
+			board.newShape(presentShape);
+			shapeInGame = true;
+		}
+		shapeInGame = board.input("s");
 	}
 
 	public int getRows() {
@@ -42,21 +57,6 @@ public class TetrisLogic {
 	public int getCols() {
 		return board.getCols();
 	}
-	
-	
-	/*public void update(float delta) {
-		System.out.println("GameWorld - update");
-		rect.y++;
-		if (rect.y > Gdx.graphics.getHeight()/2) {
-			rect.y = 0;
-		}
-	}*/
-	
-	/*public Rectangle getRect() {
-		return rect;
-	}*/
-	
-	
 	
 	
 }

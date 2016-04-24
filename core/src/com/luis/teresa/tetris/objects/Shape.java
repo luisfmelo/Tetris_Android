@@ -2,76 +2,67 @@ package com.luis.teresa.tetris.objects;
 
 import java.util.Random;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class Shape {
 
 	 enum Type { 
-		 NoShape (new int [][] {
-			 {0,0,0,0},
-			 {0,0,0,0},
-			 {0,0,0,0},
-			 {0,0,0,0}
-		 }) 
-		 , 
-		 I(new int [][] {
-					 {0,1,0,0},
-					 {0,1,0,0},
-					 {0,1,0,0},
-					 {0,1,0,0}
-				 }
-			 ),
-		 S( new int [][] {
-					 {0,0,0,0},
-					 {0,1,1,0},
-					 {1,1,0,0},
-					 {0,0,0,0}
+		 NoShape (new char [][] {
+			 {' ' ,' ' ,' ' ,' '},
+			 {' ' ,' ' ,' ' ,' '},
+			 {' ' ,' ' ,' ' ,' '},
+			 {' ' ,' ' ,' ' ,' '}
+		 }), 
+		 I(new char [][] {
+	 		{' ','1',' ',' '},
+			{' ','1',' ',' '},
+			{' ','1',' ',' '},
+			{' ','1',' ',' '}
+		 }),
+		 S( new char [][] {
+		 		{' ',' ',' ',' '},
+				{' ','1','1',' '},
+				{'1','1',' ',' '},
+				{' ',' ',' ',' '}
 				 }),  
-		 Z(new int [][] {
-					 {0,0,0,0},
-					 {0,1,1,0},
-					 {0,0,1,1},
-					 {0,0,0,0}
-			 }
-		 ), 
-         T(new int [][] {
-					 {0,0,0,0},
-					 {1,1,1,0},
-					 {0,1,0,0},
-					 {0,0,0,0}
-				 
-			 }),
-		   
-         O(new int [][] {
-					 {0,0,0,0},
-					 {0,1,1,0},
-					 {0,1,1,0},
-					 {0,0,0,0}
-				 }
-			 ),  
-         L(new int [][] {
-					 {0,1,0,0},
-					 {0,1,0,0},
-					 {0,1,1,0},
-					 {0,0,0,0}
-				 }
-			 ),  
-         J (new int [][] {
-					 {0,0,1,0},
-					 {0,0,1,0},
-					 {0,1,1,0},
-					 {0,0,0,0}
-			 }
-		 );
-		 
-		 private int [][] pattern;
-         private Type(int [][] m){
+		 Z(new char [][] {
+	 		{' ',' ',' ',' '},
+			{' ','1','1',' '},
+			{' ',' ','1','1'},
+			{' ',' ',' ',' '}
+		 }), 
+         T(new char [][] {
+	 		{' ',' ',' ',' '},
+			{'1','1','1',' '},
+			{' ','1',' ',' '},
+			{' ',' ',' ',' '}
+         }), 
+         O(new char [][] {
+	 		{' ',' ',' ',' '},
+			{' ','1','1',' '},
+			{' ','1','1',' '},
+			{' ',' ',' ',' '}
+		 }),  	
+         L(new char [][] {
+		 		{' ','1',' ',' '},
+				{' ','1',' ',' '},
+				{' ','1','1',' '},
+				{' ',' ',' ',' '}
+				 }), 
+         J (new char [][] {
+	 		{' ',' ','1',' '},
+			{' ',' ','1',' '},
+			{' ','1','1',' '},
+			{' ',' ',' ',' '}
+         });
+		 private char[][] pattern;
+         private Type(char [][] m){
         	 this.pattern = m;
-			 
 		 }
+         public String getLetter(){
+        	 return this.name();
+         }
 	 	};
          
-     private int matrix[][];
+     private char matrix[][];
      private Type pieceShape = Type.NoShape;
      private int size=4;
      //private int pattern[][][];
@@ -80,11 +71,11 @@ public class Shape {
          setRandomShape();
      }
 
-	public int[][] getMatrix() {
+	public char[][] getMatrix() {
 		return matrix;
 	}
 
-	public void setMatrix(int matrix[][]) {
+	public void setMatrix(char matrix[][]) {
 		this.matrix = matrix;
 	}
 
@@ -94,7 +85,7 @@ public class Shape {
 
 	public void setPieceShape(Type pieceShape) {
 		this.pieceShape = pieceShape; 
-		int [][]pattern=pieceShape.pattern;
+		char [][] pattern = pieceShape.pattern;
 		setMatrix(pattern);
 	}
     
@@ -104,18 +95,17 @@ public class Shape {
        
         //+1 para não contar com o NoShape
         int index = Math.abs(r.nextInt()) %  (values.length-1) + 1;
-
-        setPieceShape(values[index]);
-		
-		
+        
+        setPieceShape(values[index]);		
 	}
+	
 	public  void swapRows() {
-		int[] x;
+		char[] x;
 		
 		if(matrix==null)
 			return;
 	    
-		for (int  i = 0, k = matrix.length - 1; i < k; ++i, --k) {
+		for (int  i = 0, k = size - 1; i < k; ++i, --k) {
 	        x = matrix[i];
 	        matrix[i] = matrix[k];
 	        matrix[k] = x;
@@ -123,8 +113,7 @@ public class Shape {
 		
 	}
 	private void transpose() {
-
-		int x;
+		char x;
 		
 		if(matrix==null)
 			return;
@@ -169,6 +158,10 @@ public class Shape {
 		System.out.println("");
 
     }
+
+	public char getChar(int i, int j) {
+		return matrix[i][j];
+	}
      
      
 }
