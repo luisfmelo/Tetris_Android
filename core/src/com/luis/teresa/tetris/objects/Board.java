@@ -179,11 +179,35 @@ public class Board {
 		}
 	}
 
-	public void clearRow() {
-		// clear Row if possible
-		
+	public void checkRows() {
+		boolean clean = true;
+		for (int i = 3; i < rows - 2; i++) {
+			for (int j = 1; j < cols - 1; j++) {
+				if ( 	board[i][j] != 'I' &&
+						board[i][j] != 'J' &&
+						board[i][j] != 'L' &&
+						board[i][j] != 'O' &&
+						board[i][j] != 'T' &&
+						board[i][j] != 'S' &&
+						board[i][j] != 'Z')
+					clean = false;
+			}
+			if (clean)
+				cleanRow(i);
+			clean = true;
+		}		
 	}
 	
+	private void cleanRow(int row) {
+		System.out.println("$"+row);
+		for (int i = row; i > 3; i--) {
+			for (int j = 1; j < cols - 1; j++) {
+				board[i][j] = board[i-1][j];
+
+			}
+		}		
+	}
+
 	public void printBoard(){
 		for (int i = 0; i < rows; i++) {
 			System.out.println(board[i]);
@@ -192,7 +216,10 @@ public class Board {
 
 	public void rotate() {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public boolean checkGameOver() {
+		return false;
 	}
 
 

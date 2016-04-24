@@ -35,9 +35,16 @@ public class TetrisLogic{
 			futureShape = new Shape();
 			newCycle();
 			time = 0;
-			board.clearRow();
+			board.checkRows();
+			if (board.checkGameOver() )
+				handleGameOver();
 			presentShape = futureShape;
 		}	
+	}
+
+	private void handleGameOver() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void newCycle() {
