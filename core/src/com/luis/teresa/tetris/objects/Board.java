@@ -189,4 +189,11 @@ public class Board {
 			System.out.println(board[i]);
 		}
 	}
+
+	public void rotate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

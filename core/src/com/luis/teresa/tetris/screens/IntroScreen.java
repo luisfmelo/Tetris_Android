@@ -34,6 +34,8 @@ public class IntroScreen implements Screen {
 		introImg = new Sprite(new Texture("intro.png"));
 		introImg.setCenter(Gdx.graphics.getWidth()/2 , 
 				Gdx.graphics.getHeight()/2 );
+		introImg.setRegionWidth(Gdx.graphics.getWidth());
+		introImg.setRegionHeight(Gdx.graphics.getHeight());
 
 
 		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
@@ -42,7 +44,7 @@ public class IntroScreen implements Screen {
 			@Override
 			public void onEvent(int type, BaseTween<?> source) {
 				((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
-			}
+				}
 		}).start(tweenManager);
 
 		tweenManager.update(Float.MIN_VALUE); // update once avoid short flash of splash before animation

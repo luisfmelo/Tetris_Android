@@ -1,59 +1,39 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class LoadAssets {
+	private TextureAtlas atlas;
+	private Skin skin;
+	
+	private Sprite trophey;
+	private Sprite playBtn;
+	private Sprite leadBtn;
+	private Sprite settBtn;
+	private FileHandle scores;
+	
 
-    public static Texture texture;
-    public static TextureRegion bg, grass;
-
-    public static Animation birdAnimation;
-    public static TextureRegion bird, birdDown, birdUp;
-
-    public static TextureRegion skullUp, skullDown, bar;
-
-    public static void load() {
-
-        texture = new Texture(Gdx.files.internal("texture.png"));
-        texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-
-        bg = new TextureRegion(texture, 0, 0, 136, 43);
-        bg.flip(false, true);
-
-        grass = new TextureRegion(texture, 0, 43, 143, 11);
-        grass.flip(false, true);
-
-        birdDown = new TextureRegion(texture, 136, 0, 17, 12);
-        birdDown.flip(false, true);
-
-        bird = new TextureRegion(texture, 153, 0, 17, 12);
-        bird.flip(false, true);
-
-        birdUp = new TextureRegion(texture, 170, 0, 17, 12);
-        birdUp.flip(false, true);
-
-        TextureRegion[] birds = { birdDown, bird, birdUp };
-        birdAnimation = new Animation(0.06f, birds);
-        birdAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
-
-        skullUp = new TextureRegion(texture, 192, 0, 24, 14);
-        
-        // Create by flipping existing skullUp
-        skullDown = new TextureRegion(skullUp);
-        skullDown.flip(false, true);
-
-        bar = new TextureRegion(texture, 136, 16, 22, 3);
-        bar.flip(false, true);
-
+    public void loadMenuAssets() {
+		atlas = new TextureAtlas(Gdx.files.internal(Const.ATLAS_PATH));
+		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas);
+    	//trophey = new Sprite(Gdx.files.internal(Const.TROPHEY_PATH));
+    	//playBtn = new Sprite(Gdx.files.internal(Const.PLAYBTN_PATH));
+    	//leadBtn = new Sprite(Gdx.files.internal(Const.LEADBTN_PATH));
+    	//settBtn = new Sprite(Gdx.files.internal(Const.SETTBTN_PATH));
+    	
     }
 
     public static void dispose() {
         // We must dispose of the texture when we are finished.
-        texture.dispose();
+       // texture.dispose();
     }
+
+	public Skin getSkin() {
+		return this.skin;
+	}
 
 }

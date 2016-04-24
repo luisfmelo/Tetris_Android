@@ -37,8 +37,7 @@ public class TetrisLogic{
 			time = 0;
 			board.clearRow();
 			presentShape = futureShape;
-		}
-		
+		}	
 	}
 
 	private void newCycle() {

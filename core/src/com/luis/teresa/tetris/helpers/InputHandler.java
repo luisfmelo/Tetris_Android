@@ -7,9 +7,13 @@ import com.luis.teresa.tetris.objects.Board;
 
 public class InputHandler implements InputProcessor{
 	Board board;
-	
+	boolean dragging;
+	int previousX, previousY;
 	public InputHandler(Board board) {
 		this.board = board;
+		dragging = false;
+		previousX = 0;
+		previousY = 0;		
 	}
 
 	@Override
@@ -21,7 +25,7 @@ public class InputHandler implements InputProcessor{
 		case Input.Keys.D: board.input("d");break;
 		case Input.Keys.DOWN: board.input("s");break;
 		case Input.Keys.S: board.input("s");break;
-		//case Input.Keys.SPACE: board.input("-");break;
+		case Input.Keys.SPACE: board.rotate();break;
 		}
 		
 		return true;
@@ -39,23 +43,38 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {	
-		//board.rotate();
+		board.rotate();
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		dragging = false;
+		previousX = 0;
+		previousY = 0;	
+		
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if (screenX > Gdx.graphics.getWidth()/2)
+
+		if (dragging == false)
+		{
+			previousX = screenX;
+			previousY = screenY;
+			dragging = true;
+			return true;
+		}
+		if (screenX >= previousX)
 			board.input("d");
-		else if (screenX < Gdx.graphics.getWidth()/2)
+		else if (screenX < previousX)
 			board.input("a");
-		if (screenY > Gdx.graphics.getHeight()/2)
+		if (screenY > previousY)
 			board.input("s");
+
+		previousX = screenX;
+		previousY = screenY;
 				
 		return true;
 	}
