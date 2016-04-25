@@ -4,10 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.accessors.SpriteAccessor;
+import com.luis.teresa.tetris.helpers.LoadAssets;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -17,27 +21,34 @@ import aurelienribon.tweenengine.TweenManager;
 public class IntroScreen implements Screen {
 
 	private SpriteBatch batch;
-	private Sprite introImg;
+	private Image introImg;
 	private TweenManager tweenManager;
+	private LoadAssets myAssets;
+	private Stage stage;
 
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		// apply preferences
-		// Gdx.graphics.setVSync(Settings.vSync());
+		
+		myAssets = new LoadAssets();
+		myAssets.loadMenuAssets();
 		
 		batch = new SpriteBatch();
+		
+		myAssets = new LoadAssets();
+		myAssets.loadIntroAssets();
+			
+		stage = new Stage(new ScreenViewport());
+		Gdx.input.setInputProcessor(stage);
 
+		introImg = myAssets.getIntroImg();
+		
+		stage.addActor(introImg);
+		
+		// creating animations
 		tweenManager = new TweenManager();
-		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
-
-		introImg = new Sprite(new Texture("intro.png"));
-		introImg.setCenter(Gdx.graphics.getWidth()/2 , 
-				Gdx.graphics.getHeight()/2 );
-		introImg.setRegionWidth(Gdx.graphics.getWidth());
-		introImg.setRegionHeight(Gdx.graphics.getHeight());
-
-
+		Tween.registerAccessor(Actor.class, new ActorAccessor());
+		
 		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 		Tween.to(introImg, SpriteAccessor.ALPHA, 1.5f).target(1).repeatYoyo(1, .5f).setCallback(new TweenCallback() {
 
@@ -53,12 +64,10 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.begin();
-		introImg.draw(batch);
-		batch.end();
-
+		stage.act(delta); //update
+		stage.draw();
 		tweenManager.update(delta);
 	}
 
@@ -85,7 +94,6 @@ public class IntroScreen implements Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		introImg.getTexture().dispose();
 	}
 
 }
