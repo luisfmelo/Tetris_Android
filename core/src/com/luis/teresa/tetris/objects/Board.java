@@ -23,7 +23,7 @@ public class Board {
 	public void initializeBoard(){
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				if ( i == 2 || i == 23 || i == 24 || j == 0 || j == 11 )
+				if ( i == 2 || i >22 || j == 0 || j == 11 )
 					board[i][j] = 'X';
 				else
 					board[i][j] = ' ';
@@ -44,51 +44,51 @@ public class Board {
 	}
 
 	public void newShape(Shape shape) {
-		myShape = new ArrayList<Vector2>(4);
+		myShape = new ArrayList<Vector2>(5);
 		this.shape = shape;
 		pieceOnGoing = ":";
 		
 		switch (shape.getPieceShape().getLetter()) {
 		case "I": 
-			Const.redColor = (float) 0/255;
-			Const.greenColor = (float) 240/255;
-			Const.blueColor = (float) 240/255;
+			Const.redColor = 0f/255;
+			Const.greenColor = 240f/255;
+			Const.blueColor = 240f/255;
 			break;
 		case "S":
-			Const.redColor = (float) 0/255;
-			Const.greenColor = (float) 240/255;
-			Const.blueColor = (float) 0/255;
+			Const.redColor = 0f/255;
+			Const.greenColor = 240f/255;
+			Const.blueColor = 0f/255;
 			break;
 		case "Z":
-			Const.redColor = (float) 240/255;
-			Const.greenColor = (float) 0/255;
-			Const.blueColor = (float) 0/255;
+			Const.redColor = 240f/255;
+			Const.greenColor = 0f/255;
+			Const.blueColor = 0f/255;
 			break;
 		case "T":
-			Const.redColor = (float) 150/255;
-			Const.greenColor = (float) 0/255;
-			Const.blueColor = (float) 240/255;
+			Const.redColor = 150f/255;
+			Const.greenColor = 0f/255;
+			Const.blueColor = 240f/255;
 			break;
 		case "O":
-			Const.redColor = (float) 240/255;
-			Const.greenColor = (float) 240/255;
-			Const.blueColor = (float) 0/255;
+			Const.redColor = 240f/255;
+			Const.greenColor = 240f/255;
+			Const.blueColor = 0f/255;
 			break;
 		case "L":
-			Const.redColor = (float) 240/255;
-			Const.greenColor = (float) 150/255;
-			Const.blueColor = (float) 0/255;
+			Const.redColor = 240f/255;
+			Const.greenColor = 150f/255;
+			Const.blueColor = 0f/255;
 			break;
 		case "J":
-			Const.redColor = (float) 0/255;
-			Const.greenColor = (float) 0/255;
-			Const.blueColor = (float) 240/255;			
+			Const.redColor = 0f/255;
+			Const.greenColor = 0f/255;
+			Const.blueColor = 240f/255;			
 			break;
 
 		default:
-			Const.redColor = (float) 0/255;
-			Const.greenColor = (float) 0/255;
-			Const.blueColor = (float) 0/255;	
+			Const.redColor = 0f/255;
+			Const.greenColor = 0f/255;
+			Const.blueColor = 0f/255;	
 			break;
 		}
 		
@@ -99,30 +99,27 @@ public class Board {
 					myShape.add(new Vector2(i,j));
 			}
 		}
+		myShape.add(new Vector2(0,4)); //simboliza o ponto 0,0 da matriz 4x4 da shape
 	}
 
 	public boolean input(String command) {	
-		newCoords = new ArrayList<Vector2>(4);
-
+		newCoords = new ArrayList<Vector2>(5);
 		switch (command.toLowerCase()){
 		case "s": 
-			for (int i = 0; i < 4; i++)
+			System.out.println(command);
+			for (int i = 0; i < myShape.size(); i++)
 				newCoords.add( new Vector2(myShape.get(i).x + 1, myShape.get(i).y));
 			break;
 		case "a": 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < myShape.size(); i++)
 				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y - 1));
 			break;
 		case "d": 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < myShape.size(); i++)
 				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y + 1));
 			break;
-		case "w": 
-			for (int i = 0; i < 4; i++)
-				newCoords.add( new Vector2(myShape.get(i).x - 1, myShape.get(i).y));
-			break;
 		}
-		
+		System.out.println(myShape.size());
 		//verificar novas coordenadas
 		if ( checkCoords() )
 			insert();
@@ -132,31 +129,36 @@ public class Board {
 	}
 
 	private boolean checkCoords() {
-		for (Vector2 point : newCoords) {
-			if ( 	board[(int) point.x][(int) point.y] == 'J'|| 
-					board[(int) point.x][(int) point.y] == 'L'|| 
-					board[(int) point.x][(int) point.y] == 'I'|| 
-					board[(int) point.x][(int) point.y] == 'T'|| 
-					board[(int) point.x][(int) point.y] == 'O'|| 
-					board[(int) point.x][(int) point.y] == 'S'|| 
-					board[(int) point.x][(int) point.y] == 'Z' ||
-					point.x == 23)
+		int max = 0;
+		for (int i = 0; i < 4; i++) {
+			if (newCoords.get(i).x > max)
+				max = (int) newCoords.get(i).x;
+		}
+		for (int i = 0; i < 4; i++) {
+			if ( 	(board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'J'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'L'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'I'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'T'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'O'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'S'|| 
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'Z' ||
+					newCoords.get(i).x == 23) && newCoords.get(i).x == max)
 				{
 					//encontrou torre... adiciona a torre
 					addToTower();
 					return false;
 				}
 
-			if ( board[(int) point.x][(int) point.y] != ' ' && board[(int) point.x][(int) point.y] != '1' )
+			if ( board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] != ' ' && board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] != '1' )
 				return false;			
 		}
 		return true;
 	}
 
 	private void addToTower() {
-		for (Vector2 point : myShape) {		
-			board[(int) point.x][(int) point.y] = shape.getPieceShape().getLetter().charAt(0);
-		}
+		for (int i = 0; i < 4; i++) 
+			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = shape.getPieceShape().getLetter().charAt(0);
+
 		//printBoard();
 		pieceOnGoing = "-";
 		
@@ -171,12 +173,13 @@ public class Board {
 		}
 		
 		for (int i = 0; i < 4; i++) {
+			//System.out.println(myShape.get(i).x + "|" + myShape.get(i).y);
 			board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] = '1';
 		}
 		
-		myShape = new ArrayList<Vector2>(4);
+		myShape = new ArrayList<Vector2>(5);
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			myShape.add(new Vector2(newCoords.get(i).x, newCoords.get(i).y));
 		}
 	}
@@ -230,13 +233,15 @@ public class Board {
 	}
 
 	public void rotate() {
-		/*ArrayList<Vector2> newPos = shape.rotate(myShape);
+		newCoords = new ArrayList<Vector2>(5);
+		newCoords = shape.rotate(myShape);
 		
-		for (int i = 0; i < myShape.size(); i++) {
-			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = ' ';
-			myShape.set(i, new Vector2(newPos.get(i).x,newPos.get(i).y));
-			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = '1';
-		}*/
+		if ( checkCoords() )
+			for (int i = 0; i < 4; i++) {
+				board[(int) myShape.get(i).x][(int) myShape.get(i).y] = ' ';
+				myShape.set(i, new Vector2(newCoords.get(i).x,newCoords.get(i).y));
+				board[(int) myShape.get(i).x][(int) myShape.get(i).y] = '1';
+			}
 	}
 	
 	public void handleGameOver() {

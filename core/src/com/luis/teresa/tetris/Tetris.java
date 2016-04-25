@@ -3,8 +3,7 @@ package com.luis.teresa.tetris;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.IntroScreen;
-import com.luis.teresa.tetris.screens.MenuScreen;
+import com.luis.teresa.tetris.screens.GameScreen;
 
 public class Tetris extends Game {
 
@@ -14,8 +13,8 @@ public class Tetris extends Game {
 	
 	@Override
 	public void create() {
-		setScreen(new IntroScreen());
-		//setScreen(new MenuScreen());
+		//setScreen(new IntroScreen());
+		setScreen(new GameScreen());
 		//LoadAssets.load();
 	}
 	

@@ -115,6 +115,7 @@ public class Shape {
 	    }
 		
 	}
+	
 	private void transpose() {
 		char x;
 		
@@ -129,6 +130,7 @@ public class Shape {
             }
         }
     }
+	
 	public void rotateLeft() 
     {
         if (pieceShape == Type.O)
@@ -166,21 +168,22 @@ public class Shape {
 		return matrix[i][j];
 	}
 
-	/*public ArrayList<Vector2> rotate(ArrayList<Vector2> v) {
-		ArrayList<Vector2> myVec = new ArrayList<Vector2>(4);
-		this.print();
+	public ArrayList<Vector2> rotate(ArrayList<Vector2> v) {
+		ArrayList<Vector2> myVec = new ArrayList<Vector2>(5);
+
 		this.rotateRight();
-		this.print();
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if ( this.matrix[i][j] == '1')
-					myVec.add( new Vector2(i+v.get(i).x,j+v.get(i).y  ) );
+					myVec.add( new Vector2( i + v.get(4).x  ,  j + v.get(4).y ) );
+					//System.out.println("%" + v.get(i).x + "|" + v.get(i).y );
 			}
 		}
+		myVec.add( new Vector2(v.get(4).x,v.get(4 ).y ) );
 		
 		return myVec;
-	}*/
+	}
      
      
 }

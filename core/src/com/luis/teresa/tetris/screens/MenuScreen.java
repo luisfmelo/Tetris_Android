@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,7 +20,6 @@ import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 
-import Entities.ButtonActor;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
@@ -52,7 +52,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 
-		ButtonActor trophey = new ButtonActor(new Texture(Const.TROPHEY_PATH));
+		Image trophey = new Image(new Texture(Const.TROPHEY_PATH));
 		trophey.setSize(.15f*width, .15f*height);
 		trophey.setPosition(.5f*width, .9f*height, 0);
 
@@ -60,7 +60,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		highScore.setSize(.25f*width, .2f*height);
 		highScore.setPosition(.5f*width, .70f*height, 0);
 
-		ButtonActor playBtn = new ButtonActor(new Texture(Const.PLAYBTN_PATH));
+		Image playBtn = new Image(new Texture(Const.PLAYBTN_PATH));
 		playBtn.setSize(.3f*width, .2f*height);
 		playBtn.setPosition(.5f*width, .55f*height, 0);
 		playBtn.addListener(new ClickListener() {
@@ -78,11 +78,11 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 			}
 		});
 		
-		ButtonActor leadBtn = new ButtonActor(new Texture(Const.LEADBTN_PATH));
+		Image leadBtn = new Image(new Texture(Const.LEADBTN_PATH));
 		leadBtn.setSize(.3f*width, .2f*height);
 		leadBtn.setPosition(.5f*width, .35f*height, 0);
 		
-		ButtonActor settBtn = new ButtonActor(new Texture(Const.SETTBTN_PATH));
+		Image settBtn = new Image(new Texture(Const.SETTBTN_PATH));
 		settBtn.setSize(.3f*width, .2f*height);
 		settBtn.setPosition(.5f*width, .15f*height, 0);
 
