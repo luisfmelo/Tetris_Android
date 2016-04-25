@@ -13,6 +13,7 @@ public class Board {
 	ArrayList<Vector2> newCoords;
 	String pieceOnGoing;
 	Shape shape;
+	
 	private boolean gameover = false;
 	
 	public Board() {
@@ -229,7 +230,13 @@ public class Board {
 	}
 
 	public void rotate() {
-		// TODO Auto-generated method stub
+		/*ArrayList<Vector2> newPos = shape.rotate(myShape);
+		
+		for (int i = 0; i < myShape.size(); i++) {
+			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = ' ';
+			myShape.set(i, new Vector2(newPos.get(i).x,newPos.get(i).y));
+			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = '1';
+		}*/
 	}
 	
 	public void handleGameOver() {

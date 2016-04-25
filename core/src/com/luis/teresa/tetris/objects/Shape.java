@@ -1,6 +1,9 @@
 package com.luis.teresa.tetris.objects;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import com.badlogic.gdx.math.Vector2;
 
 public class Shape {
 
@@ -162,6 +165,22 @@ public class Shape {
 	public char getChar(int i, int j) {
 		return matrix[i][j];
 	}
+
+	/*public ArrayList<Vector2> rotate(ArrayList<Vector2> v) {
+		ArrayList<Vector2> myVec = new ArrayList<Vector2>(4);
+		this.print();
+		this.rotateRight();
+		this.print();
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if ( this.matrix[i][j] == '1')
+					myVec.add( new Vector2(i+v.get(i).x,j+v.get(i).y  ) );
+			}
+		}
+		
+		return myVec;
+	}*/
      
      
 }
