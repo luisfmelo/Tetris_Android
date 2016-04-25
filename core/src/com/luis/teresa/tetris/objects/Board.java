@@ -13,6 +13,7 @@ public class Board {
 	ArrayList<Vector2> newCoords;
 	String pieceOnGoing;
 	Shape shape;
+	private boolean gameover = false;
 	
 	public Board() {
 		board = new char[rows][cols];
@@ -181,6 +182,8 @@ public class Board {
 
 	public void checkRows() {
 		boolean clean = true;
+		boolean checkTop = false;
+		
 		for (int i = 3; i < rows - 2; i++) {
 			for (int j = 1; j < cols - 1; j++) {
 				if ( 	board[i][j] != 'I' &&
@@ -190,10 +193,22 @@ public class Board {
 						board[i][j] != 'T' &&
 						board[i][j] != 'S' &&
 						board[i][j] != 'Z')
-					clean = false;
+					clean = false;				
+				if ( 	i == 3 &&
+						(board[i][j] == 'I' ||
+						board[i][j] == 'J' ||
+						board[i][j] == 'L' ||
+						board[i][j] == 'O' ||
+						board[i][j] == 'T' ||
+						board[i][j] == 'S' ||
+						board[i][j] == 'Z'))
+					checkTop = true;
+				
 			}
-			if (clean)
+			if ( clean )
 				cleanRow(i);
+			else if ( checkTop )
+				handleGameOver();
 			clean = true;
 		}		
 	}
@@ -203,7 +218,6 @@ public class Board {
 		for (int i = row; i > 3; i--) {
 			for (int j = 1; j < cols - 1; j++) {
 				board[i][j] = board[i-1][j];
-
 			}
 		}		
 	}
@@ -218,8 +232,13 @@ public class Board {
 		// TODO Auto-generated method stub
 	}
 	
-	public boolean checkGameOver() {
-		return false;
+	public void handleGameOver() {
+		gameover  = true;
+		System.out.println("Game Over");
+	}
+
+	public boolean isGameOver() {
+		return gameover;
 	}
 
 

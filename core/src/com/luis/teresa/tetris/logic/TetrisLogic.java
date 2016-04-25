@@ -1,10 +1,12 @@
 package com.luis.teresa.tetris.logic;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.objects.Board;
 import com.luis.teresa.tetris.objects.Shape;
+import com.luis.teresa.tetris.screens.MenuScreen;
 
 public class TetrisLogic{
 	
@@ -36,15 +38,14 @@ public class TetrisLogic{
 			newCycle();
 			time = 0;
 			board.checkRows();
-			if (board.checkGameOver() )
+			if (board.isGameOver() )
 				handleGameOver();
 			presentShape = futureShape;
 		}	
 	}
 
 	private void handleGameOver() {
-		// TODO Auto-generated method stub
-		
+		Gdx.app.exit();
 	}
 
 	private void newCycle() {
