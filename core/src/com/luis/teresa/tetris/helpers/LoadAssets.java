@@ -1,6 +1,7 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -127,6 +128,11 @@ public class LoadAssets {
 
 	public Label getHighScore() {
 		return this.highScore;
+	}
+
+	public Music getMusic() {
+		Music introMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/SFX_SpecialTetris.ogg"));
+		return introMusic;
 	}
 
 

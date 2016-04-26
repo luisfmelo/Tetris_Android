@@ -2,6 +2,7 @@ package com.luis.teresa.tetris.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 import com.luis.teresa.tetris.logic.TetrisRenderer;
@@ -16,6 +17,10 @@ public class GameScreen implements Screen{
 		renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
 		
 		//Gdx.input.setInputProcessor(new InputHandler());
+		
+		Music tetrisMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/theme.mp3"));
+		tetrisMusic.setLooping(true);
+		tetrisMusic.play();
 	}
 	
 	@Override

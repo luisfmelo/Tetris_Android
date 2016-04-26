@@ -37,6 +37,7 @@ public class IntroScreen implements Screen {
 		
 		myAssets = new LoadAssets();
 		myAssets.loadIntroAssets();
+		myAssets.getMusic().play();
 			
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
@@ -50,6 +51,7 @@ public class IntroScreen implements Screen {
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
 		
 		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
+
 		Tween.to(introImg, SpriteAccessor.ALPHA, 1.5f).target(1).repeatYoyo(1, .5f).setCallback(new TweenCallback() {
 
 			@Override
