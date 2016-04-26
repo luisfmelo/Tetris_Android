@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.helpers.Const;
+import com.luis.teresa.tetris.logic.TetrisLogic;
 
 public class Board {
 	private char[][] board;
@@ -161,7 +162,6 @@ public class Board {
 
 		//printBoard();
 		pieceOnGoing = "-";
-		
 	}
 
 	private void insert() {
@@ -218,12 +218,13 @@ public class Board {
 	}
 	
 	private void cleanRow(int row) {
-		System.out.println("$"+row);
+		//System.out.println("$"+row);
 		for (int i = row; i > 3; i--) {
 			for (int j = 1; j < cols - 1; j++) {
 				board[i][j] = board[i-1][j];
 			}
-		}		
+		}	
+		TetrisLogic.addScore();
 	}
 
 	public void printBoard(){

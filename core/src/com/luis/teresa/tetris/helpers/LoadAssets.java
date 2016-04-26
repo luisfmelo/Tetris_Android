@@ -18,6 +18,8 @@ public class LoadAssets {
 	private float width = Gdx.graphics.getWidth();
 	private float height = Gdx.graphics.getHeight();
 	
+	//MUSICS
+	
 	//INTRO
 	private Image intro;
 	

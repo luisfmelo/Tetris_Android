@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Shape {
 
-	 enum Type { 
+	 public enum Type { 
 		 NoShape (new char [][] {
 			 {' ' ,' ' ,' ' ,' '},
 			 {' ' ,' ' ,' ' ,' '},

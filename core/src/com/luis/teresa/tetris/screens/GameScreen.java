@@ -16,7 +16,6 @@ public class GameScreen implements Screen{
 		myGame = new TetrisLogic(); //inicia novo jogo
 		renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
 		
-		//Gdx.input.setInputProcessor(new InputHandler());
 		
 		Music tetrisMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/theme.mp3"));
 		tetrisMusic.setLooping(true);
