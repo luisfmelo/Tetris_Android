@@ -124,7 +124,7 @@ public class TetrisRenderer {
 									getColor(s.getMatrix()[i][j])[1], 
 									getColor(s.getMatrix()[i][j])[2], 1);
 		
-		Rectangle rect = new Rectangle(x0+j*tam_x, y0+i*tam_y, 2*tam_x, tam_y);
+		Rectangle rect = new Rectangle(x0+j*tam_x, y0+i*tam_y, tam_x, tam_y);
 		
 		// Draws the rectangle from myGame (Using ShapeType.Filled)
 		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
