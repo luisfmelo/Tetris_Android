@@ -43,6 +43,7 @@ public class Const {
 	public static final String MUSIC_CLEAR4_PATH = "sounds/VO_WOW.ogg";
 	public static final String MUSIC_GAMEOVER_PATH = "sounds/SFX_GameOver.ogg";
 	public static final String MUSIC_TOUCH_PATH = "sounds/SFX_PieceTouchLR.ogg";
+	public static final String HIGH_SCORE_PREF = "HighScore Preferences";
 
 
 	

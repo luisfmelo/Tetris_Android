@@ -49,16 +49,16 @@ public class TetrisLogic{
 	}
 
 	private void handleGameOver() {
-		int highScore = Integer.parseInt(myAssets.getScores());
-
+		int highScore = myAssets.getScores();
+		System.out.println("GAME OVER--->" + highScore);
 		myMusics.playGameOver();
 		
 		if (score > highScore)
 		{
-			myAssets.setScores(Integer.toString(score));
+			myAssets.setScores(score);
 			myMusics.playFantastic();
 		}
-		Gdx.app.exit();
+		//Gdx.app.exit();
 	}
 
 	private void newCycle() {

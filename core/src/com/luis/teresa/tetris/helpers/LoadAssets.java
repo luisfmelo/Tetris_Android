@@ -1,6 +1,7 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +18,7 @@ public class LoadAssets {
 	private Skin skin;
 	private float width = Gdx.graphics.getWidth();
 	private float height = Gdx.graphics.getHeight();
+	private Preferences prefs;
 	
 	//MUSICS
 	
@@ -25,7 +27,6 @@ public class LoadAssets {
 	
 	//MENU
 	private Image trophey;
-	private FileHandle scores;
 	private Label highScore;
 	private Image playBtn;
 	private Image leadBtn;
@@ -34,7 +35,9 @@ public class LoadAssets {
 	
 	public LoadAssets() {
 		atlas = new TextureAtlas(Gdx.files.internal(Const.ATLAS_PATH));
-		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas);
+		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas); 
+		prefs = Gdx.app.getPreferences(Const.HIGH_SCORE_PREF);
+		//prefs.flush();
 	}
 
     public void loadIntroAssets() {
@@ -54,8 +57,7 @@ public class LoadAssets {
 		trophey.setPosition(.5f*width, .9f*height, 0);
 		
 		//high Score Text
-		scores = Gdx.files.internal(Const.LOCAL_SCORE_PATH);
-		highScore = new Label(getScores(), skin, "b_default");
+		highScore = new Label(Integer.toString(getScores()), skin, "b_default");
 		highScore.setAlignment(Align.center);
 		highScore.setSize(.25f*width, .2f*height);
 		highScore.setPosition(.5f*width, .75f*height, 0);
@@ -99,13 +101,14 @@ public class LoadAssets {
 	}
 	
 	// MENU
-	public String getScores() {
-		System.out.println(scores.readString());
-		return scores.readString();
+	public int getScores() {
+		//System.out.println(scores.readString());
+		return prefs.getInteger("score");//scores.readString();
 	}
 
-	public void setScores(String s) {
-		this.scores.writeString(s, false);;
+	public void setScores(int sc) {
+		this.prefs.putInteger("score", sc);
+		prefs.flush();
 	}
 
 	public Image getTrophey() {
