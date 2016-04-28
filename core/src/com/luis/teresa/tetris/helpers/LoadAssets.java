@@ -180,7 +180,7 @@ public class LoadAssets {
 	
 	//THEME
 	public String getTheme() {
-		return prefs.getString("theme");//scores.readString();
+		return prefs.getString("theme");
 	}
 
 	public void setTheme(String s) {
@@ -257,10 +257,5 @@ public class LoadAssets {
 
 	public Image getImageTheme() {
 		return theme;
-	}
-
-	public void changeTheme() {
-		// TODO Auto-generated method stub
-		
 	}
 }

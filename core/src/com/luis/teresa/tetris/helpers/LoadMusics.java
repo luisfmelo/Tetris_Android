@@ -18,10 +18,11 @@ public class LoadMusics {
 	private Sound clear4;
 	private Sound touch;
 	private Sound gameOver;
-	private static boolean soundOn;
+	private LoadAssets myAssets;
 	
 	public LoadMusics () {
 		theme = Gdx.audio.newMusic(Gdx.files.internal(Const.MUSIC_THEME_PATH)); 
+		myAssets = new LoadAssets();
 		
 		levelUp = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_LEVELUP_PATH));
 		pieceFall = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_PIECEFALL_PATH)); //not using
@@ -33,65 +34,60 @@ public class LoadMusics {
 		clear4 = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_CLEAR4_PATH));
 		touch = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_TOUCH_PATH));
 		gameOver = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_GAMEOVER_PATH));
-		soundOn = true;
-	}
-
-	public static void setSoundTo (boolean bool) {
-		soundOn = bool;
 	}
 		
 	public void playLevelUp() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			levelUp.play();
 	}
 
 	public void playPieceFall() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			pieceFall.play();
 	}
 	public void playTheme() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 		{		
 			theme.setLooping(true);
 			theme.play();
 		}
 	}
 	public void playFantastic() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			fantastic.play();
 	}
 
 	public void playClear1() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			clear1.play();
 	}
 	public void playClear2() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			clear2.play();
 	}
 
 	public void playClear3() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			clear3.play();
 	}
 
 	public void playClear4() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			clear4.play();
 	}
 
 	public void playIntro() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			intro.play();
 	}
 	
 	public void playTouch() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			touch.play();
 	}
 
 	public void playGameOver() {
-		if (soundOn)
+		if (myAssets.getSoundOn())
 			gameOver.play();
 	}
 	

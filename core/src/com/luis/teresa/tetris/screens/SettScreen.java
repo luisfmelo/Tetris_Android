@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.helpers.LoadMusics;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
@@ -74,8 +73,6 @@ public class SettScreen implements Screen {
 					music.setDrawable(new SpriteDrawable(
 										new Sprite(
 										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));
-				
-				LoadMusics.setSoundTo(Const.soundOn);
 				myAssets.setSoundOn(Const.soundOn);
 				
 				st = new Stage(new ScreenViewport());
@@ -131,14 +128,6 @@ public class SettScreen implements Screen {
 				Const.BACKGROUND_COLOR[1], Const.BACKGROUND_COLOR[2], Const.BACKGROUND_COLOR[3]);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		/*ShapeRenderer shapeRenderer = new ShapeRenderer();
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(150f/255, 150f/255, 150f/255, 0.5f);
-		Rectangle rect = new Rectangle(0.1f*Const.w, 0.2f*Const.h, 
-										0.8f*Const.w, 0.6f*Const.h);
-		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-		shapeRenderer.end();
-		*/
 		st.addActor(titleLabel);
 		st.addActor(x);
 		st.addActor(musicLabel);

@@ -74,15 +74,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		settBtn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Timeline.createParallel().beginParallel()
-						.setCallback(new TweenCallback() {
-							@Override
-							public void onEvent(int type, BaseTween<?> source) {	
-								System.out.println("heyyy");
-								((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
-							}
-						})
-						.end().start(tweenManager);
+				((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
 			}
 		});
 		
@@ -107,11 +99,10 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	@Override
 	public void render(float delta) {
-
-		//Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
-				//		Const.BACKGROUND_COLOR[1], 
-				//		Const.BACKGROUND_COLOR[2], 
-				//		Const.BACKGROUND_COLOR[3]);
+		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
+							Const.BACKGROUND_COLOR[1], 
+							Const.BACKGROUND_COLOR[2], 
+							Const.BACKGROUND_COLOR[3]);
 		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta); //update
