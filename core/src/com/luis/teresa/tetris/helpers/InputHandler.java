@@ -3,7 +3,7 @@ package com.luis.teresa.tetris.helpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.luis.teresa.tetris.objects.Board;
+import com.luis.teresa.tetris.logic.Board;
 
 public class InputHandler implements InputProcessor{
 	Board board;

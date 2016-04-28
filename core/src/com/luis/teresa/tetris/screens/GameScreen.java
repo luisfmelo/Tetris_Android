@@ -2,7 +2,6 @@ package com.luis.teresa.tetris.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 import com.luis.teresa.tetris.logic.TetrisRenderer;
@@ -15,11 +14,6 @@ public class GameScreen implements Screen{
        
 		myGame = new TetrisLogic(); //inicia novo jogo
 		renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
-		
-		
-		Music tetrisMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/theme.mp3"));
-		tetrisMusic.setLooping(true);
-		tetrisMusic.play();
 	}
 	
 	@Override
@@ -36,10 +30,20 @@ public class GameScreen implements Screen{
 	    // Covert Frame rate to String, print it
 	    //Gdx.app.log("GameScreen FPS", (1/delta) + "");
 	    
-	    //update
-	    myGame.update(delta);
-	    //render
-	    renderer.render();
+	    //update & render if game is not over
+    	if( !myGame.isGameOver() )
+    	{
+    		//update
+	    	myGame.update(delta);
+	    	//render
+	    	renderer.render();	
+    	}
+    	//if game is over, render GameOver Screen
+    	else
+    	{
+    		renderer.render();
+    		renderer.renderGameOverScreen(myGame.getScore());
+    	}
 	    
 	}
 

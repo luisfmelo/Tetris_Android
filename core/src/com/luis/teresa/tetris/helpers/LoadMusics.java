@@ -1,13 +1,15 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
 public class LoadMusics {
 
+	private Music theme;
+	
 	private Sound levelUp;
 	private Sound pieceFall;
-	private Sound theme;
 	private Sound fantastic;
 	private Sound intro;
 	private Sound clear1;
@@ -16,11 +18,13 @@ public class LoadMusics {
 	private Sound clear4;
 	private Sound touch;
 	private Sound gameOver;
-	private boolean soundOn;
+	private static boolean soundOn;
+	
 	public LoadMusics () {
+		theme = Gdx.audio.newMusic(Gdx.files.internal(Const.MUSIC_THEME_PATH)); 
+		
 		levelUp = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_LEVELUP_PATH));
 		pieceFall = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_PIECEFALL_PATH)); //not using
-		theme = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_THEME_PATH)); 
 		fantastic = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_FANTASTIC_PATH)); 
 		intro = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_INTRO_PATH));
 		clear1 = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_CLEAR1_PATH));
@@ -32,8 +36,8 @@ public class LoadMusics {
 		soundOn = true;
 	}
 
-	public void setSoundTo (boolean soundOn) {
-		this.soundOn = soundOn;
+	public static void setSoundTo (boolean bool) {
+		soundOn = bool;
 	}
 		
 	public void playLevelUp() {
@@ -47,7 +51,10 @@ public class LoadMusics {
 	}
 	public void playTheme() {
 		if (soundOn)
+		{		
+			theme.setLooping(true);
 			theme.play();
+		}
 	}
 	public void playFantastic() {
 		if (soundOn)
@@ -102,5 +109,9 @@ public class LoadMusics {
 		clear4.dispose();
 		touch.dispose();
 		gameOver.dispose();
+	}
+
+	public void stopTheme() {
+		theme.stop();
 	}
 }

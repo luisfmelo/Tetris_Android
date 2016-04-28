@@ -2,18 +2,24 @@ package com.luis.teresa.tetris;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.IntroScreen;
+import com.luis.teresa.tetris.helpers.LoadMusics;
+import com.luis.teresa.tetris.screens.MenuScreen;
 
 public class Tetris extends Game {
-
-	public static final String TITLE = "Tetris";
-	//public static final int WIDTH = 1080/4;
-	//public static final int HEIGHT = 1920/4;
-	
 	@Override
 	public void create() {
-		setScreen(new IntroScreen());
+		LoadAssets myAssets = new LoadAssets();
+		Const.soundOn = myAssets.getSoundOn();
+		LoadMusics.setSoundTo( myAssets.getSoundOn() );
+				
+		if ( myAssets.getTheme().equals("solar/") || myAssets.getTheme().equals("dracula/") )
+			Const.THEME = myAssets.getTheme();
+		else
+			Const.THEME = "solar/";
+
+		setScreen(new MenuScreen());
 		//setScreen(new GameScreen());
 	}
 	

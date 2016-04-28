@@ -1,11 +1,19 @@
 package com.luis.teresa.tetris.helpers;
 
+import com.badlogic.gdx.Gdx;
+
 public class Const {
 	/**
 	 * TEMPO DE CICLO DO TETRIS 1s
 	 */
-	public static double CYCLE_TIME = 1 ;
+	public static double CYCLE_TIME = 0.01 ;
 	public final static String TITLE = "TETRIS";
+
+	//THEMES
+	public static float[] TETRIS_COLOR;
+	public static float[] BACKGROUND_COLOR;
+	public static String THEME = "solar/";
+	public static boolean soundOn;
 	
 	public static float redColor = 1;
 	public static float greenColor = 0;
@@ -14,24 +22,21 @@ public class Const {
 
 	//COMMON
 	public static String ATLAS_PATH = "ui/atlas.pack";
-	public static String SKIN_PATH = "ui/menuSkin.json";
-
+	public static String SKIN_PATH = "ui/mySkin.json";
+	public final static int w = Gdx.graphics.getWidth();
+	public final static int h = Gdx.graphics.getHeight();
+	
 	// INTRO
 	public static final String INTRO_PATH = "intro.png";
 	
 	//MENU
 	public final static String TROPHEY_PATH = "imgs/trophey.png";
-	public static final String LOCAL_SCORE_PATH = "scores";
 	public final static String PLAYBTN_PATH = "buttons/playBtn.png";
 	public final static String LEADBTN_PATH = "buttons/leadBtn.png";
 	public final static String SETTBTN_PATH = "buttons/settBtn.png";
-	public final static String FOOTER_PATH = "imgs/footer.png";
+	public final static String TITLE_PATH = "imgs/title.png";
 
 	//MUSICS
-	public final static String COLLIDES_PATH = "sound/wallCollision2.wav";
-	public final static String LASERISH_PATH = "sound/laserish.wav";
-	public final static String HURT_PATH = "sound/hurt.wav";
-
 	public static final String MUSIC_LEVELUP_PATH = "sounds/SFX_LevelUp.ogg";
 	public static final String MUSIC_PIECEFALL_PATH = "sounds/SFX_PieceFall.ogg";
 	public static final String MUSIC_THEME_PATH = "sounds/theme.mp3";
@@ -43,11 +48,39 @@ public class Const {
 	public static final String MUSIC_CLEAR4_PATH = "sounds/VO_WOW.ogg";
 	public static final String MUSIC_GAMEOVER_PATH = "sounds/SFX_GameOver.ogg";
 	public static final String MUSIC_TOUCH_PATH = "sounds/SFX_PieceTouchLR.ogg";
-	public static final String HIGH_SCORE_PREF = "HighScore Preferences";
+	public static final String PREFERENCES = "My New Preferences";
 
+	//GAME OVER
+	public final static String HOME_PATH = "buttons/home.png";
+	public final static String REPLAY_PATH = "buttons/replay.png";
+	
+	
+	public static final String HEADER_PATH = "imgs/header.png";
+	public static final String CLOSE_PATH = "buttons/x.png";
+	public static final String SOLAR_PATH = "buttons/sun.png";
+	public static final String DRACULA_PATH = "buttons/moon.png";
+	public static final String SOUND_PATH = "buttons/sound.png";
+	public static final String MUTE_PATH = "buttons/mute.png";
 
 	
 	public static void addLevel(){
 		CYCLE_TIME = 0.9 * CYCLE_TIME;
+	}
+
+
+	public static void setBG_COLOR(float r, float g, float b, float a) {
+		BACKGROUND_COLOR = new float[4];
+		BACKGROUND_COLOR[0] = r;
+		BACKGROUND_COLOR[1] = g;
+		BACKGROUND_COLOR[2] = b;
+		BACKGROUND_COLOR[3] = a;
+	}
+
+	public static void setTETRIS_COLOR(float r, float g, float b, float a) {
+		TETRIS_COLOR = new float[4];
+		TETRIS_COLOR[0] = r;
+		TETRIS_COLOR[1] = g;
+		TETRIS_COLOR[2] = b;
+		TETRIS_COLOR[3] = a;
 	}
 }

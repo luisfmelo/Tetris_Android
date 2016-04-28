@@ -1,37 +1,26 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.GameScreen;
-import com.luis.teresa.tetris.screens.MenuScreen;
 
-public class TetrisRenderer { 
+public class TetrisRendererIMGS { 
 
 	private TetrisLogic myGame;
 	private OrthographicCamera cam;
 	private ShapeRenderer shapeRenderer;
 	private LoadAssets myAssets;
-	Stage stage = new Stage(new ScreenViewport());
-	int w = Gdx.graphics.getWidth();
-	int h = Gdx.graphics.getHeight();
 
-	public TetrisRenderer(TetrisLogic g) {
-		myGame = g;
+	public TetrisRendererIMGS(TetrisLogic world) {
+		myGame = world;
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -41,17 +30,9 @@ public class TetrisRenderer {
 		myAssets = new LoadAssets();
 	}
 
-	public void render() {
-		
+	public void render() {		
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0],Const.BACKGROUND_COLOR[1],Const.BACKGROUND_COLOR[2], Const.BACKGROUND_COLOR[3]);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		Image header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
-		header.setSize(.3f*w, .05f*h);
-		header.setPosition(.5f*w, .96f*h, 0);
-		
-		stage.addActor(header);
-		stage.draw();
 		
 		renderBoard();
 		renderFutureShape();
@@ -67,6 +48,8 @@ public class TetrisRenderer {
 	}
 
 	private void fillCell(int i, int j, char s) {
+		int w = Gdx.graphics.getWidth();
+		int h = Gdx.graphics.getHeight();
 		int tam_x = (int) (0.5*w/12);
 		int tam_y = (int) (0.8*h/22);
 		int x0 = (int) (0.05*w);
@@ -95,7 +78,7 @@ public class TetrisRenderer {
 		shapeRenderer.begin(ShapeType.Line);
 
 		// Chooses RGB Color of 255, 109, 120 at full opacity
-		shapeRenderer.setColor(Const.TETRIS_COLOR[0], Const.TETRIS_COLOR[1], Const.TETRIS_COLOR[2], .5f);
+		shapeRenderer.setColor(getColor('q')[0], getColor('q')[1], getColor('q')[2], 0.5f);
 		
 		// Draws the rectangle from myGame (Using ShapeType.Line)
 		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
@@ -113,6 +96,8 @@ public class TetrisRenderer {
 	}
 	
 	private void fillFutureShapeCell(int i, int j, Shape s) {
+		int w = Gdx.graphics.getWidth();
+		int h = Gdx.graphics.getHeight();
 		int tam_x = (int) (0.15*w/4);
 		int tam_y = (int) (0.15*h/4);
 		int x0 = (int) (0.6*w);
@@ -148,7 +133,7 @@ public class TetrisRenderer {
 		shapeRenderer.begin(ShapeType.Line);
 
 		// Chooses RGB Color of 255, 109, 120 at full opacity
-		shapeRenderer.setColor(Const.TETRIS_COLOR[0], Const.TETRIS_COLOR[1], Const.TETRIS_COLOR[2], .5f);
+		shapeRenderer.setColor(getColor('q')[0], getColor('q')[1], getColor('q')[2], 0.5f);
 		
 		// Draws the rectangle from myGame (Using ShapeType.Line)
 		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
@@ -162,35 +147,35 @@ public class TetrisRenderer {
 		int tam_x = (int) (0.15*w/4);
 		int tam_y = (int) (0.15*h/4);
 		
-		Stage st = new Stage(new ScreenViewport());
-		
 		//Label - Score
-		Label scoreLabel = new Label("Score", myAssets.getSkin(), Const.THEME + "default");
+		Label scoreLabel = new Label("Score", myAssets.getSkin(), "default");
 		scoreLabel.setAlignment(Align.center);
 		scoreLabel.setSize(tam_x*10, tam_y);
 		scoreLabel.setPosition(0.7f*w, 0.5f*h, 0);	
 		
-		Label score = new Label(myGame.getScore(), myAssets.getSkin(), Const.THEME + "default");
+		Label score = new Label(myGame.getScore(), myAssets.getSkin(), "default");
 		score.setAlignment(Align.center);
 		score.setSize(tam_x*10, tam_y);
 		score.setPosition(0.7f*w, 0.43f*h , 0);	
 		
 		//Label - Level
-		Label levelLabel = new Label("Level", myAssets.getSkin(), Const.THEME + "default");
+		Label levelLabel = new Label("Level", myAssets.getSkin(), "default");
 		levelLabel.setAlignment(Align.center);
 		levelLabel.setSize(tam_x*10, tam_y);
 		levelLabel.setPosition(0.7f*w, 0.3f*h, 0);	
 		
-		Label level = new Label(myGame.getLevel(), myAssets.getSkin(), Const.THEME + "default");
+		Label level = new Label(myGame.getLevel(), myAssets.getSkin(), "default");
 		level.setAlignment(Align.center);
 		level.setSize(tam_x*10, tam_y);
 		level.setPosition(0.7f*w, 0.23f*h , 0);	
 		
-		st.addActor(score);
-		st.addActor(scoreLabel);
-		st.addActor(level);
-		st.addActor(levelLabel);
-		st.draw();
+		
+		Stage stage = new Stage();
+		stage.addActor(score);
+		stage.addActor(scoreLabel);
+		stage.addActor(level);
+		stage.addActor(levelLabel);
+		stage.draw();
 		
 		
 	}
@@ -205,9 +190,9 @@ public class TetrisRenderer {
 			rgb[2] = Const.blueColor;
 			break;
 		case ' ': 
-			rgb[0] = Const.BACKGROUND_COLOR[0];
-			rgb[1] = Const.BACKGROUND_COLOR[1];
-			rgb[2] = Const.BACKGROUND_COLOR[2];
+			rgb[0] = Const.TETRIS_COLOR[0];
+			rgb[1] = Const.TETRIS_COLOR[1];
+			rgb[2] = Const.TETRIS_COLOR[2];
 			break;
 		case 'I': 
 			rgb[0] = 0;
@@ -245,57 +230,13 @@ public class TetrisRenderer {
 			rgb[2] = (float) 240/255;			
 			break;
 		default:
-			rgb[0] = Const.TETRIS_COLOR[0];// (float) 0/255;
-			rgb[1] = Const.TETRIS_COLOR[1];// (float) 0/255;
-			rgb[2] = Const.TETRIS_COLOR[2];// = (float) 0/255;	
+			rgb[0] = (float) 0/255;
+			rgb[1] = (float) 0/255;
+			rgb[2] = (float) 0/255;	
 			break;
 		}
 		
 		return rgb;
 	}
-
 	
-	public void renderGameOverScreen(String score) {
-		//top bar
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(150f/255, 150f/255, 150f/255, 0.5f);
-		Rectangle rect = new Rectangle(0, 0.1f*h, w, 0.2f*h);
-		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-		shapeRenderer.end();	
-		
-		//title bar
-    	Image header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
-    	header.setSize(.3f*Const.w, .05f*Const.h);
-    	header.setPosition(.5f*Const.w, .95f*Const.h, 0);
-
-		
-		//home bar
-		Image home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
-		home.setSize(.15f*w, .15f*h);
-		home.setPosition(.5f*w, .5f*h, 0);
-		home.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {					
-				((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
-			}
-		});
-		
-		//replay bar
-		Image replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
-		replay.setSize(.15f*w, .15f*h);
-		replay.setPosition(.5f*w, .3f*h, 0);
-		replay.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {					
-				((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
-			}
-		});
-		
-		stage.addActor(home);
-		stage.addActor(replay);
-		Gdx.input.setInputProcessor(stage);
-		stage.draw();
-		
-
-	}
 }

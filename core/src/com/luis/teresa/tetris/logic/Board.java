@@ -1,10 +1,9 @@
-package com.luis.teresa.tetris.objects;
+package com.luis.teresa.tetris.logic;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.helpers.Const;
-import com.luis.teresa.tetris.logic.TetrisLogic;
 
 public class Board {
 	private char[][] board;
@@ -107,7 +106,6 @@ public class Board {
 		newCoords = new ArrayList<Vector2>(5);
 		switch (command.toLowerCase()){
 		case "s": 
-			System.out.println(command);
 			for (int i = 0; i < myShape.size(); i++)
 				newCoords.add( new Vector2(myShape.get(i).x + 1, myShape.get(i).y));
 			break;
@@ -120,11 +118,10 @@ public class Board {
 				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y + 1));
 			break;
 		}
-		System.out.println(myShape.size());
 		//verificar novas coordenadas
 		if ( checkCoords() )
 			insert();
-		if ( pieceOnGoing == "-" )
+		if ( pieceOnGoing.equals("-") )
 			return false;
 		return true;
 	}
@@ -218,7 +215,6 @@ public class Board {
 	}
 	
 	private void cleanRow(int row) {
-		//System.out.println("$"+row);
 		for (int i = row; i > 3; i--) {
 			for (int j = 1; j < cols - 1; j++) {
 				board[i][j] = board[i-1][j];

@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.helpers.LoadMusics;
-import com.luis.teresa.tetris.objects.Board;
-import com.luis.teresa.tetris.objects.Shape;
 
 public class TetrisLogic{
 	private Board board;
@@ -15,7 +13,8 @@ public class TetrisLogic{
 	private Shape futureShape;
 	private static int level;
 	private static int score;
-	private LoadAssets myAssets;
+	private static LoadAssets myAssets;
+	private boolean gameOver;
 	private static LoadMusics myMusics;
 	
 	public TetrisLogic() {
@@ -24,12 +23,15 @@ public class TetrisLogic{
 		board.initializeBoard();
 		level = 1;
 		score = 0;
+		gameOver = false;
 		shapeInGame = false;
 		presentShape = new Shape();
 		futureShape = new Shape();
 		myAssets = new LoadAssets();
-		myMusics = new LoadMusics();
+		myMusics= new LoadMusics();
+		myMusics.playTheme();
 		Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
+		
 	}
 
 	public char[][] getBoard() {
@@ -51,8 +53,9 @@ public class TetrisLogic{
 	private void handleGameOver() {
 		int highScore = myAssets.getScores();
 		System.out.println("GAME OVER--->" + highScore);
+		myMusics.stopTheme();
 		myMusics.playGameOver();
-		
+		gameOver = true;
 		if (score > highScore)
 		{
 			myAssets.setScores(score);
@@ -96,6 +99,7 @@ public class TetrisLogic{
 		level ++;
 		Const.addLevel();
 		myMusics.playLevelUp();
+		myMusics.dispose();
 	}
 
 	public static void addScore() {
@@ -103,6 +107,10 @@ public class TetrisLogic{
 		if ( score % 10 == 0)
 			levelUp();
 
+	}
+
+	public boolean isGameOver() {
+		return gameOver;
 	}
 	
 	

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
+import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 
 import aurelienribon.tweenengine.BaseTween;
@@ -28,12 +29,23 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	private Skin skin;
 	private LoadAssets myAssets;
 	private TweenManager tweenManager;
+	Stage st = new Stage(new ScreenViewport());
 	
 	@Override
 	public void show() {
 		
 		myAssets = new LoadAssets();
 		myAssets.loadMenuAssets();
+		
+		if (myAssets.getTheme().equals("dracula/")){
+
+			Const.setBG_COLOR(0f,0f,0f,1f);
+			Const.setTETRIS_COLOR(1f,1f,1f,1f);
+		}
+		else {
+			Const.setBG_COLOR(1f,1f,1f,1f);
+			Const.setTETRIS_COLOR(0f,0f,0f,1f);
+		}
 		
 		skin = myAssets.getSkin();
 		
@@ -57,9 +69,25 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 			}
 		});
 		Image leadBtn = myAssets.getLeaderBtn();
+		//add listener 
 		Image settBtn = myAssets.getSettBtn();
+		settBtn.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				Timeline.createParallel().beginParallel()
+						.setCallback(new TweenCallback() {
+							@Override
+							public void onEvent(int type, BaseTween<?> source) {	
+								System.out.println("heyyy");
+								((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
+							}
+						})
+						.end().start(tweenManager);
+			}
+		});
+		
 		Image footer = myAssets.getFooter();
-
+		
 		stage.addActor(trophey);
 		stage.addActor(highScore);
 		stage.addActor(playBtn);
@@ -68,10 +96,8 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		stage.addActor(footer);
 		
 		// creating animations
-				tweenManager = new TweenManager();
-				Tween.registerAccessor(Actor.class, new ActorAccessor());
-
-		
+		tweenManager = new TweenManager();
+		Tween.registerAccessor(Actor.class, new ActorAccessor());
 	}
 
 	@Override
@@ -82,7 +108,11 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	@Override
 	public void render(float delta) {
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		//Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
+				//		Const.BACKGROUND_COLOR[1], 
+				//		Const.BACKGROUND_COLOR[2], 
+				//		Const.BACKGROUND_COLOR[3]);
+		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta); //update
 		stage.draw();
@@ -91,7 +121,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-
 	}
 
 	@Override

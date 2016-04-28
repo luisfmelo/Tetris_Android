@@ -1,4 +1,4 @@
-package com.luis.teresa.tetris.objects;
+package com.luis.teresa.tetris.logic;
 
 import java.util.ArrayList;
 import java.util.Random;
