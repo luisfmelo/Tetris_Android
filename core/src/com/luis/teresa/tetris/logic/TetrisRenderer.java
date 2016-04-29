@@ -1,6 +1,5 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,17 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.GameScreen;
-import com.luis.teresa.tetris.screens.MenuScreen;
 
 public class TetrisRenderer { 
 
@@ -29,6 +24,12 @@ public class TetrisRenderer {
 	Stage stage = new Stage(new ScreenViewport());
 	int w = Gdx.graphics.getWidth();
 	int h = Gdx.graphics.getHeight();
+	private Label secundaryLabel;
+	private Label gameOverLabel;
+	private Image home;
+	private Image header;
+	private Image GOheader;
+	private Image replay;
 
 	public TetrisRenderer(TetrisLogic g) {
 		myGame = g;
@@ -39,6 +40,7 @@ public class TetrisRenderer {
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		
 		myAssets = new LoadAssets();
+		myAssets.loadGameAssets(myGame);
 	}
 
 	public void render() {
@@ -46,13 +48,9 @@ public class TetrisRenderer {
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0],Const.BACKGROUND_COLOR[1],Const.BACKGROUND_COLOR[2], Const.BACKGROUND_COLOR[3]);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		Image header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
-		header.setSize(.3f*w, .05f*h);
-		header.setPosition(.5f*w, .96f*h, 0);
+		header = myAssets.getGameHeader();
 		
-		stage.addActor(header);
-		stage.draw();
-		
+		stage.addActor(header);		
 		renderBoard();
 		renderFutureShape();
 		renderScore();		
@@ -161,9 +159,7 @@ public class TetrisRenderer {
 		int h = Gdx.graphics.getHeight();
 		int tam_x = (int) (0.15*w/4);
 		int tam_y = (int) (0.15*h/4);
-		
-		Stage st = new Stage(new ScreenViewport());
-		
+				
 		//Label - Score
 		Label scoreLabel = new Label("Score", myAssets.getSkin(), Const.THEME + "default");
 		scoreLabel.setAlignment(Align.center);
@@ -186,11 +182,11 @@ public class TetrisRenderer {
 		level.setSize(tam_x*10, tam_y);
 		level.setPosition(0.7f*w, 0.23f*h , 0);	
 		
-		st.addActor(score);
-		st.addActor(scoreLabel);
-		st.addActor(level);
-		st.addActor(levelLabel);
-		st.draw();
+		stage.addActor(score);
+		stage.addActor(scoreLabel);
+		stage.addActor(level);
+		stage.addActor(levelLabel);
+//		st.draw();
 		
 		
 	}
@@ -253,49 +249,36 @@ public class TetrisRenderer {
 		
 		return rgb;
 	}
-
 	
-	public void renderGameOverScreen(String score) {
+	public void renderGameOverScreen(String score, boolean newHighScore ) {
+		myAssets.loadGameOverAssets();
+		
 		//top bar
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(150f/255, 150f/255, 150f/255, 0.5f);
 		Rectangle rect = new Rectangle(0, 0.1f*h, w, 0.2f*h);
 		shapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
-		shapeRenderer.end();	
+		shapeRenderer.end();
+		
+		//Game Over
+		gameOverLabel = myAssets.getGameOverLabel();
+		secundaryLabel = myAssets.getSecundaryLabel();
+		
+		if(newHighScore)//NEW HIGH SCORE
+			secundaryLabel.setText("New High Score: " + Integer.toString(myAssets.getScores()));
+		else //Game Over
+			secundaryLabel.setText("Try Again!");
 		
 		//title bar
-    	Image header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
-    	header.setSize(.3f*Const.w, .05f*Const.h);
-    	header.setPosition(.5f*Const.w, .95f*Const.h, 0);
-
-		
+    	//GOheader = myAssets.getHeader();
 		//home bar
-		Image home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
-		home.setSize(.15f*w, .15f*h);
-		home.setPosition(.5f*w, .5f*h, 0);
-		home.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {					
-				((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen());
-			}
-		});
-		
+		home = myAssets.getHome();
 		//replay bar
-		Image replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
-		replay.setSize(.15f*w, .15f*h);
-		replay.setPosition(.5f*w, .3f*h, 0);
-		replay.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {					
-				((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
-			}
-		});
-		
-		stage.addActor(home);
-		stage.addActor(replay);
-		Gdx.input.setInputProcessor(stage);
-		stage.draw();
-		
+		replay = myAssets.getReplay();
 
+		stage.addActor(home);
+		stage.addActor(secundaryLabel);
+		stage.addActor(gameOverLabel);
+		stage.addActor(replay);
 	}
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.accessors.SpriteAccessor;
 import com.luis.teresa.tetris.helpers.LoadAssets;
+import com.luis.teresa.tetris.helpers.LoadMusics;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -25,19 +26,20 @@ public class IntroScreen implements Screen {
 	private TweenManager tweenManager;
 	private LoadAssets myAssets;
 	private Stage stage;
+	private LoadMusics myMusics;
 
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		
 		myAssets = new LoadAssets();
+		myAssets.loadIntroAssets();
 		myAssets.loadMenuAssets();
 		
 		batch = new SpriteBatch();
 		
-		myAssets = new LoadAssets();
-		myAssets.loadIntroAssets();
-		myAssets.getMusic().play();
+		myMusics = new LoadMusics();
+		myMusics.playIntro();
 			
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);

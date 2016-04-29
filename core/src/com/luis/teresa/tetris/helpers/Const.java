@@ -19,6 +19,7 @@ public class Const {
 	public static float greenColor = 0;
 	public static float blueColor = 0;
 	public static float alfa = 1;
+	public static String actualImg;
 
 	//COMMON
 	public static String ATLAS_PATH = "ui/atlas.pack";
@@ -37,11 +38,11 @@ public class Const {
 	public final static String TITLE_PATH = "imgs/title.png";
 
 	//MUSICS
+	public static final String INTRO_MUSIC_PATH = "sounds/SFX_SpecialTetris.ogg";
 	public static final String MUSIC_LEVELUP_PATH = "sounds/SFX_LevelUp.ogg";
 	public static final String MUSIC_PIECEFALL_PATH = "sounds/SFX_PieceFall.ogg";
 	public static final String MUSIC_THEME_PATH = "sounds/theme.mp3";
 	public static final String MUSIC_FANTASTIC_PATH = "sounds/VO_FANTSTC.ogg";
-	public static final String MUSIC_INTRO_PATH = "sounds/SFX_SpecialTetris.ogg";
 	public static final String MUSIC_CLEAR1_PATH = "sounds/SFX_SpecialLineClearSingle.ogg";
 	public static final String MUSIC_CLEAR2_PATH = "sounds/SFX_SpecialLineClearDouble.ogg";
 	public static final String MUSIC_CLEAR3_PATH = "sounds/SFX_SpecialLineClearTriple.ogg";
@@ -54,13 +55,24 @@ public class Const {
 	public final static String HOME_PATH = "buttons/home.png";
 	public final static String REPLAY_PATH = "buttons/replay.png";
 	
-	
+	//BUTTONS - SETTINGS
 	public static final String HEADER_PATH = "imgs/header.png";
 	public static final String CLOSE_PATH = "buttons/x.png";
 	public static final String SOLAR_PATH = "buttons/sun.png";
 	public static final String DRACULA_PATH = "buttons/moon.png";
 	public static final String SOUND_PATH = "buttons/sound.png";
 	public static final String MUTE_PATH = "buttons/mute.png";
+	
+	//BLOCK IMAGES
+	public static final String WHITE_BLOCK = "blocks/branco.png";
+	public static final String BLACK_BLOCK = "blocks/preto.png";
+	public static final String LIGHTBLUE_BLOCK = "blocks/azulClaro.png";
+	public static final String DARKBLUE_BLOCK = "blocks/azulEscuro.png";
+	public static final String GREEN_BLOCK = "blocks/verde.png";
+	public static final String RED_BLOCK = "blocks/vermelho.png";
+	public static final String PURPLE_BLOCK = "blocks/roxo.png";
+	public static final String YELLOW_BLOCK = "blocks/amarelo.png";
+	public static final String ORANGE_BLOCK = "blocks/laranja.png";
 
 	
 	public static void addLevel(){
@@ -82,5 +94,30 @@ public class Const {
 		TETRIS_COLOR[1] = g;
 		TETRIS_COLOR[2] = b;
 		TETRIS_COLOR[3] = a;
+	}
+
+
+	public static String transform(float[] rgb) {
+		
+		if (rgb[0] == 255f/255 && rgb[1] == 255f/255 && rgb[2] == 255f/255)
+			return "white";
+		else if (rgb[0] == 0f/255 && rgb[1] == 0f/255 && rgb[2] == 0f/255)
+			return "black";
+		else if (rgb[0] == 0f/255 && rgb[1] == 240f/255 && rgb[2] == 240f/255)
+			return "lightblue";
+		else if (rgb[0] == 0f/255 && rgb[1] == 240f/255 && rgb[2] == 0f/255)
+			return "green";
+		else if (rgb[0] == 240f/255 && rgb[1] == 0f/255 && rgb[2] == 0f/255)
+			return "red";
+		else if (rgb[0] == 150f/255 && rgb[1] == 0f/255 && rgb[2] == 240f/255)
+			return "purple";
+		else if (rgb[0] == 240f/255 && rgb[1] == 240f/255 && rgb[2] == 0f/255)
+			return "yellow";
+		else if (rgb[0] == 240f/255 && rgb[1] == 150f/255 && rgb[2] == 0f/255)
+			return "orange";
+		else if (rgb[0] == 0f/255 && rgb[1] == 0f/255 && rgb[2] == 240f/255)
+			return "darkblue";
+		return "";
+
 	}
 }

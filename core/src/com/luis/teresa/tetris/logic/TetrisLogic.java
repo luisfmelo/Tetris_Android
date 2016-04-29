@@ -16,6 +16,7 @@ public class TetrisLogic{
 	private static LoadAssets myAssets;
 	private boolean gameOver;
 	private static LoadMusics myMusics;
+	private static boolean newHighScore;
 	
 	public TetrisLogic() {
 		time = 0;
@@ -30,6 +31,7 @@ public class TetrisLogic{
 		myAssets = new LoadAssets();
 		myMusics= new LoadMusics();
 		myMusics.playTheme();
+		newHighScore = false;
 		Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
 		
 	}
@@ -58,6 +60,7 @@ public class TetrisLogic{
 		gameOver = true;
 		if (score > highScore)
 		{
+			newHighScore = true;
 			myAssets.setScores(score);
 			myMusics.playFantastic();
 		}
@@ -112,6 +115,9 @@ public class TetrisLogic{
 	public boolean isGameOver() {
 		return gameOver;
 	}
-	
-	
+
+	public static boolean isNewHighScore() {
+		return newHighScore;
+	}
+
 }

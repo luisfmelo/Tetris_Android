@@ -3,17 +3,31 @@ package com.luis.teresa.tetris.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.logic.TetrisLogic;
-import com.luis.teresa.tetris.logic.TetrisRenderer;
+import com.luis.teresa.tetris.logic.TetrisRendererIMGS;
 
 public class GameScreen implements Screen{
 	private TetrisLogic myGame;
-	private TetrisRenderer renderer;
+	private TetrisRendererIMGS renderer;
+	private Stage st;
+	private LoadAssets myAssets;
 	
 	public GameScreen() {
-       
+		st = new Stage(new ScreenViewport());
+		Gdx.input.setInputProcessor(st);
+		
 		myGame = new TetrisLogic(); //inicia novo jogo
-		renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
+		
+		myAssets = new LoadAssets();
+		myAssets.loadGameAssets(myGame);
+		myAssets.loadGameOverAssets();
+		myAssets.loadBlockImgs();
+		
+		renderer = new TetrisRendererIMGS(myGame, st, myAssets); //inicia renderer para imprimir
 	}
 	
 	@Override
@@ -27,8 +41,6 @@ public class GameScreen implements Screen{
 
 	    // Fills the screen with the selected color
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	    // Covert Frame rate to String, print it
-	    //Gdx.app.log("GameScreen FPS", (1/delta) + "");
 	    
 	    //update & render if game is not over
     	if( !myGame.isGameOver() )
@@ -42,8 +54,10 @@ public class GameScreen implements Screen{
     	else
     	{
     		renderer.render();
-    		renderer.renderGameOverScreen(myGame.getScore());
+    		renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
     	}
+    	st.draw();
+
 	    
 	}
 

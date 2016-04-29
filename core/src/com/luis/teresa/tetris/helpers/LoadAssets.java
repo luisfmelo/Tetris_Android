@@ -1,22 +1,27 @@
 package com.luis.teresa.tetris.helpers;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.luis.teresa.tetris.logic.TetrisLogic;
+import com.luis.teresa.tetris.screens.GameScreen;
+import com.luis.teresa.tetris.screens.MenuScreen;
 
 public class LoadAssets {
 	
 	//COMMON
 	private TextureAtlas atlas;
 	private Skin skin;
-	private float width = Gdx.graphics.getWidth();
-	private float height = Gdx.graphics.getHeight();
 	private Preferences prefs;
 	
 	//INTRO
@@ -38,58 +43,113 @@ public class LoadAssets {
 	private Label themeLabel;
 	private Image music;
 	
+	//GAME
+	
+	//GAME OVER
+	private Label gameOverLabel;
+	private Label secundaryLabel;
+	private Image header;
+	private Image home;
+	private Image replay;
+	private Label scoreLabel;
+	private Label score;
+	private Label levelLabel;
+	private Label level;
+	public Image orange;
+	public Image yellow;
+	public Image purple;
+	public Image red;
+	public Image green;
+	public Image darkblue;
+	public Image lightblue;
+	public Image black;
+	public Image white;
+	public Image im;
+	
+	//BLOCKS
+	
 	public LoadAssets() {
 		atlas = new TextureAtlas(Gdx.files.internal(Const.ATLAS_PATH));
 		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas); 
 		prefs = Gdx.app.getPreferences(Const.PREFERENCES);
+		im = new Image();
+		
 	}
 
     public void loadIntroAssets() {
-    	
 		//INTRO IMAGE
 		intro = new Image(new Texture(Gdx.files.internal(Const.INTRO_PATH)));
-		intro.setSize(.5f*width, .5f*height);
-		intro.setPosition(.5f*width, .5f*height, 0);
+		intro.setSize(.5f*Const.w, .5f*Const.h);
+		intro.setPosition(.5f*Const.w, .5f*Const.h, 0);
     }
 
 
     public void loadMenuAssets() {
-
 		//high Score Image
 		trophey = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TROPHEY_PATH)));
-    	trophey.setSize(.15f*width, .15f*height);
-		trophey.setPosition(.5f*width, .9f*height, 0);
+    	trophey.setSize(.15f*Const.w, .15f*Const.h);
+		trophey.setPosition(.5f*Const.w, .9f*Const.h, 0);
 		
 		//high Score Text
 		highScore = new Label(Integer.toString(getScores()), skin, Const.THEME + "default");
 		highScore.setAlignment(Align.center);
-		highScore.setSize(.25f*width, .2f*height);
-		highScore.setPosition(.5f*width, .75f*height, 0);
+		highScore.setSize(.25f*Const.w, .2f*Const.h);
+		highScore.setPosition(.5f*Const.w, .75f*Const.h, 0);
 		
 		//Play Button
 		playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
-		playBtn.setSize(.6f*width, .3f*height);
-		playBtn.setPosition(.5f*width, .55f*height, 0);
+		playBtn.setSize(.6f*Const.w, .3f*Const.h);
+		playBtn.setPosition(.5f*Const.w, .55f*Const.h, 0);
 
 		//LeaderBoard Button
     	leadBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.LEADBTN_PATH)));
-    	leadBtn.setSize(.25f*width, .2f*height);
-		leadBtn.setPosition(.35f*width, .35f*height, 0);
+    	leadBtn.setSize(.25f*Const.w, .2f*Const.h);
+		leadBtn.setPosition(.35f*Const.w, .35f*Const.h, 0);
 		
 		//Settings Button
     	settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
-		settBtn.setSize(.25f*width, .15f*height);
-		settBtn.setPosition(.65f*width, .35f*height, 0);
+		settBtn.setSize(.25f*Const.w, .15f*Const.h);
+		settBtn.setPosition(.65f*Const.w, .35f*Const.h, 0);
 
 		//Footer
     	footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
-		footer.setSize(.3f*width, .05f*height);
-		footer.setPosition(.5f*width, .05f*height, 0);
+		footer.setSize(.3f*Const.w, .05f*Const.h);
+		footer.setPosition(.5f*Const.w, .05f*Const.h, 0);
 
     }
 
 
-
+    public void loadGameAssets(TetrisLogic myGame){
+		int tam_x = (int) (0.15*Const.w/4);
+		int tam_y = (int) (0.15*Const.h/4);
+		
+    	header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+		header.setSize(.3f*Const.w, .05f*Const.h);
+		header.setPosition(.5f*Const.w, .96f*Const.h, 0);
+		
+		//Label - Score
+		scoreLabel = new Label("Score", skin, Const.THEME + "default");
+		scoreLabel.setAlignment(Align.center);
+		scoreLabel.setSize(tam_x*10, tam_y);
+		scoreLabel.setPosition(0.7f*Const.w, 0.5f*Const.h, 0);	
+		
+		score = new Label(myGame.getScore(), skin, Const.THEME + "default");
+		score.setAlignment(Align.center);
+		score.setSize(tam_x*10, tam_y);
+		score.setPosition(0.7f*Const.w, 0.43f*Const.h , 0);	
+		
+		//Label - Level
+		levelLabel = new Label("Level", skin, Const.THEME + "default");
+		levelLabel.setAlignment(Align.center);
+		levelLabel.setSize(tam_x*10, tam_y);
+		levelLabel.setPosition(0.7f*Const.w, 0.3f*Const.h, 0);	
+		
+		level = new Label(myGame.getLevel(), skin, Const.THEME + "default");
+		level.setAlignment(Align.center);
+		level.setSize(tam_x*10, tam_y);
+		level.setPosition(0.7f*Const.w, 0.23f*Const.h , 0);	
+    }
+    
     public void loadSettingsAssets() {
     	
     	//Label Title
@@ -134,27 +194,41 @@ public class LoadAssets {
 
     }
 
-    
-    public static void dispose() {
-        // We must dispose of the texture when we are finished.
-       // texture.dispose();
+
+    public void loadGameOverAssets() {
+		//Game Over
+    	gameOverLabel = new Label("Game Over", skin, Const.THEME + "default");
+		gameOverLabel.setAlignment(Align.center);
+		gameOverLabel.setSize(Const.w, 0.2f*Const.h);
+		gameOverLabel.setPosition(0.5f*Const.w, 0.85f*Const.h, 0);	
+		
+		//secondary Label
+		secundaryLabel = new Label("", skin, Const.THEME + "small");
+		secundaryLabel.setAlignment(Align.center);
+		secundaryLabel.setSize(Const.w, 0.2f*Const.h);
+		secundaryLabel.setPosition(0.5f*Const.w, 0.75f*Const.h, 0);	
+		
+		//title bar
+    	header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+    	header.setSize(.3f*Const.w, .05f*Const.h);
+    	header.setPosition(.5f*Const.w, .95f*Const.h, 0);
+		
+		//home bar
+		home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
+		home.setSize(.15f*Const.w, .15f*Const.h);
+		home.setPosition(.5f*Const.w, .5f*Const.h, 0);
+		
+		
+		//replay bar
+		replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
+		replay.setSize(.15f*Const.w, .15f*Const.h);
+		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);
+
     }
 
-	public Skin getSkin() {
-		return this.skin;
-	}
-
-	//SETTINGS
-	
-	
-	// INTRO
-	public Image getIntroImg() {
-		return intro;
-	}
-	
-	// MENU
-	
-	/**
+    
+    
+    /**
 	 * PREFERENCES
 	 * @return
 	 */
@@ -201,10 +275,23 @@ public class LoadAssets {
 		Const.THEME = s;
 	}
 
+    
+    
+    public static void dispose() {
+    	
+    }
+
+	public Skin getSkin() {
+		return this.skin;
+	}
 	
 	
+	// INTRO
+	public Image getIntroImg() {
+		return intro;
+	}
 	
-	
+	// MENU
 	public Image getTrophey() {
 		return trophey;
 	}
@@ -227,11 +314,6 @@ public class LoadAssets {
 
 	public Label getHighScore() {
 		return this.highScore;
-	}
-
-	public Music getMusic() {
-		Music introMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/SFX_SpecialTetris.ogg"));
-		return introMusic;
 	}
 
 	//Settings
@@ -257,5 +339,87 @@ public class LoadAssets {
 
 	public Image getImageTheme() {
 		return theme;
+	}
+	
+
+	//GAME
+	public Image getGameHeader() {
+		return header;
+	}
+
+	public Label getScoreLabel() {
+		return scoreLabel;
+	}
+
+	public Label getScore() {
+		return score;
+	}
+
+	public Label getLevelLabel() {
+		return levelLabel;
+	}
+
+	public Label getLevel() {
+		return level;
+	}
+
+
+	
+	//GAME OVER
+	public Label getGameOverLabel() {
+		return gameOverLabel;
+	}
+
+	public Label getSecundaryLabel() {
+		return secundaryLabel;
+	}
+
+	public Image getHeader() {
+		return header;
+	}
+	
+	public Image getHome() {
+		return home;
+	}
+
+	public Image getReplay() {
+		return replay;
+	}
+
+	public void loadBlockImgs() {
+		white = new Image(new Texture(Gdx.files.internal(Const.WHITE_BLOCK)));
+		black = new Image(new Texture(Gdx.files.internal(Const.BLACK_BLOCK)));
+		lightblue = new Image(new Texture(Gdx.files.internal(Const.LIGHTBLUE_BLOCK)));
+		darkblue = new Image(new Texture(Gdx.files.internal(Const.DARKBLUE_BLOCK)));
+		green = new Image(new Texture(Gdx.files.internal(Const.GREEN_BLOCK)));
+		red = new Image(new Texture(Gdx.files.internal(Const.RED_BLOCK)));
+		purple = new Image(new Texture(Gdx.files.internal(Const.PURPLE_BLOCK)));
+		yellow = new Image(new Texture(Gdx.files.internal(Const.YELLOW_BLOCK)));
+		orange = new Image(new Texture(Gdx.files.internal(Const.ORANGE_BLOCK)));
+	}
+
+	public Image loadOneBlock(String color) {
+		switch(color)
+		{
+		case "white":
+			return white;
+		case "black":
+			return black;
+		case "lightblue":
+			return lightblue;
+		case "darkblue":
+			return darkblue;
+		case "green":
+			return green;
+		case "red":
+			return red;
+		case "purple":
+			return purple;
+		case "yellow":
+			return yellow;
+		case "orange":
+			return orange;
+		}
+		return orange;
 	}
 }

@@ -27,7 +27,7 @@ public class LoadMusics {
 		levelUp = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_LEVELUP_PATH));
 		pieceFall = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_PIECEFALL_PATH)); //not using
 		fantastic = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_FANTASTIC_PATH)); 
-		intro = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_INTRO_PATH));
+		intro = Gdx.audio.newSound(Gdx.files.internal(Const.INTRO_MUSIC_PATH));
 		clear1 = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_CLEAR1_PATH));
 		clear2 = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_CLEAR2_PATH));
 		clear3 = Gdx.audio.newSound(Gdx.files.internal(Const.MUSIC_CLEAR3_PATH));
