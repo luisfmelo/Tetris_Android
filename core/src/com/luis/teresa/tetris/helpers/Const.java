@@ -7,6 +7,7 @@ public class Const {
 	 * TEMPO DE CICLO DO TETRIS 1s
 	 */
 	public static double CYCLE_TIME = 0.08 ;
+	public static int ROWS_TO_LEVEL_UP = 2;
 	public final static String TITLE = "TETRIS";
 
 	//THEMES

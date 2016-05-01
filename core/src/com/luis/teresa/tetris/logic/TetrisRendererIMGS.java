@@ -1,22 +1,14 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.GameScreen;
-import com.luis.teresa.tetris.screens.MenuScreen;
 
 public class TetrisRendererIMGS { 
 
@@ -24,14 +16,10 @@ public class TetrisRendererIMGS {
 	private OrthographicCamera cam;
 	private ShapeRenderer shapeRenderer;
 	private LoadAssets myAssets;
-	Stage stage;
+	private Stage stage;
 	int w = Gdx.graphics.getWidth();
 	int h = Gdx.graphics.getHeight();
-	private Label secundaryLabel;
-	private Label gameOverLabel;
-	private Image home;
 	private Image header;
-	private Image replay;
 	private Label scoreLabel;
 	private Label level;
 	private Label levelLabel;
@@ -49,6 +37,18 @@ public class TetrisRendererIMGS {
 
 		stage = st;
 		img = myAssets.im;
+		
+		//myAssets.loadGameAssets(myGame);
+		
+		//Label - Score
+		scoreLabel = myAssets.getScoreLabel();	
+		
+		score = myAssets.getScore();
+		
+		//Label - Level
+		levelLabel = myAssets.getLevelLabel();	
+		
+		level = myAssets.getLevel();
 	}
 
 	public void render() {
@@ -62,6 +62,7 @@ public class TetrisRendererIMGS {
 		renderFutureShape();
 		renderScore();		
 		stage.addActor(header);
+		stage.draw();
 	}
 	
 	private void renderBoard() {
@@ -120,17 +121,18 @@ public class TetrisRendererIMGS {
 		scoreLabel = myAssets.getScoreLabel();	
 		
 		score = myAssets.getScore();
-		
+		score.setText(myGame.getScore());
+				
 		//Label - Level
 		levelLabel = myAssets.getLevelLabel();	
 		
 		level = myAssets.getLevel();
+		level.setText(myGame.getLevel());
 		
 		stage.addActor(score);
 		stage.addActor(scoreLabel);
 		stage.addActor(level);
-		stage.addActor(levelLabel);
-		
+		stage.addActor(levelLabel);	
 		
 	}
 
@@ -193,7 +195,7 @@ public class TetrisRendererIMGS {
 		return rgb;
 	}
 	
-	public void renderGameOverScreen(String score, boolean newHighScore ) {		
+	/*public void renderGameOverScreen(String score, boolean newHighScore ) {		
 		//Game Over
 		gameOverLabel = myAssets.getGameOverLabel();
 		secundaryLabel = myAssets.getSecundaryLabel();
@@ -240,5 +242,5 @@ public class TetrisRendererIMGS {
 		st.addActor(replay);
 		st.draw();
 
-	}
+	}*/
 }

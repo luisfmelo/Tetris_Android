@@ -103,12 +103,11 @@ public class TetrisLogic{
 		level ++;
 		Const.addLevel();
 		myMusics.playLevelUp();
-		myMusics.dispose();
 	}
 
 	public static void addScore() {
 		score ++;
-		if ( score % 10 == 0)
+		if ( score % Const.ROWS_TO_LEVEL_UP == 0)
 			levelUp();
 
 	}
