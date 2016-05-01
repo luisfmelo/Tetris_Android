@@ -119,19 +119,19 @@ public class Board {
 			break;
 		}
 		//verificar novas coordenadas
-		if ( checkCoords() )
+		if ( checkCoords(command) )
 			insert();
 		if ( pieceOnGoing.equals("-") )
 			return false;
 		return true;
 	}
 
-	private boolean checkCoords() {
-		int max = 0;
-		for (int i = 0; i < 4; i++) {
+	private boolean checkCoords(String command) {
+		//int max = 0;
+		/*for (int i = 0; i < 4; i++) {
 			if (newCoords.get(i).x > max)
 				max = (int) newCoords.get(i).x;
-		}
+		}*/
 		for (int i = 0; i < 4; i++) {
 			if ( 	(board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'J'|| 
 					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'L'|| 
@@ -139,8 +139,10 @@ public class Board {
 					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'T'|| 
 					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'O'|| 
 					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'S'|| 
-					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'Z' ||
-					newCoords.get(i).x == 23) && newCoords.get(i).x == max)
+					board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] == 'Z'||
+					newCoords.get(i).x == 23) &&
+					command.toLowerCase().equals("s"))// ||
+//					newCoords.get(i).x == 23) && newCoords.get(i).x == max)
 				{
 					//encontrou torre... adiciona a torre
 					addToTower();
@@ -233,7 +235,7 @@ public class Board {
 		newCoords = new ArrayList<Vector2>(5);
 		newCoords = shape.rotate(myShape);
 		
-		if ( checkCoords() )
+		if ( checkCoords("s") )
 			for (int i = 0; i < 4; i++) {
 				board[(int) myShape.get(i).x][(int) myShape.get(i).y] = ' ';
 				myShape.set(i, new Vector2(newCoords.get(i).x,newCoords.get(i).y));

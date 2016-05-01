@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
@@ -32,7 +31,6 @@ public class TetrisRendererIMGS {
 	private Label gameOverLabel;
 	private Image home;
 	private Image header;
-	private Image GOheader;
 	private Image replay;
 	private Label scoreLabel;
 	private Label level;
@@ -49,9 +47,6 @@ public class TetrisRendererIMGS {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(cam.combined);
 
-		/*myAssets = new LoadAssets();
-		myAssets.loadGameAssets(myGame);
-		*/
 		stage = st;
 		img = myAssets.im;
 	}
@@ -198,10 +193,7 @@ public class TetrisRendererIMGS {
 		return rgb;
 	}
 	
-	public void renderGameOverScreen(String score, boolean newHighScore ) {
-		//myAssets.loadGameOverAssets();
-
-		
+	public void renderGameOverScreen(String score, boolean newHighScore ) {		
 		//Game Over
 		gameOverLabel = myAssets.getGameOverLabel();
 		secundaryLabel = myAssets.getSecundaryLabel();
@@ -225,7 +217,8 @@ public class TetrisRendererIMGS {
 		replay = myAssets.getReplay();
 		replay.addListener(new ClickListener() {
 			@Override
-			public void clicked(InputEvent event, float x, float y) {					
+			public void clicked(InputEvent event, float x, float y) {	
+				System.out.println("hey");
 				((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen());
 			}
 		});

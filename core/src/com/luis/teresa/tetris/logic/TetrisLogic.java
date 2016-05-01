@@ -41,6 +41,7 @@ public class TetrisLogic{
 	}
 	
 	public void update(float delta) {
+		board.printBoard();
 		time += delta;
 		if ( time > Const.CYCLE_TIME )
 		{

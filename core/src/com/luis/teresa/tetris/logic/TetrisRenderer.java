@@ -3,7 +3,6 @@ package com.luis.teresa.tetris.logic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,7 +27,6 @@ public class TetrisRenderer {
 	private Label gameOverLabel;
 	private Image home;
 	private Image header;
-	private Image GOheader;
 	private Image replay;
 
 	public TetrisRenderer(TetrisLogic g) {

@@ -154,7 +154,7 @@ public class SettScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		myAssets.dispose();
+		//myAssets.dispose();
 	}
 
 }
