@@ -118,11 +118,11 @@ public class Board {
 				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y + 1));
 			break;
 		}
+		if ( pieceOnGoing.equals("-") )
+			return false;
 		//verificar novas coordenadas
 		if ( checkCoords(command) )
 			insert();
-		if ( pieceOnGoing.equals("-") )
-			return false;
 		return true;
 	}
 

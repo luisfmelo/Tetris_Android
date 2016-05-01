@@ -215,8 +215,7 @@ public class LoadAssets {
 		//replay bar
 		replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
 		replay.setSize(.15f*Const.w, .15f*Const.h);
-		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);
-
+		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);		
     }
 
     

@@ -1,5 +1,6 @@
 package com.luis.teresa.tetris.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -53,7 +54,8 @@ public class GameScreen implements Screen{
     	else
     	{
     		renderer.render();
-    		renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
+    		//renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
+    		((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore()));
     	}
     	st.draw();
 
