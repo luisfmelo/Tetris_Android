@@ -29,7 +29,6 @@ public class InputHandler implements InputProcessor{
 		case Input.Keys.S: board.input("s");break;
 		case Input.Keys.SPACE: board.rotate();break;
 		}
-		System.out.println("heu");
 		return true;
 	}
 
