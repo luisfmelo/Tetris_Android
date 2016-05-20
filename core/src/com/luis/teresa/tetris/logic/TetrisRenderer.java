@@ -1,5 +1,7 @@
 package com.luis.teresa.tetris.logic;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -248,7 +250,7 @@ public class TetrisRenderer {
 		return rgb;
 	}
 	
-	public void renderGameOverScreen(String score, boolean newHighScore ) {
+	public void renderGameOverScreen(String score, boolean newHighScore ) throws IOException {
 		myAssets.loadGameOverAssets();
 		
 		//top bar

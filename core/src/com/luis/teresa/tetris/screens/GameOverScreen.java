@@ -1,5 +1,7 @@
 package com.luis.teresa.tetris.screens;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -33,7 +35,7 @@ public class GameOverScreen implements Screen{
 	private Label secundaryLabel;
 	private ShapeRenderer shapeRenderer;
 	
-	public GameOverScreen(String score, Boolean newHighScore) {
+	public GameOverScreen(String score, Boolean newHighScore) throws IOException {
 		myAssets = new LoadAssets();
 		myAssets.loadGameOverAssets();
 	

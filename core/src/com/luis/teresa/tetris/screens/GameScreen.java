@@ -1,5 +1,7 @@
 package com.luis.teresa.tetris.screens;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -45,8 +47,12 @@ public class GameScreen implements Screen{
 	    //update & render if game is not over
     	if( !myGame.isGameOver() )
     	{
-    		//update
-	    	myGame.update(delta);
+    		try {
+				myGame.update(delta);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	//render
 	    	renderer.render();	
     	}
@@ -55,7 +61,11 @@ public class GameScreen implements Screen{
     	{
     		renderer.render();
     		//renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
-    		((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore()));
+    		try {
+				((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
     	}
     	st.draw();
 

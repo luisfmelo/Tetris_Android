@@ -1,5 +1,7 @@
 package com.luis.teresa.tetris.screens;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -34,7 +36,12 @@ public class IntroScreen implements Screen {
 		
 		myAssets = new LoadAssets();
 		myAssets.loadIntroAssets();
-		myAssets.loadMenuAssets();
+		try {
+			myAssets.loadMenuAssets();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		batch = new SpriteBatch();
 		

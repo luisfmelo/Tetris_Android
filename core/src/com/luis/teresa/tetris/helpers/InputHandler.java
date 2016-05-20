@@ -1,6 +1,5 @@
 package com.luis.teresa.tetris.helpers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.luis.teresa.tetris.logic.Board;
@@ -27,7 +26,11 @@ public class InputHandler implements InputProcessor{
 		case Input.Keys.D: board.input("d");break;
 		case Input.Keys.DOWN: board.input("s");break;
 		case Input.Keys.S: board.input("s");break;
-		case Input.Keys.SPACE: board.rotate();break;
+		case Input.Keys.W: board.rotate();break;
+		case Input.Keys.UP: board.rotate();break;
+		case Input.Keys.SPACE: board.input("g");break; // automaticamente para baixo
+		default: board.input("p");break; //nao faz nada 
+		
 		}
 		return true;
 	}
@@ -44,25 +47,26 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {	
-		clicked = true;
-		return true;
+		/*clicked = true;
+		return true;*/
+		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if ( clicked )
+		/*if ( clicked )
 			board.rotate();
 		clicked = false;
 		dragging = false;
 		previousX = 0;
-		previousY = 0;		
+		previousY = 0;		*/
 		
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-
+/*
 		clicked = false;
 		if (dragging == false)
 		{
@@ -81,7 +85,8 @@ public class InputHandler implements InputProcessor{
 		previousX = screenX;
 		previousY = screenY;
 				
-		return true;
+		return true;*/
+		return false;
 	}
 
 	@Override
@@ -91,7 +96,6 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean scrolled(int amount) {
-		Gdx.app.log("input", "scrolled" + amount);
 		return false;
 	}
 

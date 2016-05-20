@@ -1,5 +1,7 @@
 package com.luis.teresa.tetris.screens;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -35,7 +37,12 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	public void show() {
 		
 		myAssets = new LoadAssets();
-		myAssets.loadMenuAssets();
+		try {
+			myAssets.loadMenuAssets();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (myAssets.getTheme().equals("dracula/")){
 

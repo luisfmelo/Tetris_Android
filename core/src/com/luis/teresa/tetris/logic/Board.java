@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.helpers.Const;
+import com.luis.teresa.tetris.helpers.LoadMusics;
 
 public class Board {
 	private char[][] board;
@@ -15,9 +16,11 @@ public class Board {
 	Shape shape;
 	
 	private boolean gameover = false;
+	private LoadMusics myMusics;
 	
 	public Board() {
 		board = new char[rows][cols];
+		myMusics = new LoadMusics();
 	}
 	
 	public void initializeBoard(){
@@ -117,6 +120,10 @@ public class Board {
 			for (int i = 0; i < myShape.size(); i++)
 				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y + 1));
 			break;
+		case "p": 
+			for (int i = 0; i < myShape.size(); i++)
+				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y));
+			break;
 		}
 		if ( pieceOnGoing.equals("-") )
 			return false;
@@ -186,7 +193,9 @@ public class Board {
 	public void checkRows() {
 		boolean clean = true;
 		boolean checkTop = false;
+		ArrayList<Integer> rowsToClean = new ArrayList<>();
 		
+		//percorre todas as linhas... de cima para baixo para ver se é para eliminar
 		for (int i = 3; i < rows - 2; i++) {
 			for (int j = 1; j < cols - 1; j++) {
 				if ( 	board[i][j] != 'I' &&
@@ -209,11 +218,23 @@ public class Board {
 				
 			}
 			if ( clean )
-				cleanRow(i);
+				rowsToClean.add(i);
 			else if ( checkTop )
 				handleGameOver();
 			clean = true;
-		}		
+		}
+		
+		//Score & music
+		if(rowsToClean.size() != 0)
+		{
+			myMusics.playClear(Integer.toString(rowsToClean.size())); 
+			TetrisLogic.addScore(Integer.toString(rowsToClean.size()));
+		}
+		
+		//actual cleanning
+		for (Integer i : rowsToClean) {
+			cleanRow(i);
+		}
 	}
 	
 	private void cleanRow(int row) {
@@ -222,7 +243,6 @@ public class Board {
 				board[i][j] = board[i-1][j];
 			}
 		}	
-		TetrisLogic.addScore();
 	}
 
 	public void printBoard(){
@@ -241,6 +261,8 @@ public class Board {
 				myShape.set(i, new Vector2(newCoords.get(i).x,newCoords.get(i).y));
 				board[(int) myShape.get(i).x][(int) myShape.get(i).y] = '1';
 			}
+		
+		this.input("p");
 	}
 	
 	public void handleGameOver() {

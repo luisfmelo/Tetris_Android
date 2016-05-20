@@ -6,8 +6,8 @@ public class Const {
 	/**
 	 * TEMPO DE CICLO DO TETRIS 1s
 	 */
-	public static double CYCLE_TIME = 0.08 ;
-	public static int ROWS_TO_LEVEL_UP = 2;
+	public static double CYCLE_TIME = 0.18 ;
+	public static int ROWS_TO_LEVEL_UP = 16;
 	public final static String TITLE = "TETRIS";
 
 	//THEMES
@@ -21,6 +21,7 @@ public class Const {
 	public static float blueColor = 0;
 	public static float alfa = 1;
 	public static String actualImg;
+	public static String filename = ".myfile";
 
 	//COMMON
 	public static String ATLAS_PATH = "ui/atlas.pack";

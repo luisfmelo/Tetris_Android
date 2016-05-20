@@ -1,5 +1,11 @@
 package com.luis.teresa.tetris.helpers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +22,7 @@ public class LoadAssets {
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Preferences prefs;
+	private File file;
 	
 	//INTRO
 	private Image intro;
@@ -77,7 +84,7 @@ public class LoadAssets {
     }
 
 
-    public void loadMenuAssets() {
+    public void loadMenuAssets() throws IOException {
 		//high Score Image
 		trophey = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TROPHEY_PATH)));
     	trophey.setSize(.15f*Const.w, .15f*Const.h);
@@ -223,15 +230,39 @@ public class LoadAssets {
     /**
 	 * PREFERENCES
 	 * @return
+     * @throws IOException 
 	 */
 	//HIGHSCORE
-	public int getScores() {
-		return prefs.getInteger("score");//scores.readString();
+	public int getScores() throws IOException {
+		return prefs.getInteger("score");//scores.readString();		
+		/*file = new File(Const.filename);
+		if(!file.exists()) {
+			file.createNewFile();
+			setScores(0);
+		} 
+		FileInputStream fis = new FileInputStream(file);
+		byte[] data = new byte[(int) file.length()];
+		fis.read(data);
+		fis.close();
+
+		String str = new String(data, "UTF-8");
+		if (str.isEmpty())
+			str = "0";
+		System.out.println(str);
+		return Integer.parseInt(str);*/
 	}
 
-	public void setScores(int sc) {
+	public void setScores(int sc) throws IOException {
 		this.prefs.putInteger("score", sc);
 		prefs.flush();
+		/*file = new File(Const.filename);
+		if(!file.exists()) {
+			file.createNewFile();
+		} 
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(Integer.toString(sc).getBytes());
+		fos.close();*/
+
 	}
 	
 	//SOUND ON

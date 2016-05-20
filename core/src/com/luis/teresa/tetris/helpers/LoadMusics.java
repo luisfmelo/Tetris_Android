@@ -18,7 +18,7 @@ public class LoadMusics {
 	private Sound clear4;
 	private Sound touch;
 	private Sound gameOver;
-	private LoadAssets myAssets;
+	private static LoadAssets myAssets;
 	
 	public LoadMusics () {
 		theme = Gdx.audio.newMusic(Gdx.files.internal(Const.MUSIC_THEME_PATH)); 
@@ -57,25 +57,6 @@ public class LoadMusics {
 			fantastic.play();
 	}
 
-	public void playClear1() {
-		if (myAssets.getSoundOn())
-			clear1.play();
-	}
-	public void playClear2() {
-		if (myAssets.getSoundOn())
-			clear2.play();
-	}
-
-	public void playClear3() {
-		if (myAssets.getSoundOn())
-			clear3.play();
-	}
-
-	public void playClear4() {
-		if (myAssets.getSoundOn())
-			clear4.play();
-	}
-
 	public void playIntro() {
 		if (myAssets.getSoundOn())
 			intro.play();
@@ -109,5 +90,19 @@ public class LoadMusics {
 
 	public void stopTheme() {
 		theme.stop();
+	}
+
+	public void playClear(String string) {
+		if (!myAssets.getSoundOn())
+			return;
+		
+		if (Integer.parseInt(string) == 1)
+			clear1.play();
+		else if (Integer.parseInt(string) == 2)
+			clear2.play();
+		else if (Integer.parseInt(string) == 3)
+			clear3.play();
+		else if (Integer.parseInt(string) == 4)
+			clear4.play();
 	}
 }
