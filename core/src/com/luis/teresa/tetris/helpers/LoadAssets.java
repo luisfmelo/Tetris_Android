@@ -67,6 +67,7 @@ public class LoadAssets {
 		atlas = new TextureAtlas(Gdx.files.internal(Const.ATLAS_PATH));
 		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas); 
 		prefs = Gdx.app.getPreferences(Const.PREFERENCES);
+		Const.THEME = getTheme();
 		im = new Image();
 		
 	}
@@ -93,7 +94,8 @@ public class LoadAssets {
 		
 		//Play Button
 		playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
-		playBtn.setSize(.6f*Const.w, .3f*Const.h);
+		//playBtn.setSize(.6f*Const.w, .3f*Const.h);
+		playBtn.setSize(.2f*Const.w, .3f*Const.h);
 		playBtn.setPosition(.5f*Const.w, .55f*Const.h, 0);
 
 		//LeaderBoard Button
@@ -103,8 +105,9 @@ public class LoadAssets {
 		
 		//Settings Button
     	settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
-		settBtn.setSize(.25f*Const.w, .15f*Const.h);
-		settBtn.setPosition(.65f*Const.w, .35f*Const.h, 0);
+		//settBtn.setSize(.25f*Const.w, .15f*Const.h);
+    	settBtn.setSize(.19f*Const.w, .2f*Const.h);
+		settBtn.setPosition(.5f*Const.w, .30f*Const.h, 0);
 
 		//Footer
     	footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
@@ -272,6 +275,7 @@ public class LoadAssets {
 	
 	//THEME
 	public String getTheme() {
+		Const.THEME = prefs.getString("theme");
 		return prefs.getString("theme");
 	}
 

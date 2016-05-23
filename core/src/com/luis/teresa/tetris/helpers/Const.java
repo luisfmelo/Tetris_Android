@@ -13,7 +13,7 @@ public class Const {
 	//THEMES
 	public static float[] TETRIS_COLOR;
 	public static float[] BACKGROUND_COLOR;
-	public static String THEME = "solar/";
+	public static String THEME = "dracula/";
 	public static boolean soundOn;
 	
 	public static float redColor = 1;

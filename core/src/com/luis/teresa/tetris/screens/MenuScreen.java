@@ -40,7 +40,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		try {
 			myAssets.loadMenuAssets();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -75,7 +74,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 						.end().start(tweenManager);
 			}
 		});
-		Image leadBtn = myAssets.getLeaderBtn();
+		//Image leadBtn = myAssets.getLeaderBtn();
 		//add listener 
 		Image settBtn = myAssets.getSettBtn();
 		settBtn.addListener(new ClickListener() {
@@ -90,7 +89,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		stage.addActor(trophey);
 		stage.addActor(highScore);
 		stage.addActor(playBtn);
-		stage.addActor(leadBtn);
+		//stage.addActor(leadBtn);
 		stage.addActor(settBtn);
 		stage.addActor(footer);
 		
