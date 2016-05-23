@@ -7,7 +7,7 @@
 		green: { r: 0, g: 1, b: 0, a: 1 },
 		blue:  { r: 0, g: 0, b: 1, a: 1 }
 	},
-	com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	com.badlogic.gdx.graphics.g2d.Bitmapfont: {
 		white64: { file: font/white64.fnt }, 
 		black64: { file: font/black64.fnt },
 		white32: { file: font/white32.fnt },
@@ -16,30 +16,11 @@
 		black16: { file: font/black16.fnt }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-		default: { font: white32, fontColor: white },
-		b_default: { font: black32, fontColor: black },
-		w_big:     { font: white64, fontColor: white },
-		w_small:   { font: white16, fontColor: white },
-		b_big:     { font: black64, fontColor: black },
-		b_small:   { font: black16, fontColor: black }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-		default: { up: button.up, down: button.down, font: black32, pressedOffsetX: 1, pressedOffsetY: -1 },
-		big:     { up: button.up, down: button.down, font: black64, pressedOffsetX: 1, pressedOffsetY: -1 },
-		small:   { up: button.up, down: button.down, font: black16, pressedOffsetX: 1, pressedOffsetY: -1 }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-		default: { font: white32, fontColorUnselected: white, fontColorSelected: black, selection: default.selection }
-		big:     { font: white64, fontColorUnselected: white, fontColorSelected: black, selection: default.selection},
-		small:   { font: white16, fontColorUnselected: white, fontColorSelected: black, selection: default.selection }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-		default: { hScrollKnob: button.up, vScrollKnob: button.up }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-		default: { font: white32, checkboxOn: checkbox.on, checkboxOff: checkbox.off, checkboxOver: checkbox.over }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-		default: { font: black32, fontColor: black, messageFontColor: gray, background: default.background, cursor: default.selection }
+		dracula/default: { font: white32, fontColor: white },
+		solar/default: { font: black32, fontColor: black },
+		dracula/big:     { font: white64, fontColor: white },
+		dracula/small:   { font: white16, fontColor: white },
+		solar/big:     { font: black64, fontColor: black },
+		solar/small:   { font: black16, fontColor: black }
 	}
 }

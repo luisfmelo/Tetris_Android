@@ -40,19 +40,27 @@ public class MyGestureListener implements GestureListener{
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-
-        return false;
+    	if(Math.abs(velocityX)>Math.abs(velocityY)){
+            if(velocityX>0){
+            	board.input("d");
+            }else{
+            	board.input("a");
+            }
+        }else if(velocityY<0){
+            board.input("s");
+        }
+        return true;
     }
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-    	if (deltaX > 0)
+    /*	if (deltaX > 0)
     		board.input("d");
     	else if (deltaX < 0)
     		board.input("a");
     	else if (deltaY > 0)
     		board.input("s");
-    	
+    	*/
         return false;
     }
 

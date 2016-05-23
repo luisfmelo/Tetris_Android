@@ -1,9 +1,5 @@
 package com.luis.teresa.tetris.helpers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
@@ -22,7 +18,6 @@ public class LoadAssets {
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Preferences prefs;
-	private File file;
 	
 	//INTRO
 	private Image intro;

@@ -7,15 +7,15 @@ import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadMusics;
 
 public class Board {
-	private char[][] board;
-	private int rows = 25;
-	private int cols = 12;
+	private static char[][] board;
+	private static int rows = 25;
+	private static int cols = 12;
 	private ArrayList<Vector2> myShape;
 	ArrayList<Vector2> newCoords;
 	String pieceOnGoing;
 	Shape shape;
 	
-	private boolean gameover = false;
+	private static boolean gameover = false;
 	private LoadMusics myMusics;
 	
 	/**
@@ -33,10 +33,12 @@ public class Board {
    
 	/* Static 'instance' method */
 	public static Board getInstance( ) {
+		initializeBoard();
+		gameover = false;
 		return singleton;
 	}
-	
-	public void initializeBoard(){
+
+	public static void initializeBoard(){
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if ( i == 2 || i >22 || j == 0 || j == 11 )

@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.logic.TetrisLogic;
-import com.luis.teresa.tetris.logic.TetrisRendererIMGS;
+import com.luis.teresa.tetris.logic.TetrisRenderer;
 
 public class GameScreen implements Screen{
 	private TetrisLogic myGame;
-	private TetrisRendererIMGS renderer;
+	private TetrisRenderer renderer;
 	private Stage st;
 	private LoadAssets myAssets;
 	
@@ -28,8 +28,9 @@ public class GameScreen implements Screen{
 		myAssets.loadGameAssets(myGame);
 		myAssets.loadGameOverAssets();
 		myAssets.loadBlockImgs();
-		
-		renderer = new TetrisRendererIMGS(myGame, st, myAssets); //inicia renderer para imprimir
+
+		//renderer = new TetrisRendererIMGS(myGame, st, myAssets); //inicia renderer para imprimir
+		renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
 	}
 	
 	@Override
