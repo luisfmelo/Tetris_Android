@@ -24,7 +24,7 @@ public class TetrisLogic{
 	
 	public TetrisLogic() {
 		time = 0;
-		board = new Board();
+		board = Board.getInstance( );
 		board.initializeBoard();
 		level = 1;
 		score = 0;

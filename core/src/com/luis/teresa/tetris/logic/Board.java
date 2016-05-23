@@ -18,9 +18,22 @@ public class Board {
 	private boolean gameover = false;
 	private LoadMusics myMusics;
 	
-	public Board() {
+	/**
+	 * Singleton
+	 */
+	private static Board singleton = new Board( );
+	   
+	/* A private Constructor prevents any other 
+	 * class from instantiating.
+	 */
+	private Board() {
 		board = new char[rows][cols];
 		myMusics = new LoadMusics();
+	}
+   
+	/* Static 'instance' method */
+	public static Board getInstance( ) {
+		return singleton;
 	}
 	
 	public void initializeBoard(){
