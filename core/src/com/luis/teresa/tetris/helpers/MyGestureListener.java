@@ -1,47 +1,29 @@
 package com.luis.teresa.tetris.helpers;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.logic.Board;
 
-public class MyGestureListener implements GestureListener{
-	
-	private boolean dragging;
-	private int previousX;
-	private int previousY;
+public class MyGestureListener implements ApplicationListener, GestureListener, InputProcessor {
+	private Boolean isFling = false;
 	private Board board;
 
 	public MyGestureListener(Board board) {
 		this.board = board;
-		dragging = false;
-		previousX = 0;
-		previousY = 0;		
+	}
+	
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+			
+		return false;
 	}
 	
     @Override
-    public boolean touchDown(float x, float y, int pointer, int button) {
-    	board.rotate();
-    	previousX = 0;
-		previousY = 0;
-        return false;
-    }
-
-    @Override
-    public boolean tap(float x, float y, int count, int button) {
-
-        return false;
-    }
-
-    @Override
-    public boolean longPress(float x, float y) {
-
-        return false;
-    }
-
-    @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-
     	Gdx.app.log("Vx = ", Double.toString(velocityX));
     	Gdx.app.log("Vy = ", Double.toString(velocityY));
     	
@@ -53,23 +35,50 @@ public class MyGestureListener implements GestureListener{
     	
     	System.out.println(x);
     	
-    	for (int i = 0; i < Math.abs(x); i++) {
-            if( velocityX > 0 )
-            	board.input("d");
-            else
-            	board.input("a");
-    	}
-    	
-    	for (int i = 0; i < Math.abs(y); i++) 
-            if( velocityY < 0 )
-            	board.input("s");   	
+    	if (Math.abs(velocityX) > Math.abs(velocityY))
+	    	for (int i = 0; i < Math.abs(x); i++) {
+	            if( velocityX > 0 )
+	            	board.input("d");
+	            else
+	            	board.input("a");
+	    	}	
+    	else
+	    	for (int i = 0; i < Math.abs(y); i++)  {
+	            if( velocityY < 0 )
+	            	board.rotate();
+	            else
+	            	board.input("s");
+	    	}	
 
         return true;
     }
+	
+	
+	
+	
+	
+	
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+
+        return false;
+    }
 
     @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
-    	
+    public boolean tap(float x, float y, int count, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+
+        return false;
+    }
+
+
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {	
         return false;
     }
 
@@ -90,4 +99,83 @@ public class MyGestureListener implements GestureListener{
 
        return false;
     }
+
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

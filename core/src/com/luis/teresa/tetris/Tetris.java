@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.IntroScreen;
+import com.luis.teresa.tetris.screens.GameScreen;
 
 public class Tetris extends Game {
 	@Override
@@ -17,7 +17,7 @@ public class Tetris extends Game {
 		else
 			myAssets.setTheme("solar.");
 
-		setScreen(new IntroScreen());
+		setScreen(new GameScreen());
 	}
 	
 	@Override
