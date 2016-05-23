@@ -3,11 +3,9 @@ package com.luis.teresa.tetris.logic;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.input.GestureDetector;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.helpers.LoadMusics;
-import com.luis.teresa.tetris.helpers.MyGestureListener;
 
 public class TetrisLogic{
 	private Board board;
@@ -75,7 +73,7 @@ public class TetrisLogic{
 	private void newCycle() {
 		if ( !shapeInGame )
 		{
-			presentShape = futureShape;
+			presentShape = new Shape(futureShape.getPieceShape());
 			futureShape = new Shape();
 			board.newShape(presentShape);
 			shapeInGame = true;

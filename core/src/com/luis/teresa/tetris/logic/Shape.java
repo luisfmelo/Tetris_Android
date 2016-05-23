@@ -69,9 +69,20 @@ public class Shape {
      private Type pieceShape = Type.NoShape;
      private int size=4;
      //private int pattern[][][];
-     
+
+     /**
+      * Constructor for Random Shape
+      */
      public Shape() {
          setRandomShape();
+     }
+     
+     /**
+      * Constructor for specified Shape
+      * @param s
+      */
+     public Shape(Type t) {
+         setPieceShape(t);	
      }
 
 	public char[][] getMatrix() {
