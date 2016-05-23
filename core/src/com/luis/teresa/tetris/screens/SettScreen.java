@@ -4,15 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
@@ -65,14 +62,14 @@ public class SettScreen implements Screen {
 						
 				Const.soundOn = !Const.soundOn;
 				myAssets.setSoundOn(Const.soundOn);
-				if (Const.soundOn)
+				/*if (Const.soundOn)
 					music.setDrawable(new SpriteDrawable(
 										new Sprite(
 										new Texture(Gdx.files.internal(Const.THEME + Const.SOUND_PATH)))));
 				else
 					music.setDrawable(new SpriteDrawable(
 										new Sprite(
-										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));
+										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));*/
 				myAssets.setSoundOn(Const.soundOn);
 				
 				st = new Stage(new ScreenViewport());
@@ -89,19 +86,19 @@ public class SettScreen implements Screen {
 		theme.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				if ( Const.THEME.equals("dracula/") )
+				if ( Const.THEME.equals("dracula.") )
 				{
-					Const.THEME =  "solar/";
-					theme.setDrawable(new SpriteDrawable(
+					Const.THEME =  "solar.";
+					/*theme.setDrawable(new SpriteDrawable(
 							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)))));									
+							new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)))));		*/							
 				}
-				else if ( Const.THEME.equals("solar/") )
+				else if ( Const.THEME.equals("solar.") )
 				{
-					Const.THEME =  "dracula/";
-					theme.setDrawable(new SpriteDrawable(
+					Const.THEME =  "dracula.";
+					/*theme.setDrawable(new SpriteDrawable(
 							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)))));		
+							new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)))));		*/
 				}
 				
 				myAssets.setTheme(Const.THEME);

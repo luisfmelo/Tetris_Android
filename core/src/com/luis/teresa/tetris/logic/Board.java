@@ -261,9 +261,9 @@ public class Board {
 	}
 
 	public void printBoard(){
-		for (int i = 0; i < rows; i++) {
+		/*for (int i = 0; i < rows; i++) {
 			System.out.println(board[i]);
-		}
+		}*/
 	}
 
 	public void rotate() {

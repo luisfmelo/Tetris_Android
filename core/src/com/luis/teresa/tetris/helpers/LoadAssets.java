@@ -5,7 +5,10 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -61,6 +64,9 @@ public class LoadAssets {
 	public Image white;
 	public Image im;
 	
+	private TextureAtlas myPackage;
+	private TextureAtlas myBlocks;
+	
 	//BLOCKS
 	
 	public LoadAssets() {
@@ -70,6 +76,8 @@ public class LoadAssets {
 		Const.THEME = getTheme();
 		im = new Image();
 		
+		myPackage = new TextureAtlas("imgsPkg.txt");		
+		myBlocks = new TextureAtlas("blocksPkg.txt");
 	}
 
     public void loadIntroAssets() {
@@ -77,12 +85,14 @@ public class LoadAssets {
 		intro = new Image(new Texture(Gdx.files.internal(Const.INTRO_PATH)));
 		intro.setSize(.5f*Const.w, .5f*Const.h);
 		intro.setPosition(.5f*Const.w, .5f*Const.h, 0);
+		
     }
 
 
     public void loadMenuAssets() throws IOException {
 		//high Score Image
-		trophey = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TROPHEY_PATH)));
+		//trophey = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TROPHEY_PATH)));
+    	trophey = new Image(myPackage.findRegion(Const.THEME + "trophey"));
     	trophey.setSize(.15f*Const.w, .15f*Const.h);
 		trophey.setPosition(.5f*Const.w, .9f*Const.h, 0);
 		
@@ -93,24 +103,28 @@ public class LoadAssets {
 		highScore.setPosition(.5f*Const.w, .75f*Const.h, 0);
 		
 		//Play Button
-		playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
+		//playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
+		playBtn = new Image(myPackage.findRegion(Const.THEME + "playBtn"));
+		playBtn.rotateBy(-90);
 		//playBtn.setSize(.6f*Const.w, .3f*Const.h);
-		playBtn.setSize(.2f*Const.w, .3f*Const.h);
-		playBtn.setPosition(.5f*Const.w, .55f*Const.h, 0);
+		playBtn.setSize(.15f*Const.w, .25f*Const.h);
+		playBtn.setPosition(.48f*Const.w, .75f*Const.h, 0);
 
-		//LeaderBoard Button
+		/*LeaderBoard Button
     	leadBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.LEADBTN_PATH)));
     	leadBtn.setSize(.25f*Const.w, .2f*Const.h);
-		leadBtn.setPosition(.35f*Const.w, .35f*Const.h, 0);
+		leadBtn.setPosition(.35f*Const.w, .35f*Const.h, 0);*/
 		
 		//Settings Button
-    	settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
+    	//settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
+    	settBtn = new Image(myPackage.findRegion(Const.THEME + "settBtn"));
 		//settBtn.setSize(.25f*Const.w, .15f*Const.h);
     	settBtn.setSize(.19f*Const.w, .2f*Const.h);
 		settBtn.setPosition(.5f*Const.w, .30f*Const.h, 0);
 
 		//Footer
-    	footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+    	//footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+		footer = new Image(myPackage.findRegion(Const.THEME + "title"));
 		footer.setSize(.3f*Const.w, .05f*Const.h);
 		footer.setPosition(.5f*Const.w, .05f*Const.h, 0);
 
@@ -121,7 +135,8 @@ public class LoadAssets {
 		int tam_x = (int) (0.15*Const.w/4);
 		int tam_y = (int) (0.15*Const.h/4);
 		
-    	header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+    	//header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+		header = new Image(myPackage.findRegion(Const.THEME + "title"));
 		header.setSize(.3f*Const.w, .05f*Const.h);
 		header.setPosition(.5f*Const.w, .96f*Const.h, 0);
 		
@@ -157,7 +172,8 @@ public class LoadAssets {
 		titleLabel.setPosition(0.5f*Const.w, 0.8f*Const.h, 0);	
 		
 		//X Image
-		x = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.CLOSE_PATH)));
+		//x = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.CLOSE_PATH)));
+		x = new Image(myPackage.findRegion(Const.THEME + "x"));
 		x.setSize(.1f*Const.w, .1f*Const.h);
 		x.setPosition(.9f*Const.w, .9f*Const.h, 0);
 		
@@ -169,9 +185,11 @@ public class LoadAssets {
 
 		//Image - Music
 		if (Const.soundOn)
-			music = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SOUND_PATH)));
+			//music = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SOUND_PATH)));
+			music = new Image(myPackage.findRegion(Const.THEME + "sound"));
 		else
-			music = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)));
+			//music = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)));
+			music = new Image(myPackage.findRegion(Const.THEME + "mute"));
 		music.setSize(.15f*Const.w, .15f*Const.h);
 		music.setPosition(.65f*Const.w, .5f*Const.h, 0);
 
@@ -183,10 +201,12 @@ public class LoadAssets {
 		themeLabel.setPosition(0.5f*Const.w, 0.3f*Const.h, 0);	
 		
 		//Image - theme
-		if (getTheme().equals("solar/") )
-			theme = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)));
+		if (getTheme().equals("solar.") )
+			//theme = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)));
+			theme = new Image(myPackage.findRegion(Const.THEME + "sun"));
 		else
-			theme = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)));
+			//theme = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)));
+			theme = new Image(myPackage.findRegion(Const.THEME + "moon"));
 		theme.setSize(.15f*Const.w, .15f*Const.h);
 		theme.setPosition(.65f*Const.w, .3f*Const.h, 0);
 
@@ -207,18 +227,21 @@ public class LoadAssets {
 		secundaryLabel.setPosition(0.5f*Const.w, 0.75f*Const.h, 0);	
 		
 		//title bar
-    	header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+    	//header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
+		header = new Image(myPackage.findRegion(Const.THEME + "title"));
     	header.setSize(.3f*Const.w, .05f*Const.h);
     	header.setPosition(.5f*Const.w, .95f*Const.h, 0);
 		
 		//home bar
-		home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
+		//home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
+		home = new Image(myPackage.findRegion(Const.THEME + "home"));
 		home.setSize(.15f*Const.w, .15f*Const.h);
 		home.setPosition(.5f*Const.w, .5f*Const.h, 0);
 		
 		
 		//replay bar
-		replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
+		//replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
+		replay = new Image(myPackage.findRegion(Const.THEME + "replay"));
 		replay.setSize(.15f*Const.w, .15f*Const.h);
 		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);		
     }
@@ -282,13 +305,13 @@ public class LoadAssets {
 	public void setTheme(String s) {
 		this.prefs.putString("theme", s);
 		prefs.flush();
-		if (s != "dracula/")
+		if (s != "dracula.")
 		{
 			// BACKGROUND COLOR 
 			Const.setBG_COLOR(1f,1f,1f,1f);
 			Const.setTETRIS_COLOR(0f,0f,0f,1f);
 		}
-		else if (s != "solar/")
+		else if (s != "solar.")
 		{
 			// BACKGROUND COLOR 
 			Const.setBG_COLOR(0f,0f,0f,1f);
@@ -409,7 +432,7 @@ public class LoadAssets {
 	}
 
 	public void loadBlockImgs() {
-		white = new Image(new Texture(Gdx.files.internal(Const.WHITE_BLOCK)));
+		/*white = new Image(new Texture(Gdx.files.internal(Const.WHITE_BLOCK)));
 		black = new Image(new Texture(Gdx.files.internal(Const.BLACK_BLOCK)));
 		lightblue = new Image(new Texture(Gdx.files.internal(Const.LIGHTBLUE_BLOCK)));
 		darkblue = new Image(new Texture(Gdx.files.internal(Const.DARKBLUE_BLOCK)));
@@ -417,7 +440,17 @@ public class LoadAssets {
 		red = new Image(new Texture(Gdx.files.internal(Const.RED_BLOCK)));
 		purple = new Image(new Texture(Gdx.files.internal(Const.PURPLE_BLOCK)));
 		yellow = new Image(new Texture(Gdx.files.internal(Const.YELLOW_BLOCK)));
-		orange = new Image(new Texture(Gdx.files.internal(Const.ORANGE_BLOCK)));
+		orange = new Image(new Texture(Gdx.files.internal(Const.ORANGE_BLOCK)));*/
+		
+		white = new Image(myBlocks.findRegion("branco"));
+		black = new Image(myBlocks.findRegion("preto"));
+		lightblue = new Image(myBlocks.findRegion("azulClaro"));
+		darkblue = new Image(myBlocks.findRegion("azulEscuro"));
+		green = new Image(myBlocks.findRegion("verde"));
+		red = new Image(myBlocks.findRegion("vermelho"));
+		purple = new Image(myBlocks.findRegion("roxo"));
+		yellow = new Image(myBlocks.findRegion("amarelo"));
+		orange = new Image(myBlocks.findRegion("laranja"));
 	}
 
 	public Image loadOneBlock(String color) {

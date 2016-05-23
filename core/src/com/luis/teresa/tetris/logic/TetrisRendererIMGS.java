@@ -38,8 +38,6 @@ public class TetrisRendererIMGS {
 		stage = st;
 		img = myAssets.im;
 		
-		//myAssets.loadGameAssets(myGame);
-		
 		//Label - Score
 		scoreLabel = myAssets.getScoreLabel();	
 		

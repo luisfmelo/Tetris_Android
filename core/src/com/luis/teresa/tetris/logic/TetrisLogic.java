@@ -3,9 +3,11 @@ package com.luis.teresa.tetris.logic;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.input.GestureDetector;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.helpers.LoadMusics;
+import com.luis.teresa.tetris.helpers.MyGestureListener;
 
 public class TetrisLogic{
 	private Board board;
@@ -34,9 +36,9 @@ public class TetrisLogic{
 		myMusics.playTheme();
 		newHighScore = false;
 		//Desktop
-		Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
+		//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
 		//Android
-		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(board)));
+		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(board)));
 	}
 
 	public char[][] getBoard() {

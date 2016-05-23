@@ -12,10 +12,10 @@ public class Tetris extends Game {
 		LoadAssets myAssets = new LoadAssets();
 		Const.soundOn = myAssets.getSoundOn();
 				
-		if ( myAssets.getTheme().equals("solar/") || myAssets.getTheme().equals("dracula/") )
+		if ( myAssets.getTheme().equals("solar.") || myAssets.getTheme().equals("dracula.") )
 			myAssets.setTheme(myAssets.getTheme());
 		else
-			myAssets.setTheme("solar/");
+			myAssets.setTheme("solar.");
 
 		setScreen(new IntroScreen());
 	}

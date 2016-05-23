@@ -16,11 +16,11 @@
 		black16: { file: font/black16.fnt }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-		dracula/default: { font: white32, fontColor: white },
-		solar/default: { font: black32, fontColor: black },
-		dracula/big:     { font: white64, fontColor: white },
-		dracula/small:   { font: white16, fontColor: white },
-		solar/big:     { font: black64, fontColor: black },
-		solar/small:   { font: black16, fontColor: black }
+		dracula.default: { font: white32, fontColor: white },
+		solar.default: { font: black32, fontColor: black },
+		dracula.big:     { font: white64, fontColor: white },
+		dracula.small:   { font: white16, fontColor: white },
+		solar.big:     { font: black64, fontColor: black },
+		solar.small:   { font: black16, fontColor: black }
 	}
 }

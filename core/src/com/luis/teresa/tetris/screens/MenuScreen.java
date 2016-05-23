@@ -43,7 +43,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 			e.printStackTrace();
 		}
 		
-		if (myAssets.getTheme().equals("dracula/")){
+		if (myAssets.getTheme().equals("dracula.")){
 
 			Const.setBG_COLOR(0f,0f,0f,1f);
 			Const.setTETRIS_COLOR(1f,1f,1f,1f);
