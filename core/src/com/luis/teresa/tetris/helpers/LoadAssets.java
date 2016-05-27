@@ -5,10 +5,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,6 +18,7 @@ public class LoadAssets {
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Preferences prefs;
+	private boolean loaded = false;
 	
 	//INTRO
 	private Image intro;
@@ -83,9 +81,8 @@ public class LoadAssets {
     public void loadIntroAssets() {
 		//INTRO IMAGE
 		intro = new Image(new Texture(Gdx.files.internal(Const.INTRO_PATH)));
-		intro.setSize(.5f*Const.w, .5f*Const.h);
+		intro.setSize(.5f*Const.w, .3f*Const.h);
 		intro.setPosition(.5f*Const.w, .5f*Const.h, 0);
-		
     }
 
 
@@ -101,31 +98,25 @@ public class LoadAssets {
 		highScore.setAlignment(Align.center);
 		highScore.setSize(.25f*Const.w, .2f*Const.h);
 		highScore.setPosition(.5f*Const.w, .75f*Const.h, 0);
+		highScore.setFontScale(3);
 		
 		//Play Button
 		//playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
 		playBtn = new Image(myPackage.findRegion(Const.THEME + "playBtn"));
-		playBtn.rotateBy(-90);
 		//playBtn.setSize(.6f*Const.w, .3f*Const.h);
-		playBtn.setSize(.15f*Const.w, .25f*Const.h);
-		playBtn.setPosition(.48f*Const.w, .75f*Const.h, 0);
-
-		/*LeaderBoard Button
-    	leadBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.LEADBTN_PATH)));
-    	leadBtn.setSize(.25f*Const.w, .2f*Const.h);
-		leadBtn.setPosition(.35f*Const.w, .35f*Const.h, 0);*/
+		playBtn.setSize(.4f*Const.w, .2f*Const.h);
+		playBtn.setPosition(.5f*Const.w, .55f*Const.h, 0);
 		
 		//Settings Button
     	//settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
     	settBtn = new Image(myPackage.findRegion(Const.THEME + "settBtn"));
-		//settBtn.setSize(.25f*Const.w, .15f*Const.h);
-    	settBtn.setSize(.19f*Const.w, .2f*Const.h);
-		settBtn.setPosition(.5f*Const.w, .30f*Const.h, 0);
+    	settBtn.setSize(.4f*Const.w, .2f*Const.h);
+		settBtn.setPosition(.5f*Const.w, .3f*Const.h, 0);
 
 		//Footer
     	//footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
 		footer = new Image(myPackage.findRegion(Const.THEME + "title"));
-		footer.setSize(.3f*Const.w, .05f*Const.h);
+		footer.setSize(.3f*Const.w, .08f*Const.h);
 		footer.setPosition(.5f*Const.w, .05f*Const.h, 0);
 
     }
@@ -145,22 +136,26 @@ public class LoadAssets {
 		scoreLabel.setAlignment(Align.center);
 		scoreLabel.setSize(tam_x*10, tam_y);
 		scoreLabel.setPosition(0.7f*Const.w, 0.5f*Const.h, 0);	
+		scoreLabel.setFontScale(3);
 		
 		score = new Label(myGame.getScore(), skin, Const.THEME + "default");
 		score.setAlignment(Align.center);
 		score.setSize(tam_x*10, tam_y);
 		score.setPosition(0.7f*Const.w, 0.43f*Const.h , 0);	
+		score.setFontScale(3);
 		
 		//Label - Level
 		levelLabel = new Label("Level", skin, Const.THEME + "default");
 		levelLabel.setAlignment(Align.center);
 		levelLabel.setSize(tam_x*10, tam_y);
 		levelLabel.setPosition(0.7f*Const.w, 0.3f*Const.h, 0);	
+		levelLabel.setFontScale(3);
 		
 		level = new Label(myGame.getLevel(), skin, Const.THEME + "default");
 		level.setAlignment(Align.center);
 		level.setSize(tam_x*10, tam_y);
 		level.setPosition(0.7f*Const.w, 0.23f*Const.h , 0);	
+		level.setFontScale(3);
     }
     
     public void loadSettingsAssets() {
@@ -169,7 +164,8 @@ public class LoadAssets {
     	titleLabel = new Label("Settings", skin, Const.THEME + "big");
 		titleLabel.setAlignment(Align.center);
 		titleLabel.setSize(0.6f*Const.w, 0.2f*Const.h);
-		titleLabel.setPosition(0.5f*Const.w, 0.8f*Const.h, 0);	
+		titleLabel.setPosition(0.5f*Const.w, 0.8f*Const.h, 0);
+		titleLabel.setFontScale(3);
 		
 		//X Image
 		//x = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.CLOSE_PATH)));
@@ -182,6 +178,7 @@ public class LoadAssets {
 		musicLabel.setAlignment(Align.center);
 		musicLabel.setSize(0.2f*Const.w, 0.1f*Const.h);
 		musicLabel.setPosition(0.5f*Const.w, 0.5f*Const.h, 0);	
+		musicLabel.setFontScale(3);
 
 		//Image - Music
 		if (Const.soundOn)
@@ -199,6 +196,7 @@ public class LoadAssets {
 		themeLabel.setAlignment(Align.center);
 		themeLabel.setSize(0.2f*Const.w, 0.1f*Const.h);
 		themeLabel.setPosition(0.5f*Const.w, 0.3f*Const.h, 0);	
+		themeLabel.setFontScale(3);
 		
 		//Image - theme
 		if (getTheme().equals("solar.") )
@@ -219,12 +217,14 @@ public class LoadAssets {
 		gameOverLabel.setAlignment(Align.center);
 		gameOverLabel.setSize(Const.w, 0.2f*Const.h);
 		gameOverLabel.setPosition(0.5f*Const.w, 0.85f*Const.h, 0);	
+		gameOverLabel.setFontScale(3);
 		
 		//secondary Label
 		secundaryLabel = new Label("", skin, Const.THEME + "small");
 		secundaryLabel.setAlignment(Align.center);
 		secundaryLabel.setSize(Const.w, 0.2f*Const.h);
 		secundaryLabel.setPosition(0.5f*Const.w, 0.75f*Const.h, 0);	
+		secundaryLabel.setFontScale(3);
 		
 		//title bar
     	//header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
@@ -235,14 +235,14 @@ public class LoadAssets {
 		//home bar
 		//home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
 		home = new Image(myPackage.findRegion(Const.THEME + "home"));
-		home.setSize(.15f*Const.w, .15f*Const.h);
+		home.setSize(.15f*Const.w, .3f*Const.h);
 		home.setPosition(.5f*Const.w, .5f*Const.h, 0);
 		
 		
 		//replay bar
 		//replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
 		replay = new Image(myPackage.findRegion(Const.THEME + "replay"));
-		replay.setSize(.15f*Const.w, .15f*Const.h);
+		replay.setSize(.15f*Const.w, .3f*Const.h);
 		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);		
     }
 

@@ -36,12 +36,6 @@ public class IntroScreen implements Screen {
 		
 		myAssets = new LoadAssets();
 		myAssets.loadIntroAssets();
-		try {
-			myAssets.loadMenuAssets();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		batch = new SpriteBatch();
 		
@@ -49,7 +43,6 @@ public class IntroScreen implements Screen {
 		myMusics.playIntro();
 			
 		stage = new Stage(new ScreenViewport());
-		Gdx.input.setInputProcessor(stage);
 
 		introImg = myAssets.getIntroImg();
 		
