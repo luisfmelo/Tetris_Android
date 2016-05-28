@@ -35,7 +35,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	
 	@Override
 	public void show() {
-		
 		myAssets = new LoadAssets();
 		try {
 			myAssets.loadMenuAssets();
@@ -105,6 +104,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	@Override
 	public void render(float delta) {
+		
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
 							Const.BACKGROUND_COLOR[1], 
 							Const.BACKGROUND_COLOR[2], 

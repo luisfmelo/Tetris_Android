@@ -19,6 +19,7 @@ public class GameScreen implements Screen{
 	private LoadAssets myAssets;
 	
 	public GameScreen() {
+		
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
@@ -41,7 +42,7 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-
+	
 	    // Fills the screen with the selected color
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	    

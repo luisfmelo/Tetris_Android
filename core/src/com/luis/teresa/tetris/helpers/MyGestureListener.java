@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.logic.Board;
 
 public class MyGestureListener implements ApplicationListener, GestureListener, InputProcessor {
-	private Boolean isFling = false;
 	private Board board;
 
 	public MyGestureListener(Board board) {

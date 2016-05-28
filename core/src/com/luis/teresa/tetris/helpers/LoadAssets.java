@@ -18,7 +18,6 @@ public class LoadAssets {
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Preferences prefs;
-	private boolean loaded = false;
 	
 	//INTRO
 	private Image intro;
@@ -235,15 +234,15 @@ public class LoadAssets {
 		//home bar
 		//home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
 		home = new Image(myPackage.findRegion(Const.THEME + "home"));
-		home.setSize(.15f*Const.w, .3f*Const.h);
-		home.setPosition(.5f*Const.w, .5f*Const.h, 0);
+		home.setSize(.3f*Const.w, .15f*Const.h);
+		home.setPosition(.5f*Const.w, .6f*Const.h, 0);
 		
 		
 		//replay bar
 		//replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
 		replay = new Image(myPackage.findRegion(Const.THEME + "replay"));
-		replay.setSize(.15f*Const.w, .3f*Const.h);
-		replay.setPosition(.5f*Const.w, .3f*Const.h, 0);		
+		replay.setSize(.3f*Const.w, .15f*Const.h);
+		replay.setPosition(.5f*Const.w, .35f*Const.h, 0);		
     }
 
     
@@ -255,34 +254,12 @@ public class LoadAssets {
 	 */
 	//HIGHSCORE
 	public int getScores() throws IOException {
-		return prefs.getInteger("score");//scores.readString();		
-		/*file = new File(Const.filename);
-		if(!file.exists()) {
-			file.createNewFile();
-			setScores(0);
-		} 
-		FileInputStream fis = new FileInputStream(file);
-		byte[] data = new byte[(int) file.length()];
-		fis.read(data);
-		fis.close();
-
-		String str = new String(data, "UTF-8");
-		if (str.isEmpty())
-			str = "0";
-		System.out.println(str);
-		return Integer.parseInt(str);*/
+		return prefs.getInteger("score");
 	}
 
 	public void setScores(int sc) throws IOException {
 		this.prefs.putInteger("score", sc);
 		prefs.flush();
-		/*file = new File(Const.filename);
-		if(!file.exists()) {
-			file.createNewFile();
-		} 
-		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(Integer.toString(sc).getBytes());
-		fos.close();*/
 
 	}
 	
@@ -432,16 +409,6 @@ public class LoadAssets {
 	}
 
 	public void loadBlockImgs() {
-		/*white = new Image(new Texture(Gdx.files.internal(Const.WHITE_BLOCK)));
-		black = new Image(new Texture(Gdx.files.internal(Const.BLACK_BLOCK)));
-		lightblue = new Image(new Texture(Gdx.files.internal(Const.LIGHTBLUE_BLOCK)));
-		darkblue = new Image(new Texture(Gdx.files.internal(Const.DARKBLUE_BLOCK)));
-		green = new Image(new Texture(Gdx.files.internal(Const.GREEN_BLOCK)));
-		red = new Image(new Texture(Gdx.files.internal(Const.RED_BLOCK)));
-		purple = new Image(new Texture(Gdx.files.internal(Const.PURPLE_BLOCK)));
-		yellow = new Image(new Texture(Gdx.files.internal(Const.YELLOW_BLOCK)));
-		orange = new Image(new Texture(Gdx.files.internal(Const.ORANGE_BLOCK)));*/
-		
 		white = new Image(myBlocks.findRegion("branco"));
 		black = new Image(myBlocks.findRegion("preto"));
 		lightblue = new Image(myBlocks.findRegion("azulClaro"));

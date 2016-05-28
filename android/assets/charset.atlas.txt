@@ -1,0 +1,75 @@
+charset.png
+size: 2008, 189
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+highScore
+  rotate: false
+  xy: 1, 1
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1, 127
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 503, 1
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 503, 64
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 503, 127
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1005, 1
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1507, 1
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1005, 64
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1507, 64
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1
+highScore
+  rotate: false
+  xy: 1, 64
+  size: 500, 61
+  orig: 500, 61
+  offset: 0, 0
+  index: -1

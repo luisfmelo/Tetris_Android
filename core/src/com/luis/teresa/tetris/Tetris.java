@@ -1,10 +1,12 @@
 package com.luis.teresa.tetris;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.IntroScreen;
+import com.luis.teresa.tetris.screens.GameOverScreen;
 
 public class Tetris extends Game {
 	@Override
@@ -17,7 +19,11 @@ public class Tetris extends Game {
 		else
 			myAssets.setTheme("solar.");
 
-		setScreen(new IntroScreen());
+		try {
+			setScreen(new GameOverScreen("1", false));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
