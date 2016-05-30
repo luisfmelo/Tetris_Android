@@ -1,13 +1,13 @@
 package com.luis.teresa.tetris.logic;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.input.GestureDetector;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.helpers.LoadMusics;
+import com.badlogic.gdx.input.GestureDetector;
 import com.luis.teresa.tetris.helpers.MyGestureListener;
+import java.io.IOException;
+
 
 public class TetrisLogic{
 	private Board board;
@@ -24,7 +24,8 @@ public class TetrisLogic{
 	
 	public TetrisLogic() {
 		time = 0;
-		board = Board.getInstance( );
+		board = Board.getInstance();
+		
 		level = 1;
 		score = 0;
 		gameOver = false;
@@ -41,24 +42,24 @@ public class TetrisLogic{
 		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(board)));
 	}
 
-	public char[][] getBoard() {
+	public Block[][] getBoard() {
 		return board.getBoard();
 	}
 	
-	public void update(float delta) throws IOException {
+	public void update(float delta)  throws IOException {
 		board.printBoard();
 		time += delta;
 		if ( time > Const.CYCLE_TIME )
 		{
 			newCycle();
 			time = 0;
-			board.checkRows();
+			//board.checkRows();
 			if (board.isGameOver() )
 				handleGameOver();
 		}	
 	}
 
-	private void handleGameOver() throws IOException {
+	private void handleGameOver() throws IOException{
 		int highScore = myAssets.getScores();
 		myMusics.stopTheme();
 		myMusics.playGameOver();
@@ -133,4 +134,5 @@ public class TetrisLogic{
 		return newHighScore;
 	}
 
+	
 }

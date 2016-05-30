@@ -38,6 +38,7 @@ public class TetrisRendererIMGS {
 		stage = st;
 		img = myAssets.im;
 		
+				
 		//Label - Score
 		scoreLabel = myAssets.getScoreLabel();	
 		
@@ -64,20 +65,21 @@ public class TetrisRendererIMGS {
 	}
 	
 	private void renderBoard() {
-		char[][] c = myGame.getBoard();
-		
+		//char[][] c = myGame.getBoard();
+		Block[][] c = myGame.getBoard();
+
 		for (int i = 3; i < myGame.getRows()-1; i++)
 			for (int j = 0; j < myGame.getCols(); j++)
 				fillCell(i,j,c[i][j]);
 	}
 
-	private void fillCell(int i, int j, char s) {
+	private void fillCell(int i, int j, Block s) {
 		int tam_x = (int) (0.5*w/12);
 		int tam_y = (int) (0.8*h/22);
 		int x0 = (int) (0.05*w);
 		int y0 = (int) (0.95*h);
 			
-		img =  myAssets.loadOneBlock(Const.transform(getColor(s)));
+		img =  myAssets.loadOneBlock(s.getColor());
 		img.setSize(tam_x, tam_y);
 		img.setPosition(x0+j*tam_x, y0-i*tam_y, 0);
 		stage.addActor(img);
@@ -100,10 +102,11 @@ public class TetrisRendererIMGS {
 		float[] temp;
 		
 		// Chooses RGB Color
-		if ( s.getMatrix()[i][j] == '1' )
+		/*if ( s.getMatrix()[i][j] == '1' )
 			temp = getColor(s.getPieceShape().getLetter().charAt(0));
 		else
-			temp = getColor(s.getMatrix()[i][j]);
+			temp = getColor(s.getMatrix()[i][j]);*/
+		temp =getColor(s.getBlock(i, j));
 		
 		img = myAssets.loadOneBlock(Const.transform(temp));
 		img.setSize(tam_x, tam_y);
@@ -133,7 +136,9 @@ public class TetrisRendererIMGS {
 		stage.addActor(levelLabel);	
 		
 	}
-
+	private float[] getColor(Block c){
+		return Const.getRGB(c.getColor());
+	}
 	private float[] getColor(char c)
 	{
 		float[] rgb = new float[3];

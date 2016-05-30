@@ -26,11 +26,12 @@ public class InputHandler implements InputProcessor{
 		case Input.Keys.D: board.input("d");break;
 		case Input.Keys.DOWN: board.input("s");break;
 		case Input.Keys.S: board.input("s");break;
-		case Input.Keys.W: board.rotate();break;
-		case Input.Keys.UP: board.rotate();break;
-		case Input.Keys.SPACE: board.input("g");break; // automaticamente para baixo
-		default: board.input("p");break; //nao faz nada 
-		
+		case Input.Keys.SPACE: while(board.input("s"));break;//board.rotate();break;
+		case Input.Keys.UP:
+		case Input.Keys.SHIFT_LEFT:
+		case Input.Keys.SHIFT_RIGHT:board.rotate();break;
+
+		default: board.input("p");break; //nao faz nada			
 		}
 		return true;
 	}
@@ -48,8 +49,8 @@ public class InputHandler implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {	
 		/*clicked = true;
-		return true;*/
-		return false;
+		 return true;*/
+		 		return false;
 	}
 
 	@Override
@@ -59,15 +60,15 @@ public class InputHandler implements InputProcessor{
 		clicked = false;
 		dragging = false;
 		previousX = 0;
-		previousY = 0;		*/
+		previousY = 0;*/	
 		
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-/*
-		clicked = false;
+
+		/*clicked = false;
 		if (dragging == false)
 		{
 			previousX = screenX;
@@ -96,6 +97,7 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean scrolled(int amount) {
+		
 		return false;
 	}
 

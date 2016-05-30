@@ -78,7 +78,7 @@ public class Const {
 
 	
 	public static void addLevel(){
-		CYCLE_TIME = 0.9 * CYCLE_TIME;
+		CYCLE_TIME = 0.7 * CYCLE_TIME;
 	}
 
 
@@ -120,6 +120,62 @@ public class Const {
 		else if (rgb[0] == 0f/255 && rgb[1] == 0f/255 && rgb[2] == 240f/255)
 			return "darkblue";
 		return "";
+
+	}
+	
+	public static float[] getRGB(String color) {
+		float [] rgb = new float[3];
+		
+		switch (color){
+			case "white":
+				rgb[0] = 255f/255;
+				rgb[1] = 255f/255;
+				rgb[2] = 255f/255;
+				break;
+			case "black":
+				rgb[0] = 0f/255;
+				rgb[1] = 0f/255;
+				rgb[2] = 0f/255;
+				break;
+			case "lightblue":
+				rgb[0] = 0f/255;
+				rgb[1] = 240f/255;
+				rgb[2] = 240f/255;
+				break;			
+			case "green":
+				rgb[0] = 0f/255;
+				rgb[1] = 240f/255;
+				rgb[2] = 0f/255;
+				break;
+			case "red": 
+				rgb[0] = 240f/255;
+				rgb[1] = 0f/255;
+				rgb[2] = 0f/255;
+				break;
+			case "purple":
+				rgb[0] = 150f/255;
+				rgb[1] = 0f/255;
+				rgb[2] = 240f/255;
+				break;
+			case "yellow":
+				rgb[0] = 240f/255;
+				rgb[1] = 240f/255;
+				rgb[2] = 0f/255;
+				break;
+			case "orange":
+				rgb[0] = 240f/255;
+				rgb[1] = 150f/255 ;
+				rgb[2] = 0f/255;
+				break;
+			case "darkblue":
+				rgb[0] = 0f/255;
+				rgb[1]= 0f/255;
+				rgb[2] = 240f/255;
+				break;
+			default:
+				rgb=null;
+		}
+		return rgb;
 
 	}
 }
