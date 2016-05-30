@@ -1,8 +1,8 @@
 package com.luis.teresa.tetris.logic;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import java.io.IOException;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -57,14 +57,14 @@ public class TetrisRenderer {
 	}
 	
 	private void renderBoard() {
-		char[][] c = myGame.getBoard();
+		Block[][] c = myGame.getBoard();
 		
 		for (int i = 3; i < myGame.getRows()-1; i++)
 			for (int j = 0; j < myGame.getCols(); j++)
 				fillCell(i,j,c[i][j]);
 	}
 
-	private void fillCell(int i, int j, char s) {
+	private void fillCell(int i, int j, Block s) {
 		int tam_x = (int) (0.5*w/12);
 		int tam_y = (int) (0.8*h/22);
 		int x0 = (int) (0.05*w);
@@ -74,8 +74,8 @@ public class TetrisRenderer {
 		shapeRenderer.begin(ShapeType.Filled);
 		
 		// Chooses RGB Color
+		//shapeRenderer.setColor(getColor(s)[0], getColor(s)[1], getColor(s)[2], Const.TETRIS_COLOR[3]);
 		shapeRenderer.setColor(getColor(s)[0], getColor(s)[1], getColor(s)[2], Const.TETRIS_COLOR[3]);
-		
 		Rectangle rect = new Rectangle(x0+j*tam_x, y0+i*tam_y, tam_x, tam_y);
 		
 		// Draws the rectangle from myGame (Using ShapeType.Filled)
@@ -120,14 +120,17 @@ public class TetrisRenderer {
 		shapeRenderer.begin(ShapeType.Filled);
 		
 		// Chooses RGB Color
-		if ( s.getMatrix()[i][j] == '1' )
+		
+		/*if ( s.getMatrix()[i][j] == '1' )
 			shapeRenderer.setColor( getColor(s.getPieceShape().getLetter().charAt(0))[0], 
 									getColor(s.getPieceShape().getLetter().charAt(0))[1], 
 									getColor(s.getPieceShape().getLetter().charAt(0))[2], 1);
 		else
 			shapeRenderer.setColor( getColor(s.getMatrix()[i][j])[0], 
 									getColor(s.getMatrix()[i][j])[1], 
-									getColor(s.getMatrix()[i][j])[2], 1);
+									getColor(s.getMatrix()[i][j])[2], 1);*/
+		
+		shapeRenderer.setColor(getColor(s.getBlock(i, j))[0],getColor(s.getBlock(i, j))[1],getColor(s.getBlock(i, j))[2],1);
 		
 		Rectangle rect = new Rectangle(x0+j*tam_x, y0+i*tam_y, tam_x, tam_y);
 		
@@ -250,7 +253,10 @@ public class TetrisRenderer {
 		return rgb;
 	}
 	
-	public void renderGameOverScreen(String score, boolean newHighScore ) throws IOException {
+	private float[] getColor(Block c){
+		return Const.getRGB(c.getColor());
+	}
+	public void renderGameOverScreen(String score, boolean newHighScore ) throws IOException{
 		myAssets.loadGameOverAssets();
 		
 		//top bar
