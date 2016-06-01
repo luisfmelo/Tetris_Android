@@ -79,7 +79,6 @@ public class Shape {
          
 	 	};
          
-     private char[][] matrix;
      private Type pieceShape = Type.NoShape;
      private int size=4;
      private Block[][] matrix_block;
@@ -155,7 +154,7 @@ public class Shape {
 		Random r = new Random();
         Type[] values = Type.values(); 
        
-        //+1 para n�o contar com o NoShape
+        //+1 para nao contar com o NoShape
         int index = Math.abs(r.nextInt()) %  (values.length-1) + 1;
         
         setPieceShape(values[index]);		
@@ -298,5 +297,17 @@ public class Shape {
 		this.x_world = x_world;
 	}
     
+	public char [][] getShapeMatrix(){
+    	char matrix[][]= new char[size][size];
+    	
+    	for(int i=0;i<size;i++){
+    		for(int j=0;j<size;j++)
+    			if(matrix_block[i][j].getColor().equals("black"))
+    				matrix[i][j]='1';
+    			else
+    				matrix[i][j]=' ';
+    	}
+    	return matrix;
+    }
     
 }
