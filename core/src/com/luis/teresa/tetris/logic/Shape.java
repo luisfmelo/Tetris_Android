@@ -124,17 +124,6 @@ public class Shape {
 		return pieceShape;
 	}
 	
-/*private void updateBlocks(){
-		for (int i = 0; i <matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if(matrix[i][j]=='1')
-                	Blocks.add(new Block(this,i,j,this.pieceShape.color));
-                else
-                	Blocks.add(new Block(this,i,j,"black"));
-            }
-        }
-	}*/
-
 	public void setPieceShape(Type pieceShape) {
 		this.pieceShape = pieceShape; 
 		char [][] pattern = pieceShape.pattern;
@@ -210,16 +199,6 @@ public class Shape {
 
     }
     
-    public void print(){
-    	for(int i=0; i<size;i++){
-    		for(int j=0;j<size;j++)
-    			System.out.print(matrix[i][j]);
-			System.out.println("");
-
-    	}
-		System.out.println("");
-    }
-
 	public Block getBlock(int i, int j) {
 		return matrix_block[i][j];
 	}
