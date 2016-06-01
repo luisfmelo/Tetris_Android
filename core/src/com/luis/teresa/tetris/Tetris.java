@@ -10,7 +10,7 @@ import com.luis.teresa.tetris.screens.IntroScreen;
  * @author Luis
  * @author Teresa
  */
-public class Tetris extends Game {
+public final class Tetris extends Game {
 	/**
 	 * Method responsible to create the Game and redirect the use to Splash screen, 
 	 * using the theme pre-defined in the preferences
