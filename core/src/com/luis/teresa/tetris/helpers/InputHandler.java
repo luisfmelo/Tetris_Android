@@ -8,7 +8,6 @@ public class InputHandler implements InputProcessor{
 	Board board;
 	boolean dragging;
 	int previousX, previousY;
-	private boolean clicked;
 	
 	public InputHandler(Board board) {
 		this.board = board;

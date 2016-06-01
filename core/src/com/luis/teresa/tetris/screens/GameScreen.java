@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.helpers.LoadAssets;
+import com.luis.teresa.tetris.helpers.TetrisRendererIMGS;
 import com.luis.teresa.tetris.logic.TetrisLogic;
-import com.luis.teresa.tetris.logic.TetrisRendererIMGS;
 
 public class GameScreen implements Screen{
 	private TetrisLogic myGame;

@@ -3,7 +3,6 @@ package com.luis.teresa.tetris.logic;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
-import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadMusics;
 
 

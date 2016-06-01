@@ -1,8 +1,8 @@
-package com.luis.teresa.tetris.logic;
+package com.luis.teresa.tetris.helpers;
+
+import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import java.io.IOException;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,8 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.luis.teresa.tetris.helpers.Const;
-import com.luis.teresa.tetris.helpers.LoadAssets;
+import com.luis.teresa.tetris.logic.Block;
+import com.luis.teresa.tetris.logic.Shape;
+import com.luis.teresa.tetris.logic.TetrisLogic;
 
 public class TetrisRenderer { 
 

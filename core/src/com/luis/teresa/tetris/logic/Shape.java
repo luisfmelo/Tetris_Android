@@ -59,15 +59,22 @@ public class Shape {
          }, "darkblue");
 		 private char[][] pattern;
 		 private String color;
-         private Type(char [][] m, String c){
+         
+		 private Type(char [][] m, String c){
         	 this.pattern = m;
         	 this.color =c;
 		 }
-         public String getLetter(){
+         
+		 public String getLetter(){
         	 return this.name();
          }
-         public String getColor(){
+         
+		 public String getColor(){
         	 return this.color;
+         }
+         
+		 public char[][] getPattern(){
+        	 return this.pattern;
          }
          
 	 	};
@@ -76,18 +83,17 @@ public class Shape {
      private Type pieceShape = Type.NoShape;
      private int size=4;
      private Block[][] matrix_block;
-   //  private ArrayList <Block<T>> Blocks;
-     private int x_world, y_world,new_x,new_y;
+     private int x_world, y_world, new_x, new_y;
      
      /**
       * Constructor for Random Shape
      */
      public Shape() {
          setRandomShape();
-         x_world=0;
-         y_world=4;
-         new_x=0;
-         new_y=4;
+         setX_world(0);
+         setY_world(4);
+         setNew_x(0);
+         setNew_y(4);
      }
      
      /**
@@ -96,14 +102,14 @@ public class Shape {
       */
      public Shape(Type t) {
          setPieceShape(t);
-	     x_world=0;
-	     y_world=4;
-	     new_x=0;
-	     new_y=4;
+	     setX_world(0);
+	     setY_world(4);
+	     setNew_x(0);
+	     setNew_y(4);
      }
 	public void update_pos(){
-		x_world=new_x;
-		y_world=new_y;
+		setX_world(getNew_x());
+		setY_world(getNew_y());
 		
 	}
    
@@ -118,7 +124,8 @@ public class Shape {
 	public Type getPieceShape() {
 		return pieceShape;
 	}
-	/*private void updateBlocks(){
+	
+/*private void updateBlocks(){
 		for (int i = 0; i <matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
                 if(matrix[i][j]=='1')
@@ -128,6 +135,7 @@ public class Shape {
             }
         }
 	}*/
+
 	public void setPieceShape(Type pieceShape) {
 		this.pieceShape = pieceShape; 
 		char [][] pattern = pieceShape.pattern;
@@ -141,17 +149,7 @@ public class Shape {
                 	matrix_block[i][j]= new Block(this,i,j,"black");
             }
         }
-		//this.Blocks = new ArrayList <Block>();
-		
-		/*for (int i = 0; i <matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if(matrix[i][j]=='1')
-                	Blocks.add(new Block(this,i,j,this.pieceShape.color));
-                else
-                	Blocks.add(new Block(this,i,j,"black"));
-            }
-        }*/
-			}
+	}
     
 	public void setRandomShape() {
 		Random r = new Random();
@@ -187,7 +185,7 @@ public class Shape {
         
 		for (int i = 0; i < matrix_block.length; i++) {
             for (int j = i; j < matrix_block[0].length; j++) {
-                x= matrix_block[i][j];
+                x = matrix_block[i][j];
                 matrix_block[i][j] = matrix_block[j][i];
                 matrix_block[j][i] = x;
             }
@@ -198,12 +196,9 @@ public class Shape {
 	public void rotateLeft() 
     {
         if (pieceShape == Type.O)
-            return;
-        
+            return;        
         transpose();
         swapRows();
-
-        
     }
 
     public void rotateRight()
@@ -217,7 +212,6 @@ public class Shape {
     }
     
     public void print(){
-    	
     	for(int i=0; i<size;i++){
     		for(int j=0;j<size;j++)
     			System.out.print(matrix[i][j]);
@@ -225,7 +219,6 @@ public class Shape {
 
     	}
 		System.out.println("");
-
     }
 
 	public Block getBlock(int i, int j) {
@@ -249,25 +242,8 @@ public class Shape {
 		return myVec;
 	}
 
-	public int getX_world() {
-		return x_world;
-	}
-	public void set_newPos(int x,int y){
-		new_x=x;
-		new_y=y;
-	}
-	public void setX_world(int x_world) {
-		this.x_world = x_world;
-	}
 
-	public int getY_world() {
-		return y_world;
-	}
-
-	public void setY_world(int y_world) {
-		this.y_world = y_world;
-	}
-     
+	
     public void destroy(){
     	for (int i=0; i<size;i++)
     		for(int j=0; j<size;j++)
@@ -279,9 +255,48 @@ public class Shape {
     		for(int j=0; j<size;j++){
     			matrix_block[i][j].setX_shape(i);
     			matrix_block[i][j].setY_shape(j);
-    			matrix_block[i][j].setX_global(i + x_world);;
-    			matrix_block[i][j].setY_global(j + y_world);
+    			matrix_block[i][j].setX_global(i + getX_world());;
+    			matrix_block[i][j].setY_global(j + getY_world());
     		}
     }
+
+	
+	public void set_newPos(int x,int y){
+		setNew_x(x);
+		setNew_y(y);
+	}
+
+	public int getNew_y() {
+		return new_y;
+	}
+
+	public void setNew_y(int new_y) {
+		this.new_y = new_y;
+	}
+
+	public int getNew_x() {
+		return new_x;
+	}
+
+	public void setNew_x(int new_x) {
+		this.new_x = new_x;
+	}
+
+	public int getY_world() {
+		return y_world;
+	}
+
+	public void setY_world(int y_world) {
+		this.y_world = y_world;
+	}
+
+	public int getX_world() {
+		return x_world;
+	}
+
+	public void setX_world(int x_world) {
+		this.x_world = x_world;
+	}
+    
     
 }

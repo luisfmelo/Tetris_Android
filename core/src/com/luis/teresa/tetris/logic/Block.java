@@ -1,7 +1,5 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.graphics.Color;
-
 public class Block {
 	private Shape parent;
 	private String color;
