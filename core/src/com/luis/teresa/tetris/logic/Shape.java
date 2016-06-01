@@ -106,7 +106,8 @@ public class Shape {
 	     setNew_x(0);
 	     setNew_y(4);
      }
-	public void update_pos(){
+	
+     public void update_pos(){
 		setX_world(getNew_x());
 		setY_world(getNew_y());
 		
@@ -131,7 +132,7 @@ public class Shape {
 		matrix_block = new Block [size][size]; //ou array list?
 		for (int i = 0; i <pattern.length; i++) {
             for (int j = 0; j < pattern.length; j++) {
-                if(pattern[i][j]=='1')
+                if(pattern[i][j] == '1')
                 	matrix_block[i][j]= new Block(this,i,j,this.pieceShape.color);
                 else
                 	matrix_block[i][j]= new Block(this,i,j,"black");
@@ -152,7 +153,7 @@ public class Shape {
 	public  void swapRows() {
 		Block[] x;
 		
-		if(matrix_block==null)
+		if( matrix_block == null)
 			return;
 	  
 		for (int  i = 0, k = size - 1; i < k; ++i, --k) {
@@ -168,7 +169,7 @@ public class Shape {
 	private void transpose() {
 		Block x;
 		
-		if(matrix_block==null)
+		if(matrix_block == null)
 			return;
         
 		for (int i = 0; i < matrix_block.length; i++) {
@@ -191,7 +192,7 @@ public class Shape {
 
     public void rotateRight()
     {
-    	if (pieceShape == Type.O)
+    	if (this.pieceShape == Type.O)
             return;
     	
           swapRows();
@@ -212,7 +213,6 @@ public class Shape {
 			for (int j = 0; j < 4; j++) {
 				if ( !matrix_block[i][j].getColor().equals("black"))
 					myVec.add( new Vector2( i + v.get(4).x  ,  j + v.get(4).y ) );
-					//System.out.println("%" + v.get(i).x + "|" + v.get(i).y );
 			}
 		}
 		myVec.add( new Vector2(v.get(4).x,v.get(4 ).y ) );
@@ -281,7 +281,7 @@ public class Shape {
     	
     	for(int i=0;i<size;i++){
     		for(int j=0;j<size;j++)
-    			if(matrix_block[i][j].getColor().equals("black"))
+    			if(!matrix_block[i][j].getColor().equals("black"))
     				matrix[i][j]='1';
     			else
     				matrix[i][j]=' ';
