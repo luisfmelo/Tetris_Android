@@ -1,14 +1,21 @@
 package com.luis.teresa.tetris;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.screens.GameOverScreen;
+import com.luis.teresa.tetris.screens.IntroScreen;
 
+/**
+ * This class is the main class which is responsible to start the first Screen
+ * @author Luis
+ * @author Teresa
+ */
 public class Tetris extends Game {
+	/**
+	 * Method responsible to create the Game and redirect the use to Splash screen, 
+	 * using the theme pre-defined in the preferences
+	 * This method load some assets.
+	 */
 	@Override
 	public void create() {
 		LoadAssets myAssets = new LoadAssets();
@@ -19,41 +26,39 @@ public class Tetris extends Game {
 		else
 			myAssets.setTheme("solar.");
 
-		try {
-			setScreen(new GameOverScreen("1", false));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			setScreen(new IntroScreen());
 	}
 	
+	/**
+	 * Method responsible to dispose the Game and the assets loaded
+	 */
 	@Override
 	public void dispose() {
         super.dispose();
         LoadAssets.dispose();
 	}
-
+	
 	@Override
 	public void render() {
 		super.render();
 	}
 	
-
+	/**
+	 * Method responsible to adjust the screen 
+	 */
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
-		Gdx.app.log("Tetris", "resized");
 	}
 
 	@Override
 	public void pause() {
 		super.pause();
-		Gdx.app.log("Tetris", "paused");
 	}
 
 	@Override
 	public void resume() {
 		super.resume();
-		Gdx.app.log("Tetris", "resumed");
 	}
 	
 }
