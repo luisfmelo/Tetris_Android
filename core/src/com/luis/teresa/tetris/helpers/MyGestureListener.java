@@ -23,6 +23,8 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 	
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
+    	System.out.println("fling");
+    	
     	Gdx.app.log("Vx = ", Double.toString(velocityX));
     	Gdx.app.log("Vy = ", Double.toString(velocityY));
     	
@@ -43,19 +45,14 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 	    	}	
     	else
 	    	for (int i = 0; i < Math.abs(y); i++)  {
-	            if( velocityY < 0 )
-	            	board.rotate();
-	            else
+	            //if( velocityY < 0 )
+	            	//board.rotate();
+	            //else
 	            	board.input("s");
 	    	}	
 
         return true;
     }
-	
-	
-	
-	
-	
 	
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
@@ -65,7 +62,17 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
-        return false;
+    	
+    	if(count>1){
+    		while(board.input("s"));
+    	}
+    	else if(count==1)
+    		board.rotate();
+    	else
+    		return false;
+    				
+    	return true;
+    	
     }
 
     @Override
