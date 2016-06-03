@@ -1,8 +1,8 @@
 package com.luis.teresa.tetris.helpers;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
+
+import java.io.IOException;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -190,7 +190,7 @@ public class TetrisRenderer {
 		stage.addActor(scoreLabel);
 		stage.addActor(level);
 		stage.addActor(levelLabel);
-//		st.draw();
+       //st.draw();
 		
 		
 	}

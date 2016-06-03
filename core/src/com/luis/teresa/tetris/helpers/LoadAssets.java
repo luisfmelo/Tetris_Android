@@ -133,8 +133,8 @@ public class LoadAssets {
 		//Label - Score
 		scoreLabel = new Label("Score", skin, Const.THEME + "default");
 		scoreLabel.setAlignment(Align.center);
-		scoreLabel.setSize(tam_x*10, tam_y);
-		scoreLabel.setPosition(0.7f*Const.w, 0.5f*Const.h, 0);	
+		scoreLabel.setSize(tam_x*5, tam_y);
+		scoreLabel.setPosition(0.7f*Const.w, 0.5f*Const.h , 0);
 		scoreLabel.setFontScale(3);
 		
 		score = new Label(myGame.getScore(), skin, Const.THEME + "default");
