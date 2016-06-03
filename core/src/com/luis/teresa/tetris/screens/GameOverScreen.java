@@ -58,6 +58,7 @@ public class GameOverScreen implements Screen{
 	private Boolean newHS;   
 	
 	public GameOverScreen(String score, Boolean newHighScore) throws IOException {
+		
 		this.newHS = newHighScore;
 		myAssets = new LoadAssets();
 		myAssets.loadGameOverAssets();

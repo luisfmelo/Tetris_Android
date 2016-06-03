@@ -6,9 +6,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.Tetris;
+import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
+import com.luis.teresa.tetris.helpers.MyGestureListener;
 import com.luis.teresa.tetris.helpers.TetrisRendererIMGS;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 
@@ -16,7 +20,8 @@ public class GameScreen implements Screen{
 	private TetrisLogic myGame;
 	private TetrisRendererIMGS renderer;
 	private Stage st;
-	private LoadAssets myAssets;
+	private boolean newHighScore=false;
+	//private LoadAssets myAssets;
 	
 	public GameScreen() {
 		
@@ -24,13 +29,16 @@ public class GameScreen implements Screen{
 		Gdx.input.setInputProcessor(st);
 		
 		myGame = new TetrisLogic(); //inicia novo jogo
+		TetrisLogic.setROWS_TOLEVELUP(Const.ROWS_TO_LEVEL_UP);
 		
-		myAssets = new LoadAssets();
-		myAssets.loadGameAssets(myGame);
-		myAssets.loadGameOverAssets();
-		myAssets.loadBlockImgs();
+		Tetris.myMusics.playTheme();
+		Tetris.myAssets.loadGameAssets(myGame);
+		//Desktop
+				Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
+		//Android
+		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
 
-		renderer = new TetrisRendererIMGS(myGame, st, myAssets); //inicia renderer para imprimir
+		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); //inicia renderer para imprimir
 		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
 	}
 	
@@ -49,6 +57,17 @@ public class GameScreen implements Screen{
 	    //update & render if game is not over
     	if( !myGame.isGameOver() )
     	{
+    		if(TetrisLogic.getClear() >0){
+    			Tetris.myMusics.playClear(Integer.toString(TetrisLogic.getClear()));
+    			TetrisLogic.setClear(0);
+    			
+    		}
+    		if(TetrisLogic.isLevelUp()){
+    			TetrisLogic.setLevelUp(false);
+    			Const.addLevel();
+    			Tetris.myMusics.playLevelUp();
+    		}
+    		
     		try {
 				myGame.update(delta);
 			} catch (IOException e) {
@@ -62,9 +81,25 @@ public class GameScreen implements Screen{
     	else
     	{
     		renderer.render();
+    		try {
+				if(myGame.get_intScore()> Tetris.myAssets.getScores()){
+					newHighScore = true;
+					
+					Tetris.myAssets.setScores(myGame.get_intScore());
+					
+					Tetris.myMusics.playFantastic();
+				}
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		Tetris.myMusics.stopTheme();
+    		Tetris.myMusics.playGameOver();
+    		
+    		
     		//renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
     		try {
-				((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore()));
+				((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), newHighScore));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -99,4 +134,3 @@ public class GameScreen implements Screen{
 		
 	}
 }
-
