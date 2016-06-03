@@ -8,7 +8,7 @@ public class Block {
 
 	
 	public Block(Shape shape, int x_in_shape, int y_in_shape , String color){
-		this.parent = shape;
+		this.parent=shape;
 		this.setX_shape(x_in_shape); 
 		this.setY_shape(y_in_shape);
 		this.setY_global(y_in_shape + parent.getY_world()); //verificar
@@ -16,7 +16,7 @@ public class Block {
 		this.setColor(color);
 	}
 	public Block(int x_world, int   y_world){
-		this.parent = null;
+		this.parent=null;
 		this.setX_shape(-1); 
 		this.setY_shape(-1);
 		this.setY_global(y_world); 

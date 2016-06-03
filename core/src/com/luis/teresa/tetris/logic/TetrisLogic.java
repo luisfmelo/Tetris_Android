@@ -1,11 +1,6 @@
 package com.luis.teresa.tetris.logic;
 
-import com.badlogic.gdx.Gdx;
 import com.luis.teresa.tetris.helpers.Const;
-import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.helpers.LoadMusics;
-import com.badlogic.gdx.input.GestureDetector;
-import com.luis.teresa.tetris.helpers.MyGestureListener;
 import java.io.IOException;
 
 
@@ -17,10 +12,10 @@ public class TetrisLogic{
 	private Shape futureShape;
 	private static int level;
 	private static int score;
-	private static LoadAssets myAssets;
 	private boolean gameOver;
-	private static LoadMusics myMusics;
-	private static boolean newHighScore;
+	private static int ROWS_TO_LEVEL_UP;
+	private static boolean isLevelUp;
+	private static int clear;
 	
 	public TetrisLogic() {
 		time = 0;
@@ -32,22 +27,27 @@ public class TetrisLogic{
 		shapeInGame = false;
 		presentShape = new Shape();
 		futureShape = new Shape();
-		myAssets = new LoadAssets();
+		/*myAssets = new LoadAssets();
 		myMusics= new LoadMusics();
-		myMusics.playTheme();
-		newHighScore = false;
+		myMusics.playTheme();*/
+		//newHighScore = false;
 		//Desktop
 		//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(board));
 		//Android
-		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(board)));
+		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(board)));
 	}
+	
 
 	public Block[][] getBoard() {
 		return board.getBoard();
 	}
 	
-	public void update(float delta)  throws IOException {
-		board.printBoard();
+	public Board getBoard_class(){
+		return this.board;
+	}
+ 	public void update(float delta)  throws IOException {
+		//board.printBoard();
+ 		//System.out.println(score);
 		time += delta;
 		if ( time > Const.CYCLE_TIME )
 		{
@@ -55,25 +55,13 @@ public class TetrisLogic{
 			time = 0;
 			//board.checkRows();
 			if (board.isGameOver() )
-				handleGameOver();
+				gameOver=true;
 		}	
 	}
 
-	private void handleGameOver() throws IOException{
-		int highScore = myAssets.getScores();
-		myMusics.stopTheme();
-		myMusics.playGameOver();
-		gameOver = true;
-		if (score > highScore)
-		{
-			newHighScore = true;
-			myAssets.setScores(score);
-			myMusics.playFantastic();
-		}
-		//Gdx.app.exit();
-	}
+	
 
-	private void newCycle() {
+	public void newCycle() {
 		if ( !shapeInGame )
 		{
 			presentShape = new Shape(futureShape.getPieceShape());
@@ -100,16 +88,14 @@ public class TetrisLogic{
 		return Integer.toString(score);
 	}
 
+	public int get_intScore() {
+		return score;
+	}
 	public String getLevel() {
 		return Integer.toString(level);
 	}
 
-	public static void levelUp() {
-		level ++;
-		Const.addLevel();
-		myMusics.playLevelUp();
-	}
-
+	
 	public static void addScore(String string) {
 
 		if (Integer.parseInt(string) == 1)
@@ -120,9 +106,11 @@ public class TetrisLogic{
 			score += 4;
 		else if (Integer.parseInt(string) == 4)
 			score += 8;
-
-		if ( score % Const.ROWS_TO_LEVEL_UP == 0)
-			levelUp();
+		System.out.println(score);
+		if ( score % ROWS_TO_LEVEL_UP == 0){
+			level ++;
+			setLevelUp(true);
+		}
 
 	}
 
@@ -130,9 +118,33 @@ public class TetrisLogic{
 		return gameOver;
 	}
 
-	public static boolean isNewHighScore() {
-		return newHighScore;
+	public int getROWS_TOLEVELUP() {
+		return ROWS_TO_LEVEL_UP;
 	}
 
+	public static void setROWS_TOLEVELUP(int rOWS_TOLEVELUP) {
+		ROWS_TO_LEVEL_UP = rOWS_TOLEVELUP;
+	}
+
+	public static boolean isLevelUp() {
+		return isLevelUp;
+	}
+
+	public static void setLevelUp(boolean state) {
+		isLevelUp = state;
+	}
+	public static void setClear(int state){
+		clear=state;
+	}
+	public static int getClear(){
+		return clear;
+	}
+	
+	public Shape getShape(){
+		return presentShape;
+	}
+	public void setShapeInGame(boolean shape){
+		shapeInGame=shape;
+	}
 	
 }

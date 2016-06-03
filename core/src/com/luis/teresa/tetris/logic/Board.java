@@ -8,17 +8,17 @@ import com.luis.teresa.tetris.helpers.LoadMusics;
 
 public class Board {
 	//private char[][] board_char;
-	private static Block[][] board;
+	private  static Block[][] board;
 	private static int rows = 25;
 	private static int cols = 12;
 	private ArrayList<Vector2> myShape;
 	ArrayList<Vector2> newCoords;
-	String pieceOnGoing;
+	private String pieceOnGoing;
 	Shape shape;
 	boolean tower=false;
 	
 	private static boolean gameover = false;
-	private LoadMusics myMusics;
+	 
 	
 	/**
 	 * Singleton
@@ -30,14 +30,17 @@ public class Board {
 	 */
 	 private Board() {
 		board = new Block[rows][cols];
-		myMusics = new LoadMusics();
 	}
 	 /* Static 'instance' method */
 	 public static Board getInstance( ) {
 		 initializeBoard();
 		 gameover = false;
-	 		return singleton;
+	 	 return singleton;
 	 }
+	 
+	public void setBoard( Block[][] matrix){
+		 board=matrix;
+	}
 	public static void initializeBoard(){
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
@@ -65,53 +68,53 @@ public class Board {
 
 	public void newShape(Shape shape) {
 		tower=false;
-		myShape = new ArrayList<Vector2>(5);
+		myShape=new ArrayList<Vector2>(5);
 		this.shape = shape;
 		//pieceOnGoing = ":";
-		pieceOnGoing = "-:";
+		setPieceOnGoing("-:");
 			
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 4; j < 8; j++) {
 				board[i][j] = shape.getBlock(i, j - 4);
 				if (!board[i][j].getColor().equals("black"))
-					myShape.add(new Vector2(i,j));
+					getMyShape().add(new Vector2(i,j));
 			}
 		}
-		myShape.add(new Vector2(0,4)); //simboliza o ponto 0,0 da matriz 4x4 da shape
+		getMyShape().add(new Vector2(0,4)); //simboliza o ponto 0,0 da matriz 4x4 da shape
 	}
 
 	public boolean input(String command) {	
 		newCoords = new ArrayList<Vector2>(5);
 		
-		if(pieceOnGoing.equals("-:")&& shape.getX_world()>=3)
-			pieceOnGoing=":";
+		if(getPieceOnGoing().equals("-:")&& shape.getX_world()>=3)
+			setPieceOnGoing(":");
 
 		switch (command.toLowerCase()){
 		case "s": 
-			for (int i = 0; i < myShape.size(); i++)
-				newCoords.add( new Vector2(myShape.get(i).x + 1, myShape.get(i).y));
+			for (int i = 0; i < getMyShape().size(); i++)
+				newCoords.add( new Vector2(getMyShape().get(i).x + 1, getMyShape().get(i).y));
 			shape.set_newPos(shape.getX_world()+1,shape.getY_world());
 			
 			break;
 		case "a": 
-			for (int i = 0; i < myShape.size(); i++)
-				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y - 1));
+			for (int i = 0; i < getMyShape().size(); i++)
+				newCoords.add( new Vector2(getMyShape().get(i).x, getMyShape().get(i).y - 1));
 			shape.set_newPos(shape.getX_world(),shape.getY_world()-1);
 
 			break;
 		case "d": 
-			for (int i = 0; i < myShape.size(); i++)
-				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y + 1));
+			for (int i = 0; i < getMyShape().size(); i++)
+				newCoords.add( new Vector2(getMyShape().get(i).x, getMyShape().get(i).y + 1));
 			shape.set_newPos(shape.getX_world(),shape.getY_world()+1);
 
 			break;
 		case "p": 
-			 for (int i = 0; i < myShape.size(); i++)
-				newCoords.add( new Vector2(myShape.get(i).x, myShape.get(i).y));
+			 for (int i = 0; i < getMyShape().size(); i++)
+				newCoords.add( new Vector2(getMyShape().get(i).x, getMyShape().get(i).y));
 			 break;
 		}
-		if ( pieceOnGoing.equals("-") )
+		if ( getPieceOnGoing().equals("-") )
 			return false;
 		//verificar novas coordenadas
 		if ( checkCoords(command) )
@@ -119,14 +122,17 @@ public class Board {
 		//else
 			//checkRows();
 		return true;
+		/*}
+		else
+			return false;*/
 	}
 
 	private boolean checkCoords(String command) {
 		int livre=1;
 		
 		for (int i = 0; i < 4; i++) 
-			if (!(board[(int) myShape.get(i).x+1][(int) myShape.get(i).y].getColor().equals("black")) && 
-				  (board[(int) myShape.get(i).x+1][(int) myShape.get(i).y].getParent()!=shape)){
+			if (!(board[(int) getMyShape().get(i).x+1][(int) getMyShape().get(i).y].getColor().equals("black")) && 
+				  (board[(int) getMyShape().get(i).x+1][(int) getMyShape().get(i).y].getParent()!=shape)){
 				livre=0;
 				break;
 			}
@@ -136,9 +142,7 @@ public class Board {
 					  board[(int) newCoords.get(i).x][(int) newCoords.get(i).y].getParent()!=null && 
 					!(board[(int) newCoords.get(i).x][(int) newCoords.get(i).y].getColor().equals("black"))
 					)|| 
-					newCoords.get(i).x == 23) //&&
-					//command.toLowerCase().equals("s"))// ||
-//					newCoords.get(i).x == 23) && newCoords.get(i).x == max)
+					newCoords.get(i).x == 23) 
 					)
 				{
 					//encontrou torre... adiciona a torre
@@ -159,29 +163,27 @@ public class Board {
 	private void addToTower() {
 		
 		for (int i = 0; i < 4; i++) 
-			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = shape.getBlock((int) myShape.get(i).x - shape.getX_world(),(int) myShape.get(i).y-shape.getY_world());
+			board[(int) getMyShape().get(i).x][(int) getMyShape().get(i).y] = shape.getBlock((int) getMyShape().get(i).x - shape.getX_world(),(int) getMyShape().get(i).y-shape.getY_world());
 		
-		pieceOnGoing = "-";
+		setPieceOnGoing("-");
 	}
 
 	private void insert() {
 
 		//printBoard();
 		for (int i = 0; i < 4; i++) {
-			board[(int) myShape.get(i).x][(int) myShape.get(i).y] = new Block((int) myShape.get(i).x,(int) myShape.get(i).y);
+			board[(int) getMyShape().get(i).x][(int) getMyShape().get(i).y] = new Block((int) getMyShape().get(i).x,(int) getMyShape().get(i).y);
 		}
 		
-		for (int i = 0; i < 4; i++) {
-			//System.out.println(myShape.get(i).x + "|" + myShape.get(i).y);
-			board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] = shape.getBlock((int)myShape.get(i).x-shape.getX_world(), (int)myShape.get(i).y-shape.getY_world());
-		}
+		for (int i = 0; i < 4; i++) 
+			board[(int) newCoords.get(i).x][(int) newCoords.get(i).y] = shape.getBlock((int)getMyShape().get(i).x-shape.getX_world(), (int)getMyShape().get(i).y-shape.getY_world());
+		
 		shape.update_pos();
-		
-		//shape.destroy();
-		myShape = new ArrayList<Vector2>(5);
+	
+		myShape=new ArrayList<Vector2>(5);
 		
 		for (int i = 0; i < 5; i++) {
-			myShape.add(new Vector2(newCoords.get(i).x, newCoords.get(i).y));
+			getMyShape().add(new Vector2(newCoords.get(i).x, newCoords.get(i).y));
 		}
 	}
 
@@ -201,19 +203,20 @@ public class Board {
 						checkTop = true;
 			}						
 				
-	
+			
 			if ( clean ){
 				rowsToClean.add(i);
 				}
-			else if ( checkTop && !pieceOnGoing.equals(":-"))
+			else if ( checkTop && !getPieceOnGoing().equals(":-"))
 				handleGameOver();
 			clean = true;
 		}		
 				//Score & music
 				if(rowsToClean.size() != 0)
-				{
-					myMusics.playClear(Integer.toString(rowsToClean.size())); 
-					TetrisLogic.addScore(Integer.toString(rowsToClean.size()));
+				{	
+						TetrisLogic.addScore(Integer.toString(rowsToClean.size()));
+						TetrisLogic.setClear(rowsToClean.size());
+					
 				}
 					
 				//actual cleanning
@@ -231,8 +234,9 @@ public class Board {
 				board[i][j] = board[i-1][j];
 			}
 		}	
+		
 	}
-	public void printBoard(){
+	/*public void printBoard(){
 		
 		for (int i = 0; i < rows; i++) {
 			for(int j=0; j<cols ;j++){
@@ -247,30 +251,32 @@ public class Board {
 		
 		System.out.println();
 		
-	}
+	}*/
 
-	public void rotate() {
+	public boolean rotate() {
 		if(tower)
-			return;
+			return false;
 		newCoords = new ArrayList<Vector2>(5);
-		newCoords = shape.rotate(myShape);
+		newCoords = shape.rotate(getMyShape());
 		
 		if ( checkCoords("s") ){
 			for (int i = 0; i < 4; i++) {
-					board[(int) myShape.get(i).x][(int) myShape.get(i).y] = new Block((int)myShape.get(i).x,(int) myShape.get(i).y);
+					board[(int) getMyShape().get(i).x][(int) getMyShape().get(i).y] = new Block((int)getMyShape().get(i).x,(int) getMyShape().get(i).y);
 			}
 			
 			for (int i = 0; i < 4; i++) {				
-				myShape.set(i, new Vector2(newCoords.get(i).x,newCoords.get(i).y));
-				board[(int) myShape.get(i).x][(int) myShape.get(i).y] = shape.getBlock((int) myShape.get(i).x - shape.getX_world(),(int) myShape.get(i).y-shape.getY_world()); 
+				getMyShape().set(i, new Vector2(newCoords.get(i).x,newCoords.get(i).y));
+				board[(int) getMyShape().get(i).x][(int) getMyShape().get(i).y] = shape.getBlock((int) getMyShape().get(i).x - shape.getX_world(),(int) getMyShape().get(i).y-shape.getY_world()); 
 			}
+			return true;
 			
 		}
 		else{
 			shape.rotateLeft();
 			if ( checkCoords("s") )
 				insert();
-				}
+			return false;
+		}
 	}
 	
 	public void handleGameOver() {
@@ -281,6 +287,31 @@ public class Board {
 	public boolean isGameOver() {
 		return gameover;
 	}
-
-
+	public String getPieceOnGoing() {
+		return pieceOnGoing;
+	}
+	public void setPieceOnGoing(String pieceOnGoing) {
+		this.pieceOnGoing = pieceOnGoing;
+	}
+	//For tests
+	public void setShapePos(int x, int y){
+		int cont=0;
+		for (int i = 0; i < 4; i++) 
+			for(int j=0; j<4;j++){
+				if(board[x+i][y+j].getColor().equals("white") || (board[x+i][y+j].getParent()!=null&& !board[x+i][y+j].getColor().equals("black")  ))
+					continue;
+				if(!shape.getBlock(i,j).getColor().equals("black")){
+					getMyShape().set(cont,new Vector2(x+i,y+j) );
+					cont++;
+				}
+				board[x+i][y+j] = shape.getBlock(i,j); 
+			}
+		getMyShape().set(4,new Vector2(x,y));
+		shape.setX_world(x);
+		shape.setY_world(y);
+	}
+	public ArrayList<Vector2> getMyShape() {
+		return myShape;
+	}
+	
 }
