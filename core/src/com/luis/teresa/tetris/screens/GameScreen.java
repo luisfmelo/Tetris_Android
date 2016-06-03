@@ -34,9 +34,9 @@ public class GameScreen implements Screen{
 		Tetris.myMusics.playTheme();
 		Tetris.myAssets.loadGameAssets(myGame);
 		//Desktop
-				//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
+				Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
 		//Android
-		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
+		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
 
 		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); //inicia renderer para imprimir
 		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
@@ -57,6 +57,7 @@ public class GameScreen implements Screen{
 	    //update & render if game is not over
     	if( !myGame.isGameOver() )
     	{
+    		System.out.println("Level "+myGame.getLevel());
     		if(TetrisLogic.getClear() >0){
     			Tetris.myMusics.playClear(Integer.toString(TetrisLogic.getClear()));
     			TetrisLogic.setClear(0);
@@ -64,7 +65,7 @@ public class GameScreen implements Screen{
     		}
     		if(TetrisLogic.isLevelUp()){
     			TetrisLogic.setLevelUp(false);
-    			Const.addLevel();
+    			Const.addLevel(Integer.parseInt(myGame.getLevel()));
     			Tetris.myMusics.playLevelUp();
     		}
     		
@@ -82,7 +83,7 @@ public class GameScreen implements Screen{
     	{
     		renderer.render();
     		try {
-				if(myGame.get_intScore()> Tetris.myAssets.getScores()){
+				if(myGame.get_intScore() > Tetris.myAssets.getScores()){
 					newHighScore = true;
 					
 					Tetris.myAssets.setScores(myGame.get_intScore());
