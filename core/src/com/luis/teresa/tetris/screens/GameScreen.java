@@ -34,9 +34,9 @@ public class GameScreen implements Screen{
 		Tetris.myMusics.playTheme();
 		Tetris.myAssets.loadGameAssets(myGame);
 		//Desktop
-				Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
+				//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
 		//Android
-		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
+		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
 
 		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); //inicia renderer para imprimir
 		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
