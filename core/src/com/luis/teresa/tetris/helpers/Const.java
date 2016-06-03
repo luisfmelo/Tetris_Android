@@ -1,6 +1,7 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.luis.teresa.tetris.Tetris;
 
 public class Const {
 	/**
@@ -77,8 +78,8 @@ public class Const {
 	public static final String ORANGE_BLOCK = "blocks/laranja.png";
 
 	
-	public static void addLevel(){
-		CYCLE_TIME = 0.7 * CYCLE_TIME;
+	public static void addLevel( int level){
+		CYCLE_TIME = 0.9 * CYCLE_TIME;
 	}
 
 
