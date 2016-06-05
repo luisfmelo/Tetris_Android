@@ -6,13 +6,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.helpers.Const;
-import com.luis.teresa.tetris.helpers.LoadAssets;
-import com.luis.teresa.tetris.helpers.MyGestureListener;
 import com.luis.teresa.tetris.helpers.TetrisRendererIMGS;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 
@@ -81,6 +78,7 @@ public class GameScreen implements Screen{
     	//if game is over, render GameOver Screen
     	else
     	{
+    		Const.CYCLE_TIME=0.18;
     		renderer.render();
     		try {
 				if(myGame.get_intScore() > Tetris.myAssets.getScores()){

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -29,20 +30,20 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	
 	private Stage stage;
 	private Skin skin;
-	private LoadAssets myAssets;
+	//private LoadAssets myAssets;
 	private TweenManager tweenManager;
 	Stage st = new Stage(new ScreenViewport());
 	
 	@Override
 	public void show() {
-		myAssets = new LoadAssets();
+		Tetris.myAssets = new LoadAssets();
 		try {
-			myAssets.loadMenuAssets();
+			Tetris.myAssets.loadMenuAssets();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		if (myAssets.getTheme().equals("dracula.")){
+		if (Tetris.myAssets.getTheme().equals("dracula.")){
 
 			Const.setBG_COLOR(0f,0f,0f,1f);
 			Const.setTETRIS_COLOR(1f,1f,1f,1f);
@@ -52,14 +53,14 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 			Const.setTETRIS_COLOR(0f,0f,0f,1f);
 		}
 		
-		skin = myAssets.getSkin();
+		skin = Tetris.myAssets.getSkin();
 		
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 
-		Image trophey = myAssets.getTrophey();
-		Label highScore = myAssets.getHighScore();
-		Image playBtn = myAssets.getPlayBtn();
+		Image trophey = Tetris.myAssets.getTrophey();
+		Label highScore = Tetris.myAssets.getHighScore();
+		Image playBtn = Tetris.myAssets.getPlayBtn();
 		playBtn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -75,7 +76,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		});
 		//Image leadBtn = myAssets.getLeaderBtn();
 		//add listener 
-		Image settBtn = myAssets.getSettBtn();
+		Image settBtn = Tetris.myAssets.getSettBtn();
 		settBtn.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -83,7 +84,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 			}
 		});
 		
-		Image footer = myAssets.getFooter();
+		Image footer = Tetris.myAssets.getFooter();
 		
 		stage.addActor(trophey);
 		stage.addActor(highScore);

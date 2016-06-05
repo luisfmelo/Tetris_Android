@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -33,7 +34,7 @@ import aurelienribon.tweenengine.TweenManager;
 public class GameOverScreen implements Screen{
 
 	private Stage st;
-	private LoadAssets myAssets;
+	//private LoadAssets myAssets;
 	private TweenManager tweenManager;
 
 	private Image home;
@@ -60,10 +61,10 @@ public class GameOverScreen implements Screen{
 	public GameOverScreen(String score, Boolean newHighScore) throws IOException {
 		
 		this.newHS = newHighScore;
-		myAssets = new LoadAssets();
-		myAssets.loadGameOverAssets();
+		Tetris.myAssets = new LoadAssets();
+		Tetris.myAssets.loadGameOverAssets();
 		
-		if (myAssets.getTheme().equals("dracula.")){
+		if (Tetris.myAssets.getTheme().equals("dracula.")){
 
 			Const.setBG_COLOR(0f,0f,0f,1f);
 			Const.setTETRIS_COLOR(1f,1f,1f,1f);
@@ -76,13 +77,13 @@ public class GameOverScreen implements Screen{
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
-		secundaryLabel = myAssets.getSecundaryLabel();
-		gameOverLabel = myAssets.getGameOverLabel();
+		secundaryLabel = Tetris.myAssets.getSecundaryLabel();
+		gameOverLabel = Tetris.myAssets.getGameOverLabel();
 		
 		if(newHS)//NEW HIGH SCORE
 		{
 			createAnimation();
-			secundaryLabel.setText("" + Integer.toString(myAssets.getScores()));
+			secundaryLabel.setText("" + Integer.toString(Tetris.myAssets.getScores()));
 			gameOverLabel.setText("");
 			st.addActor(secundaryLabel);		
 		}
@@ -96,7 +97,7 @@ public class GameOverScreen implements Screen{
 		//title bar
     	//GOheader = myAssets.getHeader();
 		//home bar
-		home = myAssets.getHome();
+		home = Tetris.myAssets.getHome();
 		home.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {					
@@ -104,7 +105,7 @@ public class GameOverScreen implements Screen{
 			}
 		});
 		//replay bar
-		replay = myAssets.getReplay();
+		replay = Tetris.myAssets.getReplay();
 		replay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {	

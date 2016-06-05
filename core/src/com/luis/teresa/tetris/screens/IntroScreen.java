@@ -1,6 +1,6 @@
 package com.luis.teresa.tetris.screens;
 
-import java.io.IOException;
+
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.accessors.SpriteAccessor;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -26,25 +27,25 @@ public class IntroScreen implements Screen {
 	private SpriteBatch batch;
 	private Image introImg;
 	private TweenManager tweenManager;
-	private LoadAssets myAssets;
+	//private LoadAssets myAssets;
 	private Stage stage;
-	private LoadMusics myMusics;
+	//private LoadMusics myMusics;
 
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		
-		myAssets = new LoadAssets();
-		myAssets.loadIntroAssets();
+		Tetris.myAssets = new LoadAssets();
+		Tetris.myAssets.loadIntroAssets();
 		
 		batch = new SpriteBatch();
-		
-		myMusics = new LoadMusics();
-		myMusics.playIntro();
+
+		Tetris.myMusics = new LoadMusics();
+		Tetris.myMusics.playIntro();
 			
 		stage = new Stage(new ScreenViewport());
 
-		introImg = myAssets.getIntroImg();
+		introImg = Tetris.myAssets.getIntroImg();
 		
 		stage.addActor(introImg);
 		

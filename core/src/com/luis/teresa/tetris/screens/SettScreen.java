@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -21,7 +22,7 @@ import aurelienribon.tweenengine.TweenManager;
 public class SettScreen implements Screen {
 
 	private Stage st;
-	private LoadAssets myAssets;
+	//private LoadAssets myAssets;
 	private TweenManager tweenManager;
 	
 	private Label titleLabel;
@@ -32,17 +33,17 @@ public class SettScreen implements Screen {
 	private Label themeLabel;
 
 	public SettScreen() {
-		myAssets = new LoadAssets();
-		myAssets.loadSettingsAssets();
+		Tetris.myAssets = new LoadAssets();
+		Tetris.myAssets.loadSettingsAssets();
 
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
 		//Label - Title
-		titleLabel = myAssets.getTitleLabel();
+		titleLabel = Tetris.myAssets.getTitleLabel();
 		
 		//Image - X
-		x = myAssets.getX();
+		x = Tetris.myAssets.getX();
 		x.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {						
@@ -52,16 +53,16 @@ public class SettScreen implements Screen {
 				
 		
 		//Label - Music
-		musicLabel = myAssets.getMusicLabel();
+		musicLabel = Tetris.myAssets.getMusicLabel();
 		
 		//Image - Music
-		music = myAssets.getImageMusic();
+		music = Tetris.myAssets.getImageMusic();
 		music.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 						
 				Const.soundOn = !Const.soundOn;
-				myAssets.setSoundOn(Const.soundOn);
+				Tetris.myAssets.setSoundOn(Const.soundOn);
 				/*if (Const.soundOn)
 					music.setDrawable(new SpriteDrawable(
 										new Sprite(
@@ -70,7 +71,7 @@ public class SettScreen implements Screen {
 					music.setDrawable(new SpriteDrawable(
 										new Sprite(
 										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));*/
-				myAssets.setSoundOn(Const.soundOn);
+				Tetris.myAssets.setSoundOn(Const.soundOn);
 				
 				st = new Stage(new ScreenViewport());
 				Gdx.input.setInputProcessor(st);
@@ -79,10 +80,10 @@ public class SettScreen implements Screen {
 		});
 		
 		//Label - Theme
-		themeLabel = myAssets.getThemeLabel();
+		themeLabel = Tetris.myAssets.getThemeLabel();
 		
 		//Image - theme
-		theme = myAssets.getImageTheme();
+		theme = Tetris.myAssets.getImageTheme();
 		theme.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -101,7 +102,7 @@ public class SettScreen implements Screen {
 							new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)))));		*/
 				}
 				
-				myAssets.setTheme(Const.THEME);
+				Tetris.myAssets.setTheme(Const.THEME);
 
 				((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
 			}
