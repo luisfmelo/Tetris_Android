@@ -15,12 +15,21 @@ import com.luis.teresa.tetris.helpers.MyGestureListener;
 import com.luis.teresa.tetris.helpers.TetrisRendererIMGS;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 
+/**
+ * This class implements a libGDX Screen that shows up when a game is running
+ * @author Luis
+ * @author Teresa
+ */
 public class GameScreen implements Screen{
 	private TetrisLogic myGame;
 	private TetrisRendererIMGS renderer;
 	private Stage st;
 	private boolean newHighScore=false;
 	
+	/**
+	 * Constructor of the GameScreen
+	 * This method loads the necessary assets and sets the input processor
+	 */
 	public GameScreen() {
 		
 		st = new Stage(new ScreenViewport());
@@ -40,12 +49,15 @@ public class GameScreen implements Screen{
 		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
 	}
 	
+	/**
+	 * Sets a Color to Fill the Screen with (RGB = 10, 15, 230), Opacity of 1 (100%)
+	 */
 	@Override
 	public void show() {
-	    // Sets a Color to Fill the Screen with (RGB = 10, 15, 230), Opacity of 1 (100%)
 	    Gdx.gl.glClearColor(10/255.0f, 215/255.0f, 15/255.0f, 1f);
 	}
 
+	
 	@Override
 	public void render(float delta) {
 	
@@ -55,7 +67,6 @@ public class GameScreen implements Screen{
 	    //update & render if game is not over
     	if( !myGame.isGameOver() )
     	{
-    		System.out.println("Level "+myGame.getLevel());
     		if(TetrisLogic.getClear() >0){
     			Tetris.myMusics.playClear(Integer.toString(TetrisLogic.getClear()));
     			TetrisLogic.setClear(0);
@@ -95,8 +106,6 @@ public class GameScreen implements Screen{
     		Tetris.myMusics.stopTheme();
     		Tetris.myMusics.playGameOver();
     		
-    		
-    		//renderer.renderGameOverScreen(myGame.getScore(), TetrisLogic.isNewHighScore());
     		try {
 				((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(myGame.getScore(), newHighScore));
 			} catch (IOException e) {
@@ -108,6 +117,7 @@ public class GameScreen implements Screen{
 	    
 	}
 
+	
 	@Override
 	public void resize(int width, int height) {
 		

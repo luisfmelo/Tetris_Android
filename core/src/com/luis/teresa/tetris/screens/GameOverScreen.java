@@ -30,6 +30,11 @@ import com.luis.teresa.tetris.helpers.LoadAssets;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that shows up when a game is ended  
+ * @author Luis
+ * @author Teresa
+ */
 public class GameOverScreen implements Screen{
 
 	private Stage st;
@@ -57,6 +62,11 @@ public class GameOverScreen implements Screen{
     
 	private Boolean newHS;   
 	
+	/**
+	 * Constructor
+	 * @param score		       score achieved by the user
+	 * @param newHighScore	   true if the user reached a new highscore
+	 */
 	public GameOverScreen(String score, Boolean newHighScore) throws IOException {
 		
 		this.newHS = newHighScore;
@@ -93,8 +103,6 @@ public class GameOverScreen implements Screen{
 			gameOverLabel.setText("Game Over!");
 		}
 		
-		//title bar
-    	//GOheader = myAssets.getHeader();
 		//home bar
 		home = myAssets.getHome();
 		home.addListener(new ClickListener() {
@@ -130,9 +138,11 @@ public class GameOverScreen implements Screen{
 		
 	}
 	
+	
 	@Override
 	public void show() {
 	}
+	
 	
 	@Override
 	public void render(float delta) {
@@ -163,16 +173,20 @@ public class GameOverScreen implements Screen{
 	public void resume() {
 	}
 	
+	
 	@Override
 	public void hide() {
 	}
+	
 	
 	@Override
 	public void dispose() {
 	}
 	
 	
-	
+	/**
+	 * Creates an animation when a new highScore is reached
+	 */
 	
 	private void createAnimation() {
 		batch = new SpriteBatch();
@@ -186,6 +200,9 @@ public class GameOverScreen implements Screen{
         origin_y = .85f*Gdx.graphics.getHeight();
 	}
 
+	/**
+	 * Render the animation created when a new highScore is reached
+	 */
 	private void renderAnim(){// Elapsed time
         elapsed_time += Gdx.graphics.getDeltaTime();
  

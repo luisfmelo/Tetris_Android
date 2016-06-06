@@ -25,6 +25,11 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that represents the Main Menu of the application  
+ * @author Luis
+ * @author Teresa
+ */
 public class MenuScreen extends ApplicationAdapter implements Screen {
 	
 	private Stage stage;
@@ -33,6 +38,9 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	private TweenManager tweenManager;
 	Stage st = new Stage(new ScreenViewport());
 	
+	/**
+	 * This method loads the necessary resources to show the Menu screen
+	 */
 	@Override
 	public void show() {
 		myAssets = new LoadAssets();
@@ -97,11 +105,19 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
 	}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game
+	 * Releases its resources
+	 */
 	@Override
 	public void hide() {
 		dispose();
 	}
 
+	/**
+	 * This method renders the screen
+	 * @para delta		Time in seconds since the last call of the function
+	 */
 	@Override
 	public void render(float delta) {
 		
@@ -130,6 +146,10 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game
+	 * Releases the stage and skin resources
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();

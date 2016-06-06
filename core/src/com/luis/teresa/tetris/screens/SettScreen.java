@@ -18,6 +18,11 @@ import com.luis.teresa.tetris.helpers.LoadAssets;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that is used as a Settings Screen  
+ * @author Luis
+ * @author Teresa
+ */
 public class SettScreen implements Screen {
 
 	private Stage st;
@@ -31,6 +36,10 @@ public class SettScreen implements Screen {
 	private Image music;
 	private Label themeLabel;
 
+	/**
+	 * Constructor of the SettScreen
+	 * This method loads the necessary assets to the Settings Screen 
+	 */
 	public SettScreen() {
 		myAssets = new LoadAssets();
 		myAssets.loadSettingsAssets();
@@ -116,6 +125,11 @@ public class SettScreen implements Screen {
 	@Override
 	public void show() {
 	}
+	
+	/**
+	 * This method renders the screen and adds some resources to the scene
+	 * @para delta		Time in seconds since the last call of the function
+	 */
 
 	@Override
 	public void render(float delta) {
@@ -151,7 +165,6 @@ public class SettScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//myAssets.dispose();
 	}
 
 }

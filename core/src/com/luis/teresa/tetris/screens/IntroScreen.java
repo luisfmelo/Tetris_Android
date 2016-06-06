@@ -19,6 +19,11 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that shows up in the laucher of the application
+ * @author Luis
+ * @author Teresa
+ */
 public class IntroScreen implements Screen {
 
 	private SpriteBatch batch;
@@ -28,6 +33,9 @@ public class IntroScreen implements Screen {
 	private Stage stage;
 	private LoadMusics myMusics;
 
+	/**
+	 * This method loads the necessary resources to show the intro screen
+	 */
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -63,7 +71,10 @@ public class IntroScreen implements Screen {
 		tweenManager.update(Float.MIN_VALUE); // update once avoid short flash of splash before animation
 	}
 
-
+/**
+ * This method renders the screen
+ * @param delta		time in seconds since the last call of the function
+ */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -93,6 +104,9 @@ public class IntroScreen implements Screen {
 
 	}
 
+	/**
+	 * Called when this screen should the Sprite resource
+	 */
 	@Override
 	public void dispose() {
 		batch.dispose();
