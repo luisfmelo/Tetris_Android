@@ -1,6 +1,7 @@
 package com.luis.teresa.tetris.accessors;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import aurelienribon.tweenengine.TweenAccessor;
 
 /**
@@ -48,5 +49,4 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
 			assert false;
 		}	
 	}
-
 }

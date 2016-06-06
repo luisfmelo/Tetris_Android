@@ -1,8 +1,8 @@
 package com.luis.teresa.tetris.logic;
 
-import com.luis.teresa.tetris.helpers.Const;
 import java.io.IOException;
 
+import com.luis.teresa.tetris.helpers.Const;
 
 /**
  * Class that logically represents a game 
@@ -226,5 +226,4 @@ public class TetrisLogic{
 	public void setShapeInGame(boolean shape){
 		shapeInGame=shape;
 	}
-	
 }
