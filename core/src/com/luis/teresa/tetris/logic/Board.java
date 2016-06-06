@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 
-
+/**
+ * Singleton class which represents the game board. 
+ * Each boar is composed of several blocks and can contain shapes
+ * @author Luis
+ * @author Teresa
+ */
 public class Board {
 	private  static Block[][] board;
 	private static int rows = 25;
@@ -19,7 +24,7 @@ public class Board {
 	 
 	
 	/**
-	 * Singleton
+	 * Singleton 
 	 */
 	private static Board singleton = new Board( );
 		   
@@ -36,9 +41,17 @@ public class Board {
 	 	 return singleton;
 	 }
 	 
+	 /**
+	  * Sets the matrix of Blocks that represent the board
+	  * @param matrix		matrix of blocks
+	 */
 	public void setBoard( Block[][] matrix){
 		 board=matrix;
 	}
+	
+	/**
+	 * Initializes the Board by creating the necessary Blocks 
+	 */
 	public static void initializeBoard(){
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
@@ -52,18 +65,33 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Gets the matrix of blocks of the Board
+	 * @return board		matrix of Blocks
+	 */
 	public Block[][] getBoard() {
 		return board;
 	}
 
+	/**
+	 * Get the number of rows that compose the Board
+	 * @return rows
+	 */
 	public int getRows() {
 		return rows;
 	}
-
+	/**
+	 * Get the number of columns  that compose the Board
+	 * @return cols 	number of columns 
+	 */
 	public int getCols() {
 		return cols;
 	}
 
+	/**
+	 * Inserts a new Shape on the Board
+	 * @param shape		the shape to be inserted
+	 */
 	public void newShape(Shape shape) {
 		tower=false;
 		myShape=new ArrayList<Vector2>(5);
@@ -82,6 +110,12 @@ public class Board {
 		getMyShape().add(new Vector2(0,4)); //simboliza o ponto 0,0 da matriz 4x4 da shape
 	}
 
+	/**
+	 * Creates an array with the desired future coordinates for a shape
+	 * given by a certain command
+	 * @param command		string with the command inputed by the user
+	 * @return true if no error occurs
+	 */
 	public boolean input(String command) {	
 		newCoords = new ArrayList<Vector2>(5);
 		
@@ -114,17 +148,20 @@ public class Board {
 		}
 		if ( getPieceOnGoing().equals("-") )
 			return false;
-		//verificar novas coordenadas
+
 		if ( checkCoords(command) )
 			insert();
-		//else
-			//checkRows();
+		
 		return true;
-		/*}
-		else
-			return false;*/
+		
 	}
 
+	/**
+	 * Checks if the present shape future 
+	 * coordinates of a given command are valid and can be reached
+	 * @param command		string with the command given
+	 * @return	true if the future coordinates can be reache
+	 */
 	private boolean checkCoords(String command) {
 		int livre=1;
 		
@@ -143,7 +180,6 @@ public class Board {
 					newCoords.get(i).x == 23) 
 					)
 				{
-					//encontrou torre... adiciona a torre
 					if(livre==1)
 						return false;
 					tower=true;
@@ -158,6 +194,9 @@ public class Board {
 		return true;
 	}
 
+	/**
+	 * Adds the present shape to a tower of shapes when it can't reach the floor
+	 */
 	private void addToTower() {
 		
 		for (int i = 0; i < 4; i++) 
@@ -166,6 +205,11 @@ public class Board {
 		setPieceOnGoing("-");
 	}
 
+	/**
+	 * Makes a shape movement by changing its coordinates in the board
+	 * @param command	string of the command called to move the shape 
+	 * @return	true if the input is successfully 
+	 */
 	private void insert() {
 
 		//printBoard();
@@ -185,6 +229,9 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Checks if there are rows to deleted or a shape reached the top
+	 */
 	public void checkRows() {
 		boolean clean = true;
 		boolean checkTop = false;
@@ -206,7 +253,7 @@ public class Board {
 				rowsToClean.add(i);
 				}
 			else if ( checkTop && !getPieceOnGoing().equals(":-"))
-				handleGameOver();
+				gameover=true;
 			clean = true;
 		}		
 				//Score & music
@@ -224,6 +271,10 @@ public class Board {
 
 	}
 	
+	/**
+	 * Cleans a row
+	 * @param row	row to delete
+	 */
 	private void cleanRow(int row) {
 		
 		
@@ -251,6 +302,10 @@ public class Board {
 		
 	}*/
 
+	/**
+	 * Rotates the present shape to the right if possible
+	 * @return		true if it is possible to rotate, false if it isn't
+	 */
 	public boolean rotate() {
 		if(tower)
 			return false;
@@ -277,21 +332,41 @@ public class Board {
 		}
 	}
 	
-	public void handleGameOver() {
-		gameover  = true;
-		System.out.println("Game Over");
-	}
+	/**
+	 * check if the game already ended
+	 * @return gameover		true if the game ended, false otherwise
+	 */
 
 	public boolean isGameOver() {
 		return gameover;
 	}
+	
+	/**
+	 * Gets the state of the shape on board
+	 * @return	pieceOnGoin		state of the present shape (if it is going down or entering the board)
+	 */
 	public String getPieceOnGoing() {
 		return pieceOnGoing;
 	}
+	/**
+	 * Handles the gameOver
+	 */
+	public void handleGameOver(){
+		gameover=true;
+	}
+	/**
+	 * Sets the state of the present shape
+	 * @param pieceOnGoing
+	 */
 	public void setPieceOnGoing(String pieceOnGoing) {
 		this.pieceOnGoing = pieceOnGoing;
 	}
-	//For tests
+
+	/**
+	 * Sets the present shape to a given position
+	 * @param x		X coordinate
+	 * @param y		Y coordinate
+	 */
 	public void setShapePos(int x, int y){
 		int cont=0;
 		for (int i = 0; i < 4; i++) 
@@ -308,6 +383,11 @@ public class Board {
 		shape.setX_world(x);
 		shape.setY_world(y);
 	}
+	
+	/**
+	 * Gets the array with the coordinates of the shape blocks
+	 * @return	myShape		coordinates of the shape blocks with filled cells
+	 */
 	public ArrayList<Vector2> getMyShape() {
 		return myShape;
 	}

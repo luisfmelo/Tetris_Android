@@ -17,15 +17,15 @@ public class Block {
 	 * @param shape			Parent Shape 
 	 * @param x_in_shape	X coordinate in parent Shape
 	 * @param y_in_shape	Y coordinate in parent Shape
-	 * @param color			Block Color
+	 * @param c			Block Color
 	 */
-	public Block(Shape shape, int x_in_shape, int y_in_shape , String color){
+	public Block(Shape shape, int x_in_shape, int y_in_shape , String c){
 		this.parent=shape;
-		this.setX_shape(x_in_shape); 
-		this.setY_shape(y_in_shape);
-		this.setY_global(y_in_shape + parent.getY_world()); //verificar
-		this.setX_global(x_in_shape + parent.getX_world());
-		this.setColor(color);
+		x_shape=x_in_shape; 
+		y_shape=y_in_shape;
+		y_global=y_in_shape + parent.getY_world(); 
+		x_global=x_in_shape + parent.getX_world();
+		color=c;
 	}
 	
 	/**
@@ -35,11 +35,11 @@ public class Block {
 	 */
 	public Block(int x_world, int   y_world){
 		this.parent = null;
-		this.setX_shape(-1); 
-		this.setY_shape(-1);
-		this.setY_global(y_world); 
-		this.setX_global(x_world);
-		this.setColor("black");
+		x_shape=-1; 
+		y_shape=-1;
+		y_global=y_world; 
+		x_global=x_world;
+		color="black";
 	}
 
 	/**
