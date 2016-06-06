@@ -1,7 +1,5 @@
 package com.luis.teresa.tetris.screens;
 
-
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.accessors.SpriteAccessor;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -22,39 +19,46 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that shows up in the laucher of the application
+ * @author Luis
+ * @author Teresa
+ */
 public class IntroScreen implements Screen {
 
 	private SpriteBatch batch;
 	private Image introImg;
 	private TweenManager tweenManager;
-	//private LoadAssets myAssets;
+	private LoadAssets myAssets;
 	private Stage stage;
-	//private LoadMusics myMusics;
+	private LoadMusics myMusics;
 
+	/**
+	 * This method loads the necessary resources to show the intro screen
+	 */
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		
-		Tetris.myAssets = new LoadAssets();
-		Tetris.myAssets.loadIntroAssets();
+		myAssets = new LoadAssets();
+		myAssets.loadIntroAssets();
 		
 		batch = new SpriteBatch();
-
-		Tetris.myMusics = new LoadMusics();
-		Tetris.myMusics.playIntro();
+		
+		myMusics = new LoadMusics();
+		myMusics.playIntro();
 			
 		stage = new Stage(new ScreenViewport());
 
-		introImg = Tetris.myAssets.getIntroImg();
-		
+		introImg = myAssets.getIntroImg();
+
 		stage.addActor(introImg);
 		
 		// creating animations
 		tweenManager = new TweenManager();
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
-		
-		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 
+		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 		Tween.to(introImg, SpriteAccessor.ALPHA, 1.5f).target(1).repeatYoyo(1, .5f).setCallback(new TweenCallback() {
 
 			@Override
@@ -66,7 +70,10 @@ public class IntroScreen implements Screen {
 		tweenManager.update(Float.MIN_VALUE); // update once avoid short flash of splash before animation
 	}
 
-
+/**
+ * This method renders the screen
+ * @param delta		time in seconds since the last call of the function
+ */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -78,27 +85,25 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-
 	}
 
 	@Override
 	public void pause() {
-
 	}
 
 	@Override
 	public void resume() {
-
 	}
 
 	@Override
 	public void hide() {
-
 	}
 
+	/**
+	 * Called when this screen should the Sprite resource
+	 */
 	@Override
 	public void dispose() {
 		batch.dispose();
 	}
-
 }

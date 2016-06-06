@@ -4,40 +4,48 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import aurelienribon.tweenengine.TweenAccessor;
 
 /**
- * Esta classe serve para dar efeitos do tipo fade in fade out
- * Ela vai aceder ao alpha (opacidade) da imagem e afins... 
- * Ver a documentação pra perceber melhor
- * @author luism
+ * This class add effects to Sprite by changing the color values (RGB)
+ * @author Luis
+ * @author Teresa
  */
 public class SpriteAccessor implements TweenAccessor<Sprite> {
 
-	public static final int ALPHA = 0; //definido pelo tweenType
+	public static final int ALPHA = 0; //defined by tweenType
 	
+	/**
+	 * Method responsible to get the current value of the <code>tweenType</code>
+	 * @param sprite 		sprite who will suffer the change
+	 * @param tweenType		type of change (RGB parameters)
+	 * @param vals			current values of RGB color
+	 */
 	@Override
-	public int getValues(Sprite target, int tweenType, float[] returnValues) {
+	public int getValues(Sprite sprite, int tweenType, float[] vals) {
 		
 		switch(tweenType){	
 		case ALPHA:
-			returnValues[0] = target.getColor().a;
+			vals[0] = sprite.getColor().a;
 			return 1;
 		default:
-			assert false; //se nos é passado um tweenType que nos nao conhecemos -> dá "erro" 
-			return -1;    //-> este caso nao deve acontecer... mais vale prevenir do que remediar
+			assert false; // if we do not know the tweenType -> error 
 		}	
-		
-		//o retorno vai ser o numero de valores que eu vou por no returnValues
+		return -1;    // this case should not happen ... better safe than sorry
 	}
 
+	/**
+	 * Method responsible to set the new value for the <code>tweenType</code> specified
+	 * @param sprite 		sprite who will suffer the change
+	 * @param tweenType		type of change (RGB parameters)
+	 * @param vals			new values for RGB color
+	 */
 	@Override
-	public void setValues(Sprite target, int tweenType, float[] newValues) {
+	public void setValues(Sprite sprite, int tweenType, float[] vals) {
 		
 		switch(tweenType){	
 		case ALPHA:
-			target.setColor(target.getColor().r, target.getColor().g, target.getColor().b, newValues[0]); //por causa do returnValues[0]
+			sprite.setColor(sprite.getColor().r, sprite.getColor().g, sprite.getColor().b, vals[0]); //por causa do vals[0]
 			break;
 		default:
-			assert false; //se nos é passado um tweenType que nos nao conhecemos -> dá "erro" 
-			              //-> este caso nao deve acontecer... mais vale prevenir do que remediar
+			assert false;
 		}	
 	}
 

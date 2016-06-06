@@ -5,9 +5,13 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 
-
+/**
+ * This class is a piece. 
+ * One piece consists of 4 blocks and has a color and a shape
+ * @author Luis
+ * @author Teresa
+ */
 public class Shape {
-
 	 public enum Type { 
 		 NoShape (new char [][] {
 			 {' ' ,' ' ,' ' ,' '},
@@ -60,24 +64,41 @@ public class Shape {
 		 private char[][] pattern;
 		 private String color;
          
+		 /**
+		  * Constructor of a Type
+		  * @param m	pattern of that type
+		  * @param c	color of that type
+		  */
 		 private Type(char [][] m, String c){
         	 this.pattern = m;
-        	 this.color =c;
+        	 this.color = c;
 		 }
          
+		 /**
+		  * Get the letter which represents the type
+		  * @return		String of the letter
+		  */
 		 public String getLetter(){
         	 return this.name();
          }
          
+		 /**
+		  * Get the color of that type
+		  * @return		String of the color e question
+		  */
 		 public String getColor(){
         	 return this.color;
          }
          
+		 /**
+		  * Get the pattern of that type
+		  * @return		2D array of char for the pattern
+		  */
 		 public char[][] getPattern(){
         	 return this.pattern;
          }
          
-	 	};
+	 };
          
      private Type pieceShape = Type.NoShape;
      private int size=4;
@@ -89,46 +110,66 @@ public class Shape {
      */
      public Shape() {
          setRandomShape();
-         setX_world(0);
-         setY_world(4);
-         setNew_x(0);
-         setNew_y(4);
+         x_world=0;
+         y_world=4;
+         new_x=0;
+         new_y=4;
      }
      
      /**
      	* Constructor for specified Shape
-     	* @param s
+     	* @param t		Type of the desired shape
       */
      public Shape(Type t) {
          setPieceShape(t);
-	     setX_world(0);
-	     setY_world(4);
-	     setNew_x(0);
-	     setNew_y(4);
+         x_world=0;
+         y_world=4;
+         new_x=0;
+         new_y=4;
      }
+     
+     /**
+      * Update position of the shape
+      */
 	public void update_pos(){
-		setX_world(getNew_x());
-		setY_world(getNew_y());
+		x_world=new_x;
+		y_world=new_y;
 		
 	}
    
+	/**
+	 * Gets the matrix of blocks of the shape
+	 * @return	matrix_block	Array of Blocks
+	 */
 	public Block[][] getMatrix_Block() {
 		return matrix_block;
 	}
 
+	/**
+	 * Sets the matrix of blocks of the shape
+	 * @param	matrix	Array of Blocks to be setted
+	 */
 	public void setMatrix_Block(Block[][] matrix) {
 		this.matrix_block = matrix;
 	}
 
+	/**
+	 * Gets the type of the shape
+	 * @return pieceShape
+	 */
 	public Type getPieceShape() {
 		return pieceShape;
 	}
 	
+	/**
+	 * Sets the shape Type
+	 * @param pieceShape
+	 */
 	public void setPieceShape(Type pieceShape) {
 		this.pieceShape = pieceShape; 
 		char [][] pattern = pieceShape.pattern;
 		//setMatrix(pattern);
-		matrix_block = new Block [size][size]; //ou array list?
+		matrix_block = new Block [size][size]; 
 		for (int i = 0; i <pattern.length; i++) {
             for (int j = 0; j < pattern.length; j++) {
                 if(pattern[i][j]=='1')
@@ -139,16 +180,20 @@ public class Shape {
         }
 	}
     
+	/**
+	 * Sets a random Type to the shape
+	 */
 	public void setRandomShape() {
 		Random r = new Random();
         Type[] values = Type.values(); 
-       
-        //+1 para nao contar com o NoShape
-        int index = Math.abs(r.nextInt()) %  (values.length-1) + 1;
+        int index = Math.abs(r.nextInt()) %  (values.length - 1) + 1;
         
         setPieceShape(values[index]);		
 	}
 	
+	/**
+	 * Swaps the rows of the shape's matrix 
+	 */
 	public  void swapRows() {
 		Block[] x;
 		
@@ -161,10 +206,11 @@ public class Shape {
 	        matrix_block[k] = x;
 	    }
 		update_block_pos();
-		
-		
 	}
 	
+	/**
+	 * Transpose the shape's matrix
+	 */
 	private void transpose() {
 		Block x;
 		
@@ -181,6 +227,9 @@ public class Shape {
 		update_block_pos();
     }
 	
+	/**
+	 * Performs a shape rotation to the left
+	 */
 	public void rotateLeft() 
     {
         if (this.pieceShape == Type.O)
@@ -189,6 +238,9 @@ public class Shape {
         swapRows();
     }
 
+	/**
+	 * Performs a shape rotation to the right
+	 */
     public void rotateRight()
     {
     	if (this.pieceShape == Type.O)
@@ -196,13 +248,23 @@ public class Shape {
     	
           swapRows();
     	  transpose();
-
     }
     
+    /**
+     * Gets the Block in the given coordinates
+     * @param i		x Coordinate	
+     * @param j		y Coordinate
+     * @return	matrix_block[i][j]
+     */
 	public Block getBlock(int i, int j) {
 		return matrix_block[i][j];
 	}
 
+	/**
+	 * Performs a rotation to the right changing the filled blocks position
+	 * @param v		vector with the current coordinates of the blocks
+	 * @return		new vector with new coordinates after rotation
+	 */
 	public ArrayList<Vector2> rotate(ArrayList<Vector2> v) {
 		ArrayList<Vector2> myVec = new ArrayList<Vector2>(5);
 
@@ -219,15 +281,10 @@ public class Shape {
 		
 		return myVec;
 	}
-
-
-	
-    public void destroy(){
-    	for (int i=0; i<size;i++)
-    		for(int j=0; j<size;j++)
-    			matrix_block[i][j].reachedFloor();
-    }
-    
+   
+	/**
+	 * Updates the position of the blocks of the matrix
+	 */
     public void update_block_pos(){
     	for (int i=0; i< size; i++)
     		for(int j=0; j<size;j++){
@@ -238,44 +295,66 @@ public class Shape {
     		}
     }
 
-	
+	/**
+	 * Sets the future position of the shape
+	 * @param x		x coordinate
+	 * @param y		y coordinate
+	 */
 	public void set_newPos(int x,int y){
-		setNew_x(x);
-		setNew_y(y);
+		new_x=x;
+		new_y=y;
 	}
 
+	/**
+	 * Gets future Y coordinate 
+	 * @return new_y
+	 */
 	public int getNew_y() {
 		return new_y;
 	}
-
-	public void setNew_y(int new_y) {
-		this.new_y = new_y;
-	}
-
+ /**
+  * gets the future X coordinate
+  * @return new_x
+  */
 	public int getNew_x() {
 		return new_x;
 	}
-
-	public void setNew_x(int new_x) {
-		this.new_x = new_x;
-	}
-
+/**
+ * Gets the y coordinate of the shape on the board reference
+ * @return y_world
+ */
 	public int getY_world() {
 		return y_world;
 	}
 
+	/**
+	 * Sets the y coordinate of the shape on the board reference
+	 * @param y_world
+	 */
 	public void setY_world(int y_world) {
 		this.y_world = y_world;
 	}
 
+	/**
+	 * Gets the x coordinate of the shape on the board reference
+	 * @return x_world
+	 */
 	public int getX_world() {
 		return x_world;
 	}
 
+	/**
+	 * Sets the x coordinate of the shape on the board reference
+	 * @param x_world
+	 */
 	public void setX_world(int x_world) {
 		this.x_world = x_world;
 	}
     
+	/**
+	 * Gets the character matrix of the shape
+	 * @return	matrix of chars
+	 */
 	public char [][] getShapeMatrix(){
     	char matrix[][]= new char[size][size];
     	
@@ -288,5 +367,4 @@ public class Shape {
     	}
     	return matrix;
     }
-    
 }

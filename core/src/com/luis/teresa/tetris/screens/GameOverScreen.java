@@ -23,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -31,10 +30,15 @@ import com.luis.teresa.tetris.helpers.LoadAssets;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that shows up when a game is ended  
+ * @author Luis
+ * @author Teresa
+ */
 public class GameOverScreen implements Screen{
 
 	private Stage st;
-	//private LoadAssets myAssets;
+	private LoadAssets myAssets;
 	private TweenManager tweenManager;
 
 	private Image home;
@@ -45,9 +49,8 @@ public class GameOverScreen implements Screen{
 	
 	//ANIMATION
 
-	   // Time while each frame keeps on screen
+	// Time while each frame of the animation is kept on the screen
     private static float FRAME_DURATION = .1f;
- 
     private SpriteBatch batch;
     private TextureAtlas charset;
     private TextureRegion currentFrame;
@@ -58,13 +61,18 @@ public class GameOverScreen implements Screen{
     
 	private Boolean newHS;   
 	
+	/**
+	 * Constructor
+	 * @param score		       score achieved by the user
+	 * @param newHighScore	   true if the user reached a new highscore
+	 */
 	public GameOverScreen(String score, Boolean newHighScore) throws IOException {
 		
 		this.newHS = newHighScore;
-		Tetris.myAssets = new LoadAssets();
-		Tetris.myAssets.loadGameOverAssets();
+		myAssets = new LoadAssets();
+		myAssets.loadGameOverAssets();
 		
-		if (Tetris.myAssets.getTheme().equals("dracula.")){
+		if (myAssets.getTheme().equals("dracula.")){
 
 			Const.setBG_COLOR(0f,0f,0f,1f);
 			Const.setTETRIS_COLOR(1f,1f,1f,1f);
@@ -77,27 +85,24 @@ public class GameOverScreen implements Screen{
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
-		secundaryLabel = Tetris.myAssets.getSecundaryLabel();
-		gameOverLabel = Tetris.myAssets.getGameOverLabel();
+		secundaryLabel = myAssets.getSecundaryLabel();
+		gameOverLabel = myAssets.getGameOverLabel();
 		
 		if(newHS)//NEW HIGH SCORE
 		{
 			createAnimation();
-			secundaryLabel.setText("" + Integer.toString(Tetris.myAssets.getScores()));
+			secundaryLabel.setText("" + Integer.toString(myAssets.getScores()));
 			gameOverLabel.setText("");
 			st.addActor(secundaryLabel);		
 		}
 		else //Game Over
 		{
-			//Game Over
 			secundaryLabel.setText("Try Again!");
 			gameOverLabel.setText("Game Over!");
 		}
 		
-		//title bar
-    	//GOheader = myAssets.getHeader();
 		//home bar
-		home = Tetris.myAssets.getHome();
+		home = myAssets.getHome();
 		home.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {					
@@ -105,7 +110,7 @@ public class GameOverScreen implements Screen{
 			}
 		});
 		//replay bar
-		replay = Tetris.myAssets.getReplay();
+		replay = myAssets.getReplay();
 		replay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {	
@@ -127,14 +132,18 @@ public class GameOverScreen implements Screen{
 		// creating animations
 		tweenManager = new TweenManager();
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
-	
-		
 	}
+	
 	
 	@Override
 	public void show() {
 	}
 	
+
+	/**
+	 * This method renders the screen and adds some resources to the scene
+	 * @para delta		Time in seconds since the last call of the function
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
@@ -164,16 +173,20 @@ public class GameOverScreen implements Screen{
 	public void resume() {
 	}
 	
+	
 	@Override
 	public void hide() {
 	}
+	
 	
 	@Override
 	public void dispose() {
 	}
 	
 	
-	
+	/**
+	 * Creates an animation when a new highScore is reached
+	 */
 	
 	private void createAnimation() {
 		batch = new SpriteBatch();
@@ -187,6 +200,9 @@ public class GameOverScreen implements Screen{
         origin_y = .85f*Gdx.graphics.getHeight();
 	}
 
+	/**
+	 * Render the animation created when a new highScore is reached
+	 */
 	private void renderAnim(){// Elapsed time
         elapsed_time += Gdx.graphics.getDeltaTime();
  

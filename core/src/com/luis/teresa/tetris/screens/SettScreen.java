@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.accessors.ActorAccessor;
 import com.luis.teresa.tetris.helpers.Const;
 import com.luis.teresa.tetris.helpers.LoadAssets;
@@ -19,10 +18,15 @@ import com.luis.teresa.tetris.helpers.LoadAssets;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
+/**
+ * This class implements a libGDX Screen that is used as a Settings Screen  
+ * @author Luis
+ * @author Teresa
+ */
 public class SettScreen implements Screen {
 
 	private Stage st;
-	//private LoadAssets myAssets;
+	private LoadAssets myAssets;
 	private TweenManager tweenManager;
 	
 	private Label titleLabel;
@@ -32,18 +36,22 @@ public class SettScreen implements Screen {
 	private Image music;
 	private Label themeLabel;
 
+	/**
+	 * Constructor of the SettScreen
+	 * This method loads the necessary assets to the Settings Screen 
+	 */
 	public SettScreen() {
-		Tetris.myAssets = new LoadAssets();
-		Tetris.myAssets.loadSettingsAssets();
+		myAssets = new LoadAssets();
+		myAssets.loadSettingsAssets();
 
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
 		//Label - Title
-		titleLabel = Tetris.myAssets.getTitleLabel();
+		titleLabel = myAssets.getTitleLabel();
 		
 		//Image - X
-		x = Tetris.myAssets.getX();
+		x = myAssets.getX();
 		x.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {						
@@ -53,25 +61,15 @@ public class SettScreen implements Screen {
 				
 		
 		//Label - Music
-		musicLabel = Tetris.myAssets.getMusicLabel();
+		musicLabel = myAssets.getMusicLabel();
 		
 		//Image - Music
-		music = Tetris.myAssets.getImageMusic();
+		music = myAssets.getImageMusic();
 		music.addListener(new ClickListener() {
 			@Override
-			public void clicked(InputEvent event, float x, float y) {
-						
+			public void clicked(InputEvent event, float x, float y) {		
 				Const.soundOn = !Const.soundOn;
-				Tetris.myAssets.setSoundOn(Const.soundOn);
-				/*if (Const.soundOn)
-					music.setDrawable(new SpriteDrawable(
-										new Sprite(
-										new Texture(Gdx.files.internal(Const.THEME + Const.SOUND_PATH)))));
-				else
-					music.setDrawable(new SpriteDrawable(
-										new Sprite(
-										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));*/
-				Tetris.myAssets.setSoundOn(Const.soundOn);
+				myAssets.setSoundOn(Const.soundOn);
 				
 				st = new Stage(new ScreenViewport());
 				Gdx.input.setInputProcessor(st);
@@ -80,30 +78,19 @@ public class SettScreen implements Screen {
 		});
 		
 		//Label - Theme
-		themeLabel = Tetris.myAssets.getThemeLabel();
+		themeLabel = myAssets.getThemeLabel();
 		
 		//Image - theme
-		theme = Tetris.myAssets.getImageTheme();
+		theme = myAssets.getImageTheme();
 		theme.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				if ( Const.THEME.equals("dracula.") )
-				{
 					Const.THEME =  "solar.";
-					/*theme.setDrawable(new SpriteDrawable(
-							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)))));		*/							
-				}
 				else if ( Const.THEME.equals("solar.") )
-				{
 					Const.THEME =  "dracula.";
-					/*theme.setDrawable(new SpriteDrawable(
-							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)))));		*/
-				}
 				
-				Tetris.myAssets.setTheme(Const.THEME);
-
+				myAssets.setTheme(Const.THEME);
 				((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
 			}
 		});
@@ -117,7 +104,11 @@ public class SettScreen implements Screen {
 	@Override
 	public void show() {
 	}
-
+	
+	/**
+	 * This method renders the screen and adds some resources to the scene
+	 * @para delta		Time in seconds since the last call of the function
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
@@ -152,7 +143,6 @@ public class SettScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//myAssets.dispose();
 	}
 
 }

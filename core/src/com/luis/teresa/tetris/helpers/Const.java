@@ -1,13 +1,15 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.luis.teresa.tetris.Tetris;
 
+/**
+ * This class is responsible to store all the Constants presented in the game.
+ * @author Luis
+ * @author Teresa
+ */
 public class Const {
-	/**
-	 * TEMPO DE CICLO DO TETRIS 1s
-	 */
-	public static double CYCLE_TIME = 0.18 ;
+	// TEMPO DE CICLO DO TETRIS 0.5s
+	public static double CYCLE_TIME = 0.5 ;
 	public static int ROWS_TO_LEVEL_UP = 16;
 	public final static String TITLE = "TETRIS";
 
@@ -78,11 +80,17 @@ public class Const {
 	public static final String ORANGE_BLOCK = "blocks/laranja.png";
 
 	
-	public static void addLevel( int level){
-		CYCLE_TIME = 0.9 * CYCLE_TIME;
+	public static void addLevel(){
+		CYCLE_TIME = 0.95 * CYCLE_TIME;
 	}
 
-
+	/**
+	 * Set Background color
+	 * @param r		Red component of Background color
+	 * @param g		Green component of Background color
+	 * @param b		Blue component of Background color
+	 * @param a		Opacity of Background color
+	 */
 	public static void setBG_COLOR(float r, float g, float b, float a) {
 		BACKGROUND_COLOR = new float[4];
 		BACKGROUND_COLOR[0] = r;
@@ -91,6 +99,13 @@ public class Const {
 		BACKGROUND_COLOR[3] = a;
 	}
 
+	/**
+	 * Set Tetris color
+	 * @param r		Red component of Tetris color
+	 * @param g		Green component of Tetris color
+	 * @param b		Blue component of Tetris color
+	 * @param a		Opacity of Tetris color
+	 */
 	public static void setTETRIS_COLOR(float r, float g, float b, float a) {
 		TETRIS_COLOR = new float[4];
 		TETRIS_COLOR[0] = r;
@@ -99,7 +114,11 @@ public class Const {
 		TETRIS_COLOR[3] = a;
 	}
 
-
+	/**
+	 * Transform color in RGB format to String format
+	 * @param rgb		rgb values stored in array of floats
+	 * @return 			string of the correspondent value
+	 */
 	public static String transform(float[] rgb) {
 		
 		if (rgb[0] == 255f/255 && rgb[1] == 255f/255 && rgb[2] == 255f/255)
@@ -124,6 +143,11 @@ public class Const {
 
 	}
 	
+	/**
+	 * Transform color in string format to RGB format
+	 * @param rgb		name of the color in string format
+	 * @return 			rgb values of the correspondent color stored in array of floats
+	 */
 	public static float[] getRGB(String color) {
 		float [] rgb = new float[3];
 		
