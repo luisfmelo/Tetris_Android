@@ -131,7 +131,7 @@ public class TetrisRendererIMGS {
 		int y0 = (int) (0.85*h);
 		float[] temp;
 		
-		temp =getColor(s.getBlock(i, j));
+		temp = getColor(s.getBlock(i, j));
 		
 		img = myAssets.loadOneBlock(Const.transform(temp));
 		img.setSize(tam_x, tam_y);
