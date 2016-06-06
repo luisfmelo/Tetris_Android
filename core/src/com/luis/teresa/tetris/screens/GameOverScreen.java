@@ -49,9 +49,8 @@ public class GameOverScreen implements Screen{
 	
 	//ANIMATION
 
-	   // Time while each frame keeps on screen
+	// Time while each frame of the animation is kept on the screen
     private static float FRAME_DURATION = .1f;
- 
     private SpriteBatch batch;
     private TextureAtlas charset;
     private TextureRegion currentFrame;
@@ -98,7 +97,6 @@ public class GameOverScreen implements Screen{
 		}
 		else //Game Over
 		{
-			//Game Over
 			secundaryLabel.setText("Try Again!");
 			gameOverLabel.setText("Game Over!");
 		}
@@ -134,8 +132,6 @@ public class GameOverScreen implements Screen{
 		// creating animations
 		tweenManager = new TweenManager();
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
-	
-		
 	}
 	
 	
@@ -143,7 +139,11 @@ public class GameOverScreen implements Screen{
 	public void show() {
 	}
 	
-	
+
+	/**
+	 * This method renders the screen and adds some resources to the scene
+	 * @para delta		Time in seconds since the last call of the function
+	 */
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 

@@ -5,9 +5,13 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 
-
+/**
+ * This class is a piece. 
+ * One piece consists of 4 blocks and has a color and a shape
+ * @author Luis
+ * @author Teresa
+ */
 public class Shape {
-
 	 public enum Type { 
 		 NoShape (new char [][] {
 			 {' ' ,' ' ,' ' ,' '},
@@ -60,24 +64,41 @@ public class Shape {
 		 private char[][] pattern;
 		 private String color;
          
+		 /**
+		  * Constructor of a Type
+		  * @param m	pattern of that type
+		  * @param c	color of that type
+		  */
 		 private Type(char [][] m, String c){
         	 this.pattern = m;
-        	 this.color =c;
+        	 this.color = c;
 		 }
          
+		 /**
+		  * Get the letter which represents the type
+		  * @return		String of the letter
+		  */
 		 public String getLetter(){
         	 return this.name();
          }
          
+		 /**
+		  * Get the color of that type
+		  * @return		String of the color e question
+		  */
 		 public String getColor(){
         	 return this.color;
          }
          
+		 /**
+		  * Get the pattern of that type
+		  * @return		2D array of char for the pattern
+		  */
 		 public char[][] getPattern(){
         	 return this.pattern;
          }
          
-	 	};
+	 };
          
      private Type pieceShape = Type.NoShape;
      private int size=4;
@@ -148,7 +169,7 @@ public class Shape {
 		this.pieceShape = pieceShape; 
 		char [][] pattern = pieceShape.pattern;
 		//setMatrix(pattern);
-		matrix_block = new Block [size][size]; //ou array list?
+		matrix_block = new Block [size][size]; 
 		for (int i = 0; i <pattern.length; i++) {
             for (int j = 0; j < pattern.length; j++) {
                 if(pattern[i][j]=='1')
@@ -165,9 +186,7 @@ public class Shape {
 	public void setRandomShape() {
 		Random r = new Random();
         Type[] values = Type.values(); 
-       
-        //+1 para nao contar com o NoShape
-        int index = Math.abs(r.nextInt()) %  (values.length-1) + 1;
+        int index = Math.abs(r.nextInt()) %  (values.length - 1) + 1;
         
         setPieceShape(values[index]);		
 	}
@@ -187,8 +206,6 @@ public class Shape {
 	        matrix_block[k] = x;
 	    }
 		update_block_pos();
-		
-		
 	}
 	
 	/**
@@ -231,7 +248,6 @@ public class Shape {
     	
           swapRows();
     	  transpose();
-
     }
     
     /**
@@ -351,5 +367,4 @@ public class Shape {
     	}
     	return matrix;
     }
-    
 }

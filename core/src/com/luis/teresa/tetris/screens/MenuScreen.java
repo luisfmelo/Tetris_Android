@@ -51,7 +51,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		}
 		
 		if (myAssets.getTheme().equals("dracula.")){
-
 			Const.setBG_COLOR(0f,0f,0f,1f);
 			Const.setTETRIS_COLOR(1f,1f,1f,1f);
 		}
@@ -81,7 +80,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 						.end().start(tweenManager);
 			}
 		});
-		//Image leadBtn = myAssets.getLeaderBtn();
 		//add listener 
 		Image settBtn = myAssets.getSettBtn();
 		settBtn.addListener(new ClickListener() {
@@ -96,7 +94,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		stage.addActor(trophey);
 		stage.addActor(highScore);
 		stage.addActor(playBtn);
-		//stage.addActor(leadBtn);
 		stage.addActor(settBtn);
 		stage.addActor(footer);
 		
@@ -120,7 +117,6 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 	 */
 	@Override
 	public void render(float delta) {
-		
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 
 							Const.BACKGROUND_COLOR[1], 
 							Const.BACKGROUND_COLOR[2], 
@@ -138,12 +134,10 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	@Override
 	public void resume() {
-
 	}
 
 	@Override
 	public void pause() {
-
 	}
 
 	/**
@@ -155,5 +149,4 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 		stage.dispose();
 		skin.dispose();
 	}
-
 }

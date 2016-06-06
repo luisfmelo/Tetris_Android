@@ -150,14 +150,12 @@ public class TestShapes {
 		v.add(new Vector2(8,8));
 		v.add(new Vector2(4,4)); // point of sync
 		
-
 		ArrayList<Vector2> rotated_v = new ArrayList<>();
 		rotated_v.add(new Vector2(4,5));
 		rotated_v.add(new Vector2(5,5));
 		rotated_v.add(new Vector2(5,6));
 		rotated_v.add(new Vector2(6,6));
 		rotated_v.add(new Vector2(4,4)); // point of sync
-		
 		
 		assertEquals(s.rotate(v), rotated_v);
 	}

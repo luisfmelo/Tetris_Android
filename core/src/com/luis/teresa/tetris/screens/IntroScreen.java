@@ -51,15 +51,14 @@ public class IntroScreen implements Screen {
 		stage = new Stage(new ScreenViewport());
 
 		introImg = myAssets.getIntroImg();
-		
+
 		stage.addActor(introImg);
 		
 		// creating animations
 		tweenManager = new TweenManager();
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
-		
-		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 
+		Tween.set(introImg, SpriteAccessor.ALPHA).target(0).start(tweenManager);
 		Tween.to(introImg, SpriteAccessor.ALPHA, 1.5f).target(1).repeatYoyo(1, .5f).setCallback(new TweenCallback() {
 
 			@Override
@@ -86,22 +85,18 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-
 	}
 
 	@Override
 	public void pause() {
-
 	}
 
 	@Override
 	public void resume() {
-
 	}
 
 	@Override
 	public void hide() {
-
 	}
 
 	/**
@@ -111,5 +106,4 @@ public class IntroScreen implements Screen {
 	public void dispose() {
 		batch.dispose();
 	}
-
 }

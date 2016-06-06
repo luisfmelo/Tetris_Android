@@ -67,18 +67,8 @@ public class SettScreen implements Screen {
 		music = myAssets.getImageMusic();
 		music.addListener(new ClickListener() {
 			@Override
-			public void clicked(InputEvent event, float x, float y) {
-						
+			public void clicked(InputEvent event, float x, float y) {		
 				Const.soundOn = !Const.soundOn;
-				myAssets.setSoundOn(Const.soundOn);
-				/*if (Const.soundOn)
-					music.setDrawable(new SpriteDrawable(
-										new Sprite(
-										new Texture(Gdx.files.internal(Const.THEME + Const.SOUND_PATH)))));
-				else
-					music.setDrawable(new SpriteDrawable(
-										new Sprite(
-										new Texture(Gdx.files.internal(Const.THEME + Const.MUTE_PATH)))));*/
 				myAssets.setSoundOn(Const.soundOn);
 				
 				st = new Stage(new ScreenViewport());
@@ -96,22 +86,11 @@ public class SettScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				if ( Const.THEME.equals("dracula.") )
-				{
 					Const.THEME =  "solar.";
-					/*theme.setDrawable(new SpriteDrawable(
-							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.SOLAR_PATH)))));		*/							
-				}
 				else if ( Const.THEME.equals("solar.") )
-				{
 					Const.THEME =  "dracula.";
-					/*theme.setDrawable(new SpriteDrawable(
-							new Sprite(
-							new Texture(Gdx.files.internal(Const.THEME + Const.DRACULA_PATH)))));		*/
-				}
 				
 				myAssets.setTheme(Const.THEME);
-
 				((Game) Gdx.app.getApplicationListener()).setScreen(new SettScreen());
 			}
 		});
@@ -130,7 +109,6 @@ public class SettScreen implements Screen {
 	 * This method renders the screen and adds some resources to the scene
 	 * @para delta		Time in seconds since the last call of the function
 	 */
-
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(Const.BACKGROUND_COLOR[0], 

@@ -14,16 +14,12 @@ import com.luis.teresa.tetris.logic.TetrisLogic;
  * @author Luis
  * @author Teresa
  */
-
 public class TestTetrisLogic {
-	
-	
 	/**
 	 * Tests if level is updated when scores reaches the desired rows to level Up
 	 */
 	@Test
-	public void levelUp() {
-		
+	public void testLevelUp() {
 		TetrisLogic game=new TetrisLogic();
 		TetrisLogic.setROWS_TOLEVELUP(16);
 		TetrisLogic.addScore("4");
@@ -35,15 +31,12 @@ public class TestTetrisLogic {
 	 * Tests if the future shape implementation is correct
 	 */
 	@Test
-	public void futureShape_Ok() throws IOException{
-		TetrisLogic g=new TetrisLogic();
+	public void testFutureShape_Ok() throws IOException{
+		TetrisLogic g = new TetrisLogic();
 		g.newCycle();
-		Shape s=g.getFutureShape();
+		Shape s = g.getFutureShape();
 		g.setShapeInGame(false);
 		g.newCycle();
 		assertEquals(s.getPieceShape(),g.getShape().getPieceShape());
-		
 	}
-	
-
 }

@@ -35,22 +35,23 @@ public class GameScreen implements Screen{
 		st = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(st);
 		
-		myGame = new TetrisLogic(); //inicia novo jogo
+		myGame = new TetrisLogic(); // start a new game
 		TetrisLogic.setROWS_TOLEVELUP(Const.ROWS_TO_LEVEL_UP);
 		
 		Tetris.myMusics.playTheme();
 		Tetris.myAssets.loadGameAssets(myGame);
-		//Desktop
-				//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
-		//Android
+	// Commands for Desktop
+		//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
+	// Commands for Android
 		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
-
-		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); //inicia renderer para imprimir
-		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
+		
+		// start to print on the screen
+		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); 
 	}
 	
 	/**
-	 * Sets a Color to Fill the Screen with (RGB = 10, 15, 230), Opacity of 1 (100%)
+	 * Sets a Color to Fill the Screen with (RGB = 10, 15, 230), 
+	 * Opacity of 1 (100%)
 	 */
 	@Override
 	public void show() {
@@ -81,10 +82,8 @@ public class GameScreen implements Screen{
     		try {
 				myGame.update(delta);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	//render
 	    	renderer.render();	
     	}
     	//if game is over, render GameOver Screen
@@ -95,14 +94,13 @@ public class GameScreen implements Screen{
 				if(myGame.get_intScore() > Tetris.myAssets.getScores()){
 					newHighScore = true;
 					
-					Tetris.myAssets.setScores(myGame.get_intScore());
-					
+					Tetris.myAssets.setScores(myGame.get_intScore());		
 					Tetris.myMusics.playFantastic();
 				}
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+    		
     		Tetris.myMusics.stopTheme();
     		Tetris.myMusics.playGameOver();
     		
@@ -113,8 +111,6 @@ public class GameScreen implements Screen{
 			}
     	}
     	st.draw();
-
-	    
 	}
 
 	
@@ -140,6 +136,5 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		
 	}
 }
