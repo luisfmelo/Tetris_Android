@@ -3,11 +3,9 @@ package com.luis.teresa.tetris.logic;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
-import com.luis.teresa.tetris.helpers.LoadMusics;
 
 
 public class Board {
-	//private char[][] board_char;
 	private  static Block[][] board;
 	private static int rows = 25;
 	private static int cols = 12;
@@ -109,7 +107,7 @@ public class Board {
 			shape.set_newPos(shape.getX_world(),shape.getY_world()+1);
 
 			break;
-		case "p": 
+		default: 
 			 for (int i = 0; i < getMyShape().size(); i++)
 				newCoords.add( new Vector2(getMyShape().get(i).x, getMyShape().get(i).y));
 			 break;

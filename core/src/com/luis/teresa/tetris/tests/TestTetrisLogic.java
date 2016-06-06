@@ -1,12 +1,11 @@
 package com.luis.teresa.tetris.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
 import org.junit.Test;
 
-import com.luis.teresa.tetris.logic.Board;
 import com.luis.teresa.tetris.logic.Shape;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 

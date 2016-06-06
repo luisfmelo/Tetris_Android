@@ -219,15 +219,7 @@ public class Shape {
 		
 		return myVec;
 	}
-
-
-	
-    public void destroy(){
-    	for (int i=0; i<size;i++)
-    		for(int j=0; j<size;j++)
-    			matrix_block[i][j].reachedFloor();
-    }
-    
+   
     public void update_block_pos(){
     	for (int i=0; i< size; i++)
     		for(int j=0; j<size;j++){

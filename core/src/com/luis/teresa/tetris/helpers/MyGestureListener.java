@@ -1,12 +1,17 @@
 package com.luis.teresa.tetris.helpers;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.luis.teresa.tetris.logic.Board;
 
+/**
+ * This class is responsible to answer to input events.
+ * For Android version.
+ * @author Luis
+ * @author Teresa
+ */
 public class MyGestureListener implements ApplicationListener, GestureListener, InputProcessor {
 	private Board board;
 
@@ -14,28 +19,19 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 		this.board = board;
 	}
 	
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-			
-		return false;
-	}
-	
+	/**
+	 * When the user swipe, it will move the Shape.
+	 * @param velocityX 	velocity on X Axis in seconds
+	 * @param velocityY 	velocity on Y Axis in seconds
+	 */
     @Override
-    public boolean fling(float velocityX, float velocityY, int button) {
-    	System.out.println("fling");
-    	
-    	Gdx.app.log("Vx = ", Double.toString(velocityX));
-    	Gdx.app.log("Vy = ", Double.toString(velocityY));
-    	
+    public boolean fling(float velocityX, float velocityY, int button) {   	
     	int x = Math.abs((int)velocityX);
     	int y = Math.abs((int)velocityY);
 
     	x = (x / 600) + 1;
     	y = (y / 1000) + 1;
-    	
-    	System.out.println(x);
-    	
+    	    	
     	if (Math.abs(velocityX) > Math.abs(velocityY))
 	    	for (int i = 0; i < Math.abs(x); i++) {
 	            if( velocityX > 0 )
@@ -45,43 +41,39 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 	    	}	
     	else
 	    	for (int i = 0; i < Math.abs(y); i++)  {
-	            //if( velocityY < 0 )
-	            	//board.rotate();
-	            //else
-	            	board.input("s");
+            	board.input("s");
 	    	}	
 
         return true;
     }
 	
-    @Override
-    public boolean touchDown(float x, float y, int pointer, int button) {
-
-        return false;
-    }
-
+    /**
+     * When the screen is tapped, rotate the shape.
+     */
     @Override
     public boolean tap(float x, float y, int count, int button) {
-    	
-    	if(count>1){
-    		while(board.input("s"));
-    	}
-    	else if(count==1)
-    		board.rotate();
-    	else
-    		return false;
+   		board.rotate();
     				
     	return true;
-    	
+    }
+    
+    
+    
+	
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+	
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        return false;
     }
 
     @Override
     public boolean longPress(float x, float y) {
-
         return false;
     }
-
-
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {	
@@ -90,98 +82,75 @@ public class MyGestureListener implements ApplicationListener, GestureListener, 
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-
         return false;
     }
 
     @Override
     public boolean zoom (float originalDistance, float currentDistance){
-
        return false;
     }
 
     @Override
     public boolean pinch (Vector2 initialFirstPointer, Vector2 initialSecondPointer, Vector2 firstPointer, Vector2 secondPointer){
-
        return false;
     }
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 }

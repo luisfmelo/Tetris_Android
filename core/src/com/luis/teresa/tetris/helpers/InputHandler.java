@@ -4,18 +4,23 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.luis.teresa.tetris.logic.Board;
 
+/**
+ * This class is responsible to answer to input events.
+ * For desktop version only
+ * @author Luis
+ * @author Teresa
+ */
 public class InputHandler implements InputProcessor{
-	Board board;
-	boolean dragging;
-	int previousX, previousY;
-	
+
+	private Board board;
+
 	public InputHandler(Board board) {
-		this.board = board;
-		dragging = false;
-		previousX = 0;
-		previousY = 0;		
+		this.board = board;	
 	}
 
+	/**
+	 * This method handles keyboard events.
+	 */
 	@Override
 	public boolean keyDown(int keycode) {
 		switch(keycode){
@@ -29,8 +34,7 @@ public class InputHandler implements InputProcessor{
 		case Input.Keys.UP:
 		case Input.Keys.SHIFT_LEFT:
 		case Input.Keys.SHIFT_RIGHT:board.rotate();break;
-
-		default: board.input("p");break; //nao faz nada			
+		default: board.input(".");break;	
 		}
 		return true;
 	}
@@ -47,45 +51,16 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {	
-		/*clicked = true;
-		 return true;*/
-		 		return false;
+		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		/*if ( clicked )
-			board.rotate();
-		clicked = false;
-		dragging = false;
-		previousX = 0;
-		previousY = 0;*/	
-		
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-
-		/*clicked = false;
-		if (dragging == false)
-		{
-			previousX = screenX;
-			previousY = screenY;
-			dragging = true;
-			return true;
-		}
-		if (screenX >= previousX)
-			board.input("d");
-		else if (screenX < previousX)
-			board.input("a");
-		if (screenY > previousY)
-			board.input("s");
-
-		previousX = screenX;
-		previousY = screenY;
-				
-		return true;*/
 		return false;
 	}
 
@@ -96,7 +71,6 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean scrolled(int amount) {
-		
 		return false;
 	}
 

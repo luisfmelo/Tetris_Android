@@ -1,28 +1,21 @@
 package com.luis.teresa.tetris.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.InitializationError;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
-import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
-import com.badlogic.gdx.backends.headless.mock.input.MockInput;
 import com.badlogic.gdx.math.Vector2;
-import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.logic.Block;
 import com.luis.teresa.tetris.logic.Board;
 import com.luis.teresa.tetris.logic.Shape;
 import com.luis.teresa.tetris.logic.Shape.Type;
 import com.luis.teresa.tetris.logic.TetrisLogic;
-
-import mockit.MockUp;
 
 public class TesteBoard {
 	

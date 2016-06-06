@@ -134,23 +134,6 @@ public class TestShapes {
 		
 		assertEquals(cont,4);
 	}
-
-	/**
-	 * Test the destruction of a shape (some block reached floor)
-	 */
-	@Test
-	public void testDestroyShape() {
-		Shape s = new Shape();
-		
-		s.destroy();
-		
-		for (int i = 0; i < s.getMatrix_Block().length; i++) {
-			for (int j = 0; j < s.getMatrix_Block().length; j++) {
-				assertEquals(s.getMatrix_Block()[i][j].getX_shape(), -1);
-				assertEquals(s.getMatrix_Block()[i][j].getY_shape(), -1);
-			}
-		}		
-	}
 	
 	/**
 	 * Test the real rotation that we use in Game (vector of coordinates)

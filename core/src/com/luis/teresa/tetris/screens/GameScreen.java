@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.luis.teresa.tetris.Tetris;
 import com.luis.teresa.tetris.helpers.Const;
-import com.luis.teresa.tetris.helpers.LoadAssets;
 import com.luis.teresa.tetris.helpers.MyGestureListener;
 import com.luis.teresa.tetris.helpers.TetrisRendererIMGS;
 import com.luis.teresa.tetris.logic.TetrisLogic;
@@ -21,7 +20,6 @@ public class GameScreen implements Screen{
 	private TetrisRendererIMGS renderer;
 	private Stage st;
 	private boolean newHighScore=false;
-	//private LoadAssets myAssets;
 	
 	public GameScreen() {
 		
@@ -34,9 +32,9 @@ public class GameScreen implements Screen{
 		Tetris.myMusics.playTheme();
 		Tetris.myAssets.loadGameAssets(myGame);
 		//Desktop
-				Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
+				//Gdx.input.setInputProcessor(new com.luis.teresa.tetris.helpers.InputHandler(myGame.getBoard_class()));
 		//Android
-		//Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
+		Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(myGame.getBoard_class())));
 
 		renderer = new TetrisRendererIMGS(myGame, st, Tetris.myAssets); //inicia renderer para imprimir
 		//renderer = new TetrisRenderer(myGame); //inicia renderer para imprimir
@@ -65,7 +63,7 @@ public class GameScreen implements Screen{
     		}
     		if(TetrisLogic.isLevelUp()){
     			TetrisLogic.setLevelUp(false);
-    			Const.addLevel(Integer.parseInt(myGame.getLevel()));
+    			Const.addLevel();
     			Tetris.myMusics.playLevelUp();
     		}
     		

@@ -12,6 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 
+/**
+ * This class is responsible to Load all the assets necessary for the game.
+ * @author Luis
+ * @author Teresa
+ */
 public class LoadAssets {
 	
 	//COMMON
@@ -26,7 +31,6 @@ public class LoadAssets {
 	private Image trophey;
 	private Label highScore;
 	private Image playBtn;
-	private Image leadBtn;
 	private Image settBtn;
 	private Image footer;
 	
@@ -39,17 +43,18 @@ public class LoadAssets {
 	private Image music;
 	
 	//GAME
-	
-	//GAME OVER
-	private Label gameOverLabel;
-	private Label secundaryLabel;
-	private Image header;
-	private Image home;
-	private Image replay;
 	private Label scoreLabel;
 	private Label score;
 	private Label levelLabel;
 	private Label level;
+	private Image header;
+
+	//GAME OVER
+	private Label gameOverLabel;
+	private Label secundaryLabel;
+	private Image home;
+	private Image replay;
+
 	public Image orange;
 	public Image yellow;
 	public Image purple;
@@ -64,8 +69,10 @@ public class LoadAssets {
 	private TextureAtlas myPackage;
 	private TextureAtlas myBlocks;
 	
-	//BLOCKS
-	
+	/**
+	 * Constructor.
+	 * this method loads important assets for all the screens like skin, preferences, theme,...
+	 */
 	public LoadAssets() {
 		atlas = new TextureAtlas(Gdx.files.internal(Const.ATLAS_PATH));
 		skin = new Skin(Gdx.files.internal(Const.SKIN_PATH), atlas); 
@@ -77,6 +84,10 @@ public class LoadAssets {
 		myBlocks = new TextureAtlas("blocksPkg.txt");
 	}
 
+	/**
+	 * This method loads important assets for the proper functioning 
+	 * of the screen: IntroScreen
+	 */
     public void loadIntroAssets() {
 		//INTRO IMAGE
 		intro = new Image(new Texture(Gdx.files.internal(Const.INTRO_PATH)));
@@ -84,10 +95,12 @@ public class LoadAssets {
 		intro.setPosition(.5f*Const.w, .5f*Const.h, 0);
     }
 
-
+	/**
+	 * This method loads important assets for the proper functioning 
+	 * of the screen: MenuScreen
+	 */
     public void loadMenuAssets() throws IOException {
 		//high Score Image
-		//trophey = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TROPHEY_PATH)));
     	trophey = new Image(myPackage.findRegion(Const.THEME + "trophey"));
     	trophey.setSize(.15f*Const.w, .15f*Const.h);
 		trophey.setPosition(.5f*Const.w, .9f*Const.h, 0);
@@ -100,27 +113,25 @@ public class LoadAssets {
 		highScore.setFontScale(3);
 		
 		//Play Button
-		//playBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.PLAYBTN_PATH)));
 		playBtn = new Image(myPackage.findRegion(Const.THEME + "playBtn"));
-		//playBtn.setSize(.6f*Const.w, .3f*Const.h);
 		playBtn.setSize(.4f*Const.w, .2f*Const.h);
 		playBtn.setPosition(.5f*Const.w, .55f*Const.h, 0);
 		
 		//Settings Button
-    	//settBtn = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.SETTBTN_PATH)));
     	settBtn = new Image(myPackage.findRegion(Const.THEME + "settBtn"));
     	settBtn.setSize(.4f*Const.w, .2f*Const.h);
 		settBtn.setPosition(.5f*Const.w, .3f*Const.h, 0);
 
 		//Footer
-    	//footer = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
 		footer = new Image(myPackage.findRegion(Const.THEME + "title"));
 		footer.setSize(.3f*Const.w, .08f*Const.h);
 		footer.setPosition(.5f*Const.w, .05f*Const.h, 0);
-
     }
 
-
+	/**
+	 * This method loads important assets for the proper functioning 
+	 * of the screen: GameScreen
+	 */
     public void loadGameAssets(TetrisLogic myGame){
 		int tam_x = (int) (0.15*Const.w/4);
 		int tam_y = (int) (0.15*Const.h/4);
@@ -156,9 +167,12 @@ public class LoadAssets {
 		level.setPosition(0.7f*Const.w, 0.23f*Const.h , 0);	
 		level.setFontScale(3);
     }
-    
+
+	/**
+	 * This method loads important assets for the proper functioning 
+	 * of the screen: SettingsScreen
+	 */
     public void loadSettingsAssets() {
-    	
     	//Label Title
     	titleLabel = new Label("Settings", skin, Const.THEME + "big");
 		titleLabel.setAlignment(Align.center);
@@ -211,7 +225,7 @@ public class LoadAssets {
 
 
     public void loadGameOverAssets() {
-		//Game Over
+		//Game Over Label
     	gameOverLabel = new Label("Game Over", skin, Const.THEME + "default");
 		gameOverLabel.setAlignment(Align.center);
 		gameOverLabel.setSize(Const.w, 0.2f*Const.h);
@@ -226,59 +240,69 @@ public class LoadAssets {
 		secundaryLabel.setFontScale(3);
 		
 		//title bar
-    	//header = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.TITLE_PATH)));
 		header = new Image(myPackage.findRegion(Const.THEME + "title"));
     	header.setSize(.3f*Const.w, .05f*Const.h);
     	header.setPosition(.5f*Const.w, .95f*Const.h, 0);
 		
 		//home bar
-		//home = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.HOME_PATH)));
 		home = new Image(myPackage.findRegion(Const.THEME + "home"));
 		home.setSize(.3f*Const.w, .15f*Const.h);
 		home.setPosition(.5f*Const.w, .6f*Const.h, 0);
 		
-		
 		//replay bar
-		//replay = new Image(new Texture(Gdx.files.internal(Const.THEME + Const.REPLAY_PATH)));
 		replay = new Image(myPackage.findRegion(Const.THEME + "replay"));
 		replay.setSize(.3f*Const.w, .15f*Const.h);
 		replay.setPosition(.5f*Const.w, .35f*Const.h, 0);		
     }
+    
 
-    
-    
-    /**
-	 * PREFERENCES
-	 * @return
-     * @throws IOException 
-	 */
-	//HIGHSCORE
+    /** 
+     * Get the current value of HighScore
+     * @return 		The HighScore value
+     */
 	public int getScores() throws IOException {
 		return prefs.getInteger("score");
 	}
 
+    /** 
+     * Save a new value for HighScore
+     * @param sc 	new HighScore value
+     */
 	public void setScores(int sc) throws IOException {
 		this.prefs.putInteger("score", sc);
 		prefs.flush();
-
 	}
 	
-	//SOUND ON
+    /** 
+     * Get the current value of Sound Preference
+     * @return 		false if it is muted. true otherwise.
+     */
 	public boolean getSoundOn() {
 		return prefs.getBoolean("soundOn");			
 	}
 
+    /** 
+     * Save new Sound Preference
+     * @param s 	false if we want to mute the sound. true otherwise.
+     */
 	public void setSoundOn(boolean s) {
 		this.prefs.putBoolean("soundOn", s);
 		prefs.flush();
 	}
 	
-	//THEME
+    /** 
+     * Get the current value of the Theme Preference
+     * @return 		the name of the theme that is being used.
+     */
 	public String getTheme() {
 		Const.THEME = prefs.getString("theme");
 		return prefs.getString("theme");
 	}
 
+	/**
+	 * Save new Theme Preference: solar. or dracula.
+	 * @param s
+	 */
 	public void setTheme(String s) {
 		this.prefs.putString("theme", s);
 		prefs.flush();
@@ -297,90 +321,152 @@ public class LoadAssets {
 		Const.THEME = s;
 	}
 
-    
-    
-    public static void dispose() {
-    	
-    }
-
+    /** 
+     * Get the skin currently in use
+     * @return 		skin.
+     */
 	public Skin getSkin() {
 		return this.skin;
 	}
 	
 	
 	// INTRO
+    /** 
+     * Get the image for splash Screen
+     * @return 		Image for introScreen.
+     */
 	public Image getIntroImg() {
 		return intro;
 	}
 	
 	// MENU
+    /** 
+     * Get HighScore Image
+     * @return 		Trophey Image.
+     */
 	public Image getTrophey() {
 		return trophey;
 	}
 
+    /** 
+     * Get Play Image
+     * @return 		Play Image.
+     */
 	public Image getPlayBtn() {
 		return playBtn;
 	}
 
-	public Image getLeaderBtn() {
-		return leadBtn;
-	}
-
+    /** 
+     * Get Settings Image
+     * @return 		Settings Image.
+     */
 	public Image getSettBtn() {
 		return settBtn;
 	}
 
+    /** 
+     * Get Footer Image
+     * @return 		Footer Image.
+     */
 	public Image getFooter() {
 		return footer;
 	}
 
+    /** 
+     * Get HighScore Label
+     * @return 		HighScore Label.
+     */
 	public Label getHighScore() {
 		return this.highScore;
 	}
 
 	//Settings
+    /** 
+     * Get Title Label
+     * @return 		Title Label.
+     */
 	public Label getTitleLabel() {
 		return titleLabel;
 	}
 
+    /** 
+     * Get Close (x) Image
+     * @return 		Close(x) Image.
+     */
 	public Image getX() {
 		return x;
 	}
 	
+    /** 
+     * Get Music Status Label
+     * @return 		Music Status Label.
+     */
 	public Label getMusicLabel() {
 		return musicLabel;
 	}
 
+    /** 
+     * Get Music Status Image
+     * @return 		Music Status Image.
+     */
 	public Image getImageMusic() {
 		return music;
 	}
 	
+    /** 
+     * Get Theme Label
+     * @return 		Theme Label.
+     */
 	public Label getThemeLabel() {
 		return themeLabel;
 	}
 
+    /** 
+     * Get Theme Image
+     * @return 		Theme Image.
+     */
 	public Image getImageTheme() {
 		return theme;
 	}
 	
 
 	//GAME
+    /** 
+     * Get Game Header Image
+     * @return 		Game Header Image.
+     */
 	public Image getGameHeader() {
 		return header;
 	}
 
+    /** 
+     * Get Score Label
+     * @return 		Score Label.
+     */
 	public Label getScoreLabel() {
 		return scoreLabel;
 	}
 
+    /** 
+     * Get Score number in Label
+     * @return 		Score number Label.
+     */
 	public Label getScore() {
 		return score;
 	}
 
+    /** 
+     * Get Level Label
+     * @return 		Level Label.
+     */
 	public Label getLevelLabel() {
 		return levelLabel;
 	}
 
+    /** 
+     * Get Level number in Label
+     * @return 		Level number Label.
+     */
 	public Label getLevel() {
 		return level;
 	}
@@ -388,26 +474,49 @@ public class LoadAssets {
 
 	
 	//GAME OVER
+    /** 
+     * Get Game Over Label
+     * @return 		Game Over Label.
+     */
 	public Label getGameOverLabel() {
 		return gameOverLabel;
 	}
 
+    /** 
+     * Get Info Label
+     * @return 		Secundary(info) Label.
+     */
 	public Label getSecundaryLabel() {
 		return secundaryLabel;
 	}
 
+    /** 
+     * Get Header Image
+     * @return 		Header Image.
+     */
 	public Image getHeader() {
 		return header;
 	}
 	
+    /** 
+     * Get Home Btn Image
+     * @return 		Home Btn Image.
+     */
 	public Image getHome() {
 		return home;
 	}
 
+    /** 
+     * Get Replay Btn Image
+     * @return 		Replay Btn Image.
+     */
 	public Image getReplay() {
 		return replay;
 	}
 
+	/**
+	 * Load all blocks images
+	 */
 	public void loadBlockImgs() {
 		white = new Image(myBlocks.findRegion("branco"));
 		black = new Image(myBlocks.findRegion("preto"));
@@ -420,6 +529,11 @@ public class LoadAssets {
 		orange = new Image(myBlocks.findRegion("laranja"));
 	}
 
+	/**
+	 * Get the Block image we want to use. All the blocks are pre-loaded
+	 * @param color		String with color of the block
+	 * @return			Image of the desired block
+	 */
 	public Image loadOneBlock(String color) {
 		switch(color)
 		{
@@ -444,7 +558,4 @@ public class LoadAssets {
 		}
 		return orange;
 	}
-
-
-	
 }
