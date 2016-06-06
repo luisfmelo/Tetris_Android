@@ -15,6 +15,10 @@ import com.luis.teresa.tetris.logic.Board;
 public class MyGestureListener implements ApplicationListener, GestureListener, InputProcessor {
 	private Board board;
 
+	/**
+	 * Constructor
+	 * @param board			Board of the game
+	 */
 	public MyGestureListener(Board board) {
 		this.board = board;
 	}

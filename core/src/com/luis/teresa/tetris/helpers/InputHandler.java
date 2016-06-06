@@ -13,7 +13,10 @@ import com.luis.teresa.tetris.logic.Board;
 public class InputHandler implements InputProcessor{
 
 	private Board board;
-
+	/**
+	 * Constructor
+	 * @param board			Board to be handled
+	 */
 	public InputHandler(Board board) {
 		this.board = board;	
 	}
