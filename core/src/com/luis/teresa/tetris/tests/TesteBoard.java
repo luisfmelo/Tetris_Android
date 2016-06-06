@@ -17,9 +17,17 @@ import com.luis.teresa.tetris.logic.Shape;
 import com.luis.teresa.tetris.logic.Shape.Type;
 import com.luis.teresa.tetris.logic.TetrisLogic;
 
+
+/**
+ * This class tests Board methods
+ * @author Luis
+ * @author Teresa
+ */
 public class TesteBoard {
 	
-	
+	/**
+	 * Test if the rows are cleaned when filled completely 
+	 */
 	@Test
 	public void clean_rows() {
 		
@@ -48,6 +56,10 @@ public class TesteBoard {
 			assertEquals(b.getBoard()[r-3][i].getColor(),"black");
 		
 	}
+	
+	/**
+	 * Test if the game ends when it should
+	 */
 	@Test
 	public void gameOver() {
 		Board b=Board.getInstance();
@@ -57,27 +69,24 @@ public class TesteBoard {
 	}
 	
 	
-	private Board getBoard_commandsTest() {
-		Board b=Board.getInstance();
-		Board.initializeBoard();
-		b.newShape(new Shape(Type.I));
-		b.setPieceOnGoing(":");
-		 
-		return b;
-		
-	}
+	/**
+	 * Test if a shape doesn't go beyond limits of the board
+	 */
 	@Test
 	public void commandWallTest(){
 		Board b=Board.getInstance();
 		Board.initializeBoard();
 		b.setPieceOnGoing(":");
-		//rotate left ->can't rotate
 		b.newShape(new Shape(Type.O));
 		b.setShapePos(5, 0);
 		ArrayList<Vector2> pos=b.getMyShape();
 		b.input("a");
 		assertEquals(pos,b.getMyShape());
 	}
+	
+	/**
+	 * Test if a shape doesn't rotate when it can't
+	 */
 	@Test
 	public void commandImpossibleRotation(){
 		Board b=Board.getInstance();
@@ -96,6 +105,10 @@ public class TesteBoard {
 		assertEquals(pos,b.getMyShape());
 		
 	}
+	
+	/**
+	 * Test the down move of a shape in a board
+	 */
 	@Test
 	public void commandDownTest(){
 		Board b=getBoard_commandsTest();
@@ -103,6 +116,10 @@ public class TesteBoard {
 		b.input("s");
 		assertNotEquals(pos,b.getMyShape());
 	}
+	
+	/**
+	 * Test the rotation of a shape in a board 
+	 */
 	@Test
 	public void commandRotateTest(){
 		Board b=getBoard_commandsTest();
@@ -110,6 +127,10 @@ public class TesteBoard {
 		b.rotate();
 		assertNotEquals(pos,b.rotate());
 	}
+	
+	/**
+	 * Test the left move of a shape 
+	 */
 	@Test
 	public void commandLeftTest(){
 		Board b=getBoard_commandsTest();
@@ -118,6 +139,10 @@ public class TesteBoard {
 		b.input("a");
 		assertNotEquals(pos,b.getMyShape());
 	}
+	
+	/**
+	 * Test the right move of a shape 
+	 */
 	@Test
 	public void commandRightTest(){
 		Board b=getBoard_commandsTest();
@@ -126,6 +151,10 @@ public class TesteBoard {
 		b.input("d");
 		assertNotEquals(pos,b.getMyShape());	
 	}
+	
+	/**
+	 * Test insertion of a shape on the board
+	 */
 	@Test
 	public void newShape_OnBoard() {
 		Board b=Board.getInstance();
@@ -138,6 +167,10 @@ public class TesteBoard {
 				assertEquals(b.getBoard()[i][j].getParent(),shape);
 		
 	}
+	
+	/**
+	 * Test if a shape it is correctly positioned on top of other shape present in the board 
+	 */
 	@Test
 	public void addToTower() {
 		Board b=Board.getInstance();
@@ -154,15 +187,17 @@ public class TesteBoard {
 		b.setShapePos(b.getRows()-8, 4);
 		b.input("s");
 		b.input("s");
-		//b.printBoard();
 		assertNotEquals(b.getBoard()[b.getRows()-5][5].getParent(),b.getBoard()[b.getRows()-4][6].getParent());
 		assertFalse(b.input("s"));
 		
 	}
+	
+	/**
+	 * Test if the game ends when a shape reaches the top
+	 */
 	@Test
 	public void touchTop() throws IOException {
 
-		//TetrisLogic game=new TetrisLogic();
 		Board b=Board.getInstance();
 		
 		Shape s=new Shape();
@@ -173,7 +208,18 @@ public class TesteBoard {
 		
 		assertTrue(b.isGameOver());
 	}
-	
 
+	/**
+	 * Auxiliar method to all commandsTests present in this class
+	 */
+	private Board getBoard_commandsTest() {
+		Board b=Board.getInstance();
+		Board.initializeBoard();
+		b.newShape(new Shape(Type.I));
+		b.setPieceOnGoing(":");
+		 
+		return b;
+		
+	}
 
 }
