@@ -113,7 +113,7 @@ public class MenuScreen extends ApplicationAdapter implements Screen {
 
 	/**
 	 * This method renders the screen
-	 * @para delta		Time in seconds since the last call of the function
+	 * @param delta		Time in seconds since the last call of the function
 	 */
 	@Override
 	public void render(float delta) {
