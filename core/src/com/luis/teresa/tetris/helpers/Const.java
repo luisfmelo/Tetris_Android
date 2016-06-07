@@ -145,8 +145,8 @@ public class Const {
 	
 	/**
 	 * Transform color in string format to RGB format
-	 * @param rgb		name of the color in string format
-	 * @return 			rgb values of the correspondent color stored in array of floats
+	 * @param color		name of the color in string format
+	 * @return rgb		rgb values of the correspondent color stored in array of floats
 	 */
 	public static float[] getRGB(String color) {
 		float [] rgb = new float[3];
