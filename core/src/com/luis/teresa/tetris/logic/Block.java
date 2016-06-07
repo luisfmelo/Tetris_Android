@@ -52,7 +52,7 @@ public class Block {
 
 	/**
 	 * Set X coordinate in the Board
-	 * param x_global	X coordinate
+	 * @param x_global	X coordinate
 	 */
 	public void setX_global(int x_global) {
 		this.x_global = x_global;
@@ -60,7 +60,7 @@ public class Block {
 
 	/**
 	 * Get Y coordinate in the Board
-	 * @return		Y coordinate
+	 * @return	y_global	Y coordinate
 	 */
 	public int getY_global() {
 		return y_global;
@@ -68,7 +68,7 @@ public class Block {
 
 	/**
 	 * Set Y coordinate in the Board
-	 * param y_global	Y coordinate
+	 * @param y_global	Y coordinate
 	 */
 	public void setY_global(int y_global) {
 		this.y_global = y_global;
@@ -76,7 +76,7 @@ public class Block {
 
 	/**
 	 * Get X coordinate in the Shape
-	 * @return		X coordinate
+	 * @return	x_shape 	X coordinate
 	 */
 	public int getX_shape() {
 		return x_shape;
@@ -84,7 +84,7 @@ public class Block {
 
 	/**
 	 * Set X coordinate in the Shape
-	 * param x_global	X coordinate
+	 * @param x_global	X coordinate
 	 */
 	public void setX_shape(int x_shape) {
 		this.x_shape = x_shape;
@@ -92,7 +92,7 @@ public class Block {
 
 	/**
 	 * Get Y coordinate in the Shape
-	 * @return		Y coordinate
+	 * @return	y_shape	Y coordinate
 	 */
 	public int getY_shape() {
 		return y_shape;
@@ -100,7 +100,7 @@ public class Block {
 
 	/**
 	 * Set Y coordinate in the Shape
-	 * param y_global	Y coordinate
+	 * @param y_global	Y coordinate
 	 */
 	public void setY_shape(int y_shape) {
 		this.y_shape = y_shape;
@@ -108,7 +108,7 @@ public class Block {
 	
 	/**
 	 * Get the Color of the Block
-	 * @return			String with color name
+	 * @return	color		String with color name
 	 */
 	public String getColor() {
 		return color;
@@ -124,7 +124,7 @@ public class Block {
 	
 	/**
 	 * Get the Parent Shape for this Block
-	 * @return			Shape
+	 * @return	parent		Shape that the block belongs to
 	 */
 	public Shape getParent(){
 		return parent;
@@ -132,7 +132,7 @@ public class Block {
 	
 	/**
 	 * Set new Parent Shape for this block
-	 * @param p			Shape
+	 * @param p			Shape that the block will belong to
 	 */
 	public void setParent(Shape p){
 		if(p==null){
