@@ -142,7 +142,7 @@ public class GameOverScreen implements Screen{
 
 	/**
 	 * This method renders the screen and adds some resources to the scene
-	 * @para delta		Time in seconds since the last call of the function
+	 * @param delta		Time in seconds since the last call of the function
 	 */
 	@Override
 	public void render(float delta) {
