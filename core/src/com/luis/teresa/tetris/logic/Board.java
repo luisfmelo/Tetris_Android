@@ -206,9 +206,7 @@ public class Board {
 	}
 
 	/**
-	 * Makes a shape movement by changing its coordinates in the board
-	 * @param command	string of the command called to move the shape 
-	 * @return	true if the input is successfully 
+	 * Makes a shape movement by changing its coordinates in the board with the future coordinates
 	 */
 	private void insert() {
 
@@ -304,7 +302,7 @@ public class Board {
 
 	/**
 	 * Rotates the present shape to the right if possible
-	 * @return		true if it is possible to rotate, false if it isn't
+	 * @return boolenan_value    true if it is possible to rotate, false if it isn't
 	 */
 	public boolean rotate() {
 		if(tower)
