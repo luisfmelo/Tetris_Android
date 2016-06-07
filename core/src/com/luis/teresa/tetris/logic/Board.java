@@ -113,8 +113,8 @@ public class Board {
 	/**
 	 * Creates an array with the desired future coordinates for a shape
 	 * given by a certain command
-	 * @param command		string with the command inputed by the user
-	 * @return true if no error occurs
+	 * @param command			string with the command inputed by the user
+	 * @return boolean_value	true if no error occurs
 	 */
 	public boolean input(String command) {	
 		newCoords = new ArrayList<Vector2>(5);
@@ -354,7 +354,7 @@ public class Board {
 	}
 	/**
 	 * Sets the state of the present shape
-	 * @param pieceOnGoing
+	 * @param pieceOnGoing		string describing the state of the shape in board, falling or entering
 	 */
 	public void setPieceOnGoing(String pieceOnGoing) {
 		this.pieceOnGoing = pieceOnGoing;
