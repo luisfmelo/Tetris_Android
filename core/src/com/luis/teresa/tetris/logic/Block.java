@@ -84,7 +84,7 @@ public class Block {
 
 	/**
 	 * Set X coordinate in the Shape
-	 * @param x_global	X coordinate
+	 * @param x_shape	X coordinate
 	 */
 	public void setX_shape(int x_shape) {
 		this.x_shape = x_shape;
@@ -100,7 +100,7 @@ public class Block {
 
 	/**
 	 * Set Y coordinate in the Shape
-	 * @param y_global	Y coordinate
+	 * @param y_shape	Y coordinate
 	 */
 	public void setY_shape(int y_shape) {
 		this.y_shape = y_shape;

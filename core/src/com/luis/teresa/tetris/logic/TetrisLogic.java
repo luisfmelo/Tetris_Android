@@ -173,7 +173,7 @@ public class TetrisLogic{
 
 	/**
 	 * Sets the necessary number of rows cleaned to level up 
-	 * @param ROWS_TO_LEVEL_UP	integer with necessary rows to be set
+	 * @param rOWS_TOLEVELUP	integer with necessary rows to be set
 	 */
 	public static void setROWS_TOLEVELUP(int rOWS_TOLEVELUP) {
 		ROWS_TO_LEVEL_UP = rOWS_TOLEVELUP;
@@ -189,7 +189,7 @@ public class TetrisLogic{
 
 	/**
 	 * Sets variable that is true if in the current cycle the levelUp function was called 
-	 * @param isLevelUp		boolean value of the state of levelUp
+	 * @param state		boolean value of the state of levelUp
 	 */
 	public static void setLevelUp(boolean state) {
 		isLevelUp = state;
