@@ -163,7 +163,7 @@ public class Shape {
 	
 	/**
 	 * Sets the shape Type
-	 * @param pieceShape
+	 * @param pieceShape  Desired Type for the shape
 	 */
 	public void setPieceShape(Type pieceShape) {
 		this.pieceShape = pieceShape; 
@@ -329,7 +329,7 @@ public class Shape {
 
 	/**
 	 * Sets the y coordinate of the shape on the board reference
-	 * @param y_world
+	 * @param y_world	Desired Y coordinate
 	 */
 	public void setY_world(int y_world) {
 		this.y_world = y_world;
@@ -337,7 +337,7 @@ public class Shape {
 
 	/**
 	 * Gets the x coordinate of the shape on the board reference
-	 * @return x_world
+	 * @return x_world		X coordinate on the board
 	 */
 	public int getX_world() {
 		return x_world;
@@ -345,7 +345,7 @@ public class Shape {
 
 	/**
 	 * Sets the x coordinate of the shape on the board reference
-	 * @param x_world
+	 * @param x_world	Desired X coordinate
 	 */
 	public void setX_world(int x_world) {
 		this.x_world = x_world;
