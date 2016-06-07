@@ -110,7 +110,7 @@ public class LoadAssets {
 		highScore.setAlignment(Align.center);
 		highScore.setSize(.25f*Const.w, .2f*Const.h);
 		highScore.setPosition(.5f*Const.w, .75f*Const.h, 0);
-		highScore.setFontScale(3);
+		//highScore.setFontScale(3);
 		
 		//Play Button
 		playBtn = new Image(myPackage.findRegion(Const.THEME + "playBtn"));
@@ -147,26 +147,26 @@ public class LoadAssets {
 		scoreLabel.setAlignment(Align.center);
 		scoreLabel.setSize(tam_x*5, tam_y);
 		scoreLabel.setPosition(0.7f*Const.w, 0.5f*Const.h , 0);
-		scoreLabel.setFontScale(3);
+		//scoreLabel.setFontScale(3);
 		
 		score = new Label(myGame.getScore(), skin, Const.THEME + "default");
 		score.setAlignment(Align.center);
 		score.setSize(tam_x*10, tam_y);
 		score.setPosition(0.7f*Const.w, 0.43f*Const.h , 0);	
-		score.setFontScale(3);
+		//score.setFontScale(3);
 		
 		//Label - Level
 		levelLabel = new Label("Level", skin, Const.THEME + "default");
 		levelLabel.setAlignment(Align.center);
 		levelLabel.setSize(tam_x*10, tam_y);
 		levelLabel.setPosition(0.7f*Const.w, 0.3f*Const.h, 0);	
-		levelLabel.setFontScale(3);
+		//levelLabel.setFontScale(3);
 		
 		level = new Label(myGame.getLevel(), skin, Const.THEME + "default");
 		level.setAlignment(Align.center);
 		level.setSize(tam_x*10, tam_y);
 		level.setPosition(0.7f*Const.w, 0.23f*Const.h , 0);	
-		level.setFontScale(3);
+		//level.setFontScale(3);
     }
 
 	/**
@@ -179,7 +179,7 @@ public class LoadAssets {
 		titleLabel.setAlignment(Align.center);
 		titleLabel.setSize(0.6f*Const.w, 0.2f*Const.h);
 		titleLabel.setPosition(0.5f*Const.w, 0.8f*Const.h, 0);
-		titleLabel.setFontScale(3);
+		//titleLabel.setFontScale(3);
 		
 		//X Image
 		x = new Image(myPackage.findRegion(Const.THEME + "x"));
@@ -191,7 +191,7 @@ public class LoadAssets {
 		musicLabel.setAlignment(Align.center);
 		musicLabel.setSize(0.2f*Const.w, 0.1f*Const.h);
 		musicLabel.setPosition(0.5f*Const.w, 0.5f*Const.h, 0);	
-		musicLabel.setFontScale(3);
+		//musicLabel.setFontScale(3);
 
 		//Image - Music
 		if (Const.soundOn)
@@ -209,7 +209,7 @@ public class LoadAssets {
 		themeLabel.setAlignment(Align.center);
 		themeLabel.setSize(0.2f*Const.w, 0.1f*Const.h);
 		themeLabel.setPosition(0.5f*Const.w, 0.3f*Const.h, 0);	
-		themeLabel.setFontScale(3);
+		//themeLabel.setFontScale(3);
 		
 		//Image - theme
 		if (getTheme().equals("solar.") )
@@ -233,14 +233,14 @@ public class LoadAssets {
 		gameOverLabel.setAlignment(Align.center);
 		gameOverLabel.setSize(Const.w, 0.2f*Const.h);
 		gameOverLabel.setPosition(0.5f*Const.w, 0.85f*Const.h, 0);	
-		gameOverLabel.setFontScale(3);
+		//gameOverLabel.setFontScale(3);
 		
 		//secondary Label
 		secundaryLabel = new Label("", skin, Const.THEME + "small");
 		secundaryLabel.setAlignment(Align.center);
 		secundaryLabel.setSize(Const.w, 0.2f*Const.h);
 		secundaryLabel.setPosition(0.5f*Const.w, 0.75f*Const.h, 0);	
-		secundaryLabel.setFontScale(3);
+		//secundaryLabel.setFontScale(3);
 		
 		//title bar
 		header = new Image(myPackage.findRegion(Const.THEME + "title"));
