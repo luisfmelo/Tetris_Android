@@ -56,7 +56,7 @@ public class TetrisLogic{
 	
 	/**
 	 * Updates and checks the board if the time since last update is greater than the desired CycleTime
-	 * @param delta time since the last call of the function
+	 * @param delta 	time since the last call of the function
 	 */
  	public void update(float delta)  throws IOException {
 		time += delta;
@@ -135,7 +135,7 @@ public class TetrisLogic{
 
 	/**
 	 * Adds score to the total score and checks if the game should go to next level
-	 * @param score to add
+	 * @param string	score to add
 	 */
 	public static void addScore(String string) {
 
@@ -157,7 +157,7 @@ public class TetrisLogic{
 
 	/**
 	 * Checks if the game ended
-	 * @return gameOver
+	 * @return gameOver		true if the game already ended, false otherwise
 	 */
 	public boolean isGameOver() {
 		return gameOver;
@@ -165,7 +165,7 @@ public class TetrisLogic{
 
 	/**
 	 * Gets the necessary number of rows cleaned to level up 
-	 * @return ROWS_TO_LEVEL_UP
+	 * @return ROWS_TO_LEVEL_UP		integer with necessary rows 
 	 */
 	public int getROWS_TOLEVELUP() {
 		return ROWS_TO_LEVEL_UP;
@@ -173,7 +173,7 @@ public class TetrisLogic{
 
 	/**
 	 * Sets the necessary number of rows cleaned to level up 
-	 * @param ROWS_TO_LEVEL_UP
+	 * @param ROWS_TO_LEVEL_UP	integer with necessary rows to be set
 	 */
 	public static void setROWS_TOLEVELUP(int rOWS_TOLEVELUP) {
 		ROWS_TO_LEVEL_UP = rOWS_TOLEVELUP;
@@ -189,7 +189,7 @@ public class TetrisLogic{
 
 	/**
 	 * Sets variable that is true if in the current cycle the levelUp function was called 
-	 * @param isLevelUp
+	 * @param isLevelUp		boolean value of the state of levelUp
 	 */
 	public static void setLevelUp(boolean state) {
 		isLevelUp = state;
@@ -197,7 +197,7 @@ public class TetrisLogic{
 	
 	/**
 	 * Sets variable that is true if in the current cycle the a row was clear 
-	 * @param state of rows
+	 * @param state of rows		int value representing the number of rows to clear in the cycle
 	 */
 	public static void setClear(int state){
 		clear=state;
@@ -205,7 +205,7 @@ public class TetrisLogic{
 	
 	/**
 	 * Gets variable that is true if in the current cycle the a row was clear  
-	 * @return clear
+	 * @return clear	int value representing the number of rows to clear in the cycle
 	 */
 	public static int getClear(){
 		return clear;
@@ -213,7 +213,7 @@ public class TetrisLogic{
 	
 	/**
 	 * Gets the current shape in the board 
-	 * @return presentShape
+	 * @return presentShape		current shape
 	 */
 	public Shape getShape(){
 		return presentShape;
@@ -221,7 +221,7 @@ public class TetrisLogic{
 	
 	/**
 	 * Sets a shape as the present shape in the board 
-	 * @param shape
+	 * @param shape		current shape to set
 	 */
 	public void setShapeInGame(boolean shape){
 		shapeInGame=shape;
