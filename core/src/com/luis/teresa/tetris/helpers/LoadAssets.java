@@ -131,6 +131,7 @@ public class LoadAssets {
 	/**
 	 * This method loads important assets for the proper functioning 
 	 * of the screen: GameScreen
+	 * @param	myGame		game that wishes to load the assets
 	 */
     public void loadGameAssets(TetrisLogic myGame){
 		int tam_x = (int) (0.15*Const.w/4);
