@@ -201,7 +201,8 @@ public class TesteBoard {
 	}
 
 	/**
-	 * Auxiliar method to all commandsTests present in this class
+	 * Auxiliary method to all commandsTests present in this class
+	 * @return board	instance of board modified in the method
 	 */
 	private Board getBoard_commandsTest() {
 		Board b=Board.getInstance();
